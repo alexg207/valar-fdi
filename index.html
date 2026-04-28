@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valar FDI · Inference Intelligence Map. Primary VC</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f8fafc;--surface:#ffffff;--surface2:#f1f5f9;--surface3:#e8edf5;
+  --border:#e2e8f0;--border-mid:#cbd5e1;
+  --text:#0f172a;--text-mid:#334155;--text-muted:#64748b;--text-faint:#94a3b8;
+  --accent:#6366f1;--accent-light:#eef2ff;--accent-mid:#c7d2fe;--accent-dark:#4338ca;
+  --high:#059669;--high-bg:#d1fae5;--high-dark:#065f46;
+  --med:#d97706;--med-bg:#fef3c7;--med-dark:#92400e;
+  --low:#64748b;--low-bg:#f1f5f9;--low-dark:#334155;
+  --tag-bg:#eef2ff;--tag-text:#4338ca;--tag-border:#c7d2fe;
+  --hiring-bg:#fdf4ff;--hiring-text:#7e22ce;--hiring-border:#e9d5ff;
+  --oss-bg:#f0fdf4;--oss-text:#166534;--oss-border:#bbf7d0;
+  --hw-bg:#fff7ed;--hw-text:#9a3412;--hw-border:#fed7aa;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:200;}
+.header-left{display:flex;align-items:center;gap:20px;}
+.logo{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);letter-spacing:-.01em;text-decoration:none;cursor:pointer;}
+.logo-mark{width:22px;height:22px;background:var(--accent);border-radius:5px;display:flex;align-items:center;justify-content:center;}
+.logo-mark svg{width:12px;height:12px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;}
+.hdiv{width:1px;height:20px;background:var(--border);}
+.header-context{font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace;letter-spacing:.02em;}
+.header-right{display:flex;gap:32px;align-items:center;}
+.hstat{text-align:right;}
+.hstat-val{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--text);line-height:1;}
+.hstat-lbl{font-size:9px;color:var(--text-faint);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+.fdi-badge{background:var(--accent-light);color:var(--accent-dark);border:1px solid var(--accent-mid);border-radius:4px;padding:4px 10px;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-family:'DM Mono',monospace;}
+.page{max-width:1380px;margin:0 auto;padding:32px 40px 100px;}
+
+/* BREADCRUMB */
+.breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:20px;font-size:12px;}
+.breadcrumb a{color:var(--accent);text-decoration:none;font-weight:500;cursor:pointer;}
+.breadcrumb a:hover{text-decoration:underline;}
+.breadcrumb span{color:var(--text-faint);}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:28px;gap:0;}
+.tab{padding:12px 24px;font-size:13px;font-weight:500;letter-spacing:.03em;cursor:pointer;background:transparent;border:none;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--accent-dark);border-bottom-color:var(--accent);font-weight:600;}
+.tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--surface2);color:var(--text-muted);font-size:10px;font-weight:600;margin-left:6px;font-family:'DM Mono',monospace;}
+.tab.active .tab-count{background:var(--accent-light);color:var(--accent-dark);}
+
+/* SECTION HEADER */
+.sec-head{margin-bottom:20px;}
+.sec-eyebrow{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:5px;}
+.sec-title{font-size:19px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.sec-desc{font-size:13px;color:var(--text-muted);line-height:1.5;}
+
+/* FILTER AREA */
+.filter-area{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:20px;}
+.filter-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.filter-row:last-child{margin-bottom:0;}
+.filter-group-label{font-size:9px;font-family:'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--text-faint);min-width:100px;flex-shrink:0;}
+.fpill{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid var(--border-mid);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .12s;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.fpill:hover{border-color:var(--accent);color:var(--accent-dark);}
+.fpill.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.filter-divider{height:1px;background:var(--border);margin:10px 0;}
+.search-row{display:flex;align-items:center;gap:10px;}
+.search-wrap{position:relative;flex:1;max-width:280px;}
+.search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--text-faint);pointer-events:none;}
+.search-input{width:100%;padding:6px 10px 6px 30px;border:1px solid var(--border-mid);border-radius:6px;font-size:12px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;transition:border .12s;}
+.search-input:focus{border-color:var(--accent);}
+.results-count{font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace;margin-left:auto;}
+
+/* COMPANY GRID & CARDS */
+.company-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;}
+.company-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:box-shadow .12s,border-color .12s;position:relative;overflow:hidden;}
+.company-card:hover{box-shadow:0 4px 20px rgba(99,102,241,.1);border-color:var(--accent-mid);}
+.company-card.open{border-color:var(--accent);box-shadow:0 4px 24px rgba(99,102,241,.15);}
+.card-tier-bar{height:2px;width:100%;}
+.card-tier-bar.high{background:var(--high);}
+.card-tier-bar.med{background:var(--med);}
+.card-tier-bar.low{background:var(--border-mid);}
+.card-body{padding:16px 18px;}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;}
+.card-identity{display:flex;align-items:center;gap:10px;}
+.card-favicon{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);object-fit:cover;background:var(--surface2);flex-shrink:0;}
+.card-favicon-fallback{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--accent-dark);flex-shrink:0;}
+.card-name{font-size:14px;font-weight:600;color:var(--text);line-height:1.2;}
+.card-domain{font-size:10px;color:var(--text-faint);font-family:'DM Mono',monospace;margin-top:1px;}
+.tier-badge{padding:3px 8px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.tier-badge.high{background:var(--high-bg);color:var(--high-dark);}
+.tier-badge.med{background:var(--med-bg);color:var(--med-dark);}
+.tier-badge.low{background:var(--low-bg);color:var(--low-dark);}
+.card-category{font-size:10px;color:var(--text-muted);margin-bottom:10px;}
+.card-tags{display:flex;gap:4px;flex-wrap:wrap;}
+
+/* TAGS */
+.tag[title]{position:relative;}
+.tag[title]:hover{opacity:0.85;}
+.tag{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:500;white-space:nowrap;border:1px solid;}
+.tag.stack{background:var(--tag-bg);color:var(--tag-text);border-color:var(--tag-border);}
+.tag.hiring{background:var(--hiring-bg);color:var(--hiring-text);border-color:var(--hiring-border);}
+.tag.oss{background:var(--oss-bg);color:var(--oss-text);border-color:var(--oss-border);}
+.tag.hw{background:var(--hw-bg);color:var(--hw-text);border-color:var(--hw-border);}
+.tag.neutral{background:var(--surface2);color:var(--text-muted);border-color:var(--border);}
+
+/* TREND ARROWS & BUBBLES */
+.trend-wrap{display:inline;position:relative;}
+.trend-arrow{font-weight:700;padding:0 2px;}
+.trend-arrow.up{color:#059669;}
+.trend-arrow.down{color:#dc2626;}
+.trend-arrow.flat{color:#d97706;}
+.trend-bubble{display:none;position:fixed;width:340px;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.15);padding:12px 14px;z-index:9999;pointer-events:none;}
+.tb-title{font-size:11px;font-weight:600;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.tb-body{font-size:10px;color:var(--text-mid);line-height:1.5;margin-bottom:6px;}
+.tb-src{font-size:9px;color:var(--text-faint);font-family:'DM Mono',monospace;border-top:1px solid var(--border);padding-top:6px;}
+
+/* SOURCE POPOVERS */
+.src-wrap{display:inline;position:relative;margin-left:4px;}
+.src-btn{display:inline-block;font-size:8px;font-family:'DM Mono',monospace;color:var(--text-faint);background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:0 4px;line-height:1.6;vertical-align:middle;}
+.src-btn:hover{color:var(--accent-dark);border-color:var(--accent-mid);background:var(--accent-light);}
+.src-pop{display:none;position:fixed;width:320px;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.15);padding:10px 12px;z-index:9999;}
+.src-pop-text{font-size:10px;color:var(--text-mid);line-height:1.5;}
+
+/* OPPORTUNITY DOTS */
+.opp-dots-wrap{position:relative;display:inline-flex;align-items:center;}
+.opp-bubble{display:none;position:fixed;width:360px;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.15);padding:12px 14px;z-index:9999;}
+.opp-bubble-text{font-size:11px;color:var(--text-mid);line-height:1.55;}
+
+/* DETAIL PANEL */
+.detail-inner ul,.gtm-thesis-box ul{margin:10px 0 0 0;padding-left:28px;list-style:none;}
+.detail-inner ul li,.gtm-thesis-box ul li{font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:8px;position:relative;padding-left:12px;}
+.detail-inner ul li::before,.gtm-thesis-box ul li::before{content:'';position:absolute;left:-8px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent);}
+.detail-inner ul li strong,.gtm-thesis-box ul li strong{color:var(--text);font-weight:600;}
+
+/* SIGNAL SECTION */
+.signal-section{margin-top:12px;padding-top:10px;border-top:1px solid var(--border);}
+.signal-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;flex-wrap:wrap;}
+.signal-label{font-size:10px;color:var(--text-muted);min-width:130px;flex-shrink:0;}
+.signal-dots{display:flex;gap:4px;}
+.sdot{width:8px;height:8px;border-radius:50%;}
+.sdot.filled{background:var(--accent);}
+.sdot.distress-filled{background:#dc2626;}
+.sdot.empty{background:var(--border-mid);}
+.signal-tags{display:flex;gap:4px;flex-wrap:wrap;}
+.signal-tag{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:500;white-space:nowrap;border:1px solid;}
+.signal-tag.positive{background:#f0fdf4;color:#166534;border-color:#bbf7d0;}
+.signal-tag.negative{background:#fdf4ff;color:#7e22ce;border-color:#e9d5ff;}
+.signal-tag.neutral{background:var(--surface2);color:var(--text-muted);border-color:var(--border);}
+
+/* CARD FOOTER */
+.card-footer{padding:10px 18px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.card-network{font-size:10px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.ndot{width:18px;height:18px;border-radius:50%;background:var(--accent-light);border:1.5px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:var(--accent-dark);margin-left:-4px;}
+.ndot:first-child{margin-left:0;}
+.card-expand-btn{font-size:10px;color:var(--accent);font-weight:500;display:flex;align-items:center;gap:4px;}
+.card-expand-btn svg{width:12px;height:12px;transition:transform .15s;}
+.company-card.open .card-expand-btn svg{transform:rotate(180deg);}
+.detail-panel{display:none;border-top:1px solid var(--border);background:var(--bg);}
+.company-card.open .detail-panel{display:block;}
+.detail-inner{padding:20px 18px;}
+.detail-section{margin-bottom:20px;}
+.detail-section:last-child{margin-bottom:0;}
+.detail-section-title{font-size:9px;font-family:'DM Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.detail-section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.detail-rows{display:flex;flex-direction:column;gap:7px;}
+.detail-row{display:flex;align-items:flex-start;gap:8px;}
+.detail-label{font-size:11px;color:var(--text-muted);min-width:130px;flex-shrink:0;padding-top:1px;}
+.detail-val{font-size:11px;color:var(--text-mid);flex:1;line-height:1.5;}
+
+/* CONTACT CARDS */
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;overflow:hidden;}
+.contact-card-top{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;}
+.contact-avatar{width:32px;height:32px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-muted);flex-shrink:0;border:1px solid var(--border);}
+.contact-info{flex:1;min-width:0;}
+.contact-name{font-size:12px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px;}
+.contact-title{font-size:10px;color:var(--text-muted);margin-top:1px;}
+.contact-type-badge{font-size:8px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:3px;white-space:nowrap;}
+.contact-type-badge.technical{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+.contact-type-badge.business{background:#fdf4ff;color:#7e22ce;border:1px solid #e9d5ff;}
+.contact-connections{border-top:1px solid var(--border);padding:8px 12px;background:var(--bg);display:flex;flex-direction:column;gap:5px;}
+.contact-conn-row{display:flex;align-items:center;gap:7px;}
+.conn-avatar{width:20px;height:20px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:var(--accent-dark);flex-shrink:0;}
+.conn-name{font-size:10px;color:var(--text-mid);font-weight:500;}
+.conn-strength{font-size:8px;padding:1px 6px;border-radius:3px;font-weight:600;margin-left:auto;}
+.conn-strength.warm{background:#dcfce7;color:#166534;}
+.conn-strength.possible{background:#fef9c3;color:#854d0e;}
+.placeholder-note{font-size:10px;color:var(--text-faint);font-style:italic;padding:8px 10px;background:var(--surface2);border-radius:5px;border:1px dashed var(--border-mid);}
+
+/* NETWORK MAP */
+.network-person-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;cursor:pointer;transition:border-color .12s;}
+.network-person-card:hover,.network-person-card.active{border-color:var(--accent);}
+.network-person-card.active{background:var(--accent-light);}
+.npc-name{font-size:13px;font-weight:600;color:var(--text);}
+.npc-title{font-size:10px;color:var(--text-muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.npc-count{font-size:10px;font-family:'DM Mono',monospace;color:var(--accent);margin-top:4px;font-weight:500;}
+.network-connections{flex:1;}
+.nc-empty{font-size:12px;color:var(--text-faint);font-style:italic;padding:20px;text-align:center;}
+
+/* GTM THESIS BOX */
+.gtm-thesis-box{background:var(--accent-light);border:1px solid var(--accent-mid);border-radius:10px;padding:20px;margin-bottom:20px;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .header{padding:0 16px;flex-wrap:wrap;height:auto;padding:10px 16px;}
+  .page{padding:16px 16px 60px;}
+  .company-grid{grid-template-columns:1fr;}
+  .tabs{overflow-x:auto;}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <a class="logo" onclick="goHome()">
+      <div class="logo-mark"><svg viewBox="0 0 12 12"><polyline points="2,9 6,3 10,9"/></svg></div>
+      Primary VC
+    </a>
+    <div class="hdiv"></div>
+    <span class="header-context">FDI · Valar Inference Intelligence Map</span>
+  </div>
+  <div class="header-right">
+    <div class="hstat"><div class="hstat-val">2</div><div class="hstat-lbl">Segments</div></div>
+    <div class="hstat"><div class="hstat-val">20</div><div class="hstat-lbl">Companies</div></div>
+    <div class="hstat"><div class="hstat-val" style="color:var(--high)">10</div><div class="hstat-lbl">High Priority</div></div>
+    <div class="hdiv"></div>
+    <span class="fdi-badge">FDI Draft</span>
+  </div>
+</header>
+
+<div class="page">
+  <!-- HOME VIEW -->
+  <div id="view-home">
+    <div class="tabs" style="margin-bottom:24px;">
+      <button class="tab active" id="home-tab-enterprise" onclick="switchHomeTab('enterprise')">Enterprise Companies <span class="tab-count" id="tab-count-enterprise">0</span></button>
+      <button class="tab" id="home-tab-midmarket" onclick="switchHomeTab('midmarket')">Mid-Market Companies <span class="tab-count" id="tab-count-midmarket">0</span></button>
+      <button class="tab" id="home-tab-network" onclick="switchHomeTab('network')">Network Map</button>
+    </div>
+
+    <!-- ENTERPRISE TAB -->
+    <div id="home-view-enterprise">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Stage 2 — Stretch ICP</div>
+        <div class="sec-title">Enterprise Companies</div>
+        <div class="sec-desc">Large regulated enterprises with complex data infrastructure needs. These represent Valar's stretch ICP — longer sales cycles but higher ACV potential.</div>
+      </div>
+      <div class="filter-area">
+        <div class="filter-row">
+          <span class="filter-group-label">Priority</span>
+          <div class="filter-pills" id="fp-tier-enterprise">
+            <button class="fpill active" onclick="toggleFilter('tier','all','enterprise')">All</button>
+            <button class="fpill" onclick="toggleFilter('tier','high','enterprise')">High</button>
+            <button class="fpill" onclick="toggleFilter('tier','med','enterprise')">Med</button>
+            <button class="fpill" onclick="toggleFilter('tier','low','enterprise')">Low</button>
+          </div>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="search-row">
+          <div class="search-wrap">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
+            <input class="search-input" type="text" placeholder="Search companies..." oninput="filterCompanies('enterprise')">
+          </div>
+          <span class="results-count" id="rc-enterprise">0 companies</span>
+        </div>
+      </div>
+      <div class="company-grid" id="grid-enterprise"></div>
+    </div>
+
+    <!-- MID-MARKET TAB -->
+    <div id="home-view-midmarket" style="display:none;">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Stage 1 — Near-term ICP</div>
+        <div class="sec-title">Mid-Market Companies</div>
+        <div class="sec-desc">Data-sensitive mid-market companies with immediate need for secure inference infrastructure. These are Valar's near-term ICP with shorter sales cycles.</div>
+      </div>
+      <div class="filter-area">
+        <div class="filter-row">
+          <span class="filter-group-label">Priority</span>
+          <div class="filter-pills" id="fp-tier-midmarket">
+            <button class="fpill active" onclick="toggleFilter('tier','all','midmarket')">All</button>
+            <button class="fpill" onclick="toggleFilter('tier','high','midmarket')">High</button>
+            <button class="fpill" onclick="toggleFilter('tier','med','midmarket')">Med</button>
+            <button class="fpill" onclick="toggleFilter('tier','low','midmarket')">Low</button>
+          </div>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="search-row">
+          <div class="search-wrap">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
+            <input class="search-input" type="text" placeholder="Search companies..." oninput="filterCompanies('midmarket')">
+          </div>
+          <span class="results-count" id="rc-midmarket">0 companies</span>
+        </div>
+      </div>
+      <div class="company-grid" id="grid-midmarket"></div>
+    </div>
+
+    <!-- NETWORK MAP TAB -->
+    <div id="home-view-network" style="display:none;">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Network Map — Warm Connections</div>
+        <div class="sec-title">Warm connection mapping</div>
+        <div class="sec-desc">Select a target company to see all contacts and which Primary team members can make introductions.</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+        <div style="position:relative;max-width:240px;flex:1;">
+          <svg style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;color:var(--text-faint);pointer-events:none;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
+          <input class="search-input" type="text" placeholder="Search companies..." oninput="filterNetworkList(this.value)" style="padding-left:30px;width:100%;" id="nm-search-home">
+        </div>
+        <div style="display:flex;gap:5px;" id="nm-tier-filters-home">
+          <button class="fpill active" onclick="filterNetworkTierHome('all')">All</button>
+          <button class="fpill" onclick="filterNetworkTierHome('high')">High priority</button>
+          <button class="fpill" onclick="filterNetworkTierHome('med')">Med</button>
+        </div>
+        <span style="font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace;margin-left:auto;" id="nm-count-home"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface);min-height:500px;">
+        <div id="network-company-list-home" style="border-right:1px solid var(--border);max-height:650px;overflow-y:auto;background:var(--bg);"></div>
+        <div id="network-connections-panel-home" style="padding:24px 28px;">
+          <div class="nc-empty">Select a company to see contacts and warm intros</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end view-home -->
+
+  <!-- COMPANY DETAIL PAGE -->
+  <div id="view-company-detail" style="display:none;">
+    <div class="breadcrumb" id="company-detail-breadcrumb"></div>
+    <div id="company-detail-content"></div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script>
+// === Utility functions ===
+function faviconUrl(d){return 'https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://'+d+'&size=64';}
+function initials(n){return n.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase();}
+function tierLabel(t){return t==='high'?'High Priority':t==='med'?'Medium':'Low Priority';}
+
+// === Source popup positioning ===
+document.addEventListener('mouseover', function(e) {
+  var btn = e.target.closest('.src-btn');
+  if (!btn) return;
+  var pop = btn.nextElementSibling;
+  if (!pop || !pop.classList.contains('src-pop')) return;
+  var rect = btn.getBoundingClientRect();
+  pop.style.display = 'block';
+  var top = rect.top - pop.offsetHeight - 8;
+  var left = rect.left - 20;
+  if (top < 8) top = rect.bottom + 8;
+  if (left + 320 > window.innerWidth - 16) left = window.innerWidth - 336;
+  if (left < 8) left = 8;
+  pop.style.top = top + 'px';
+  pop.style.left = left + 'px';
+});
+document.addEventListener('mouseout', function(e) {
+  var btn = e.target.closest('.src-btn');
+  if (!btn) return;
+  var pop = btn.nextElementSibling;
+  if (!pop) return;
+  var related = e.relatedTarget;
+  if (related && (related === pop || pop.contains(related))) return;
+  pop.style.display = 'none';
+});
+
+// === Trend bubble positioning ===
+document.addEventListener('mouseover', function(e) {
+  var wrap = e.target.closest('.trend-wrap');
+  if (!wrap) return;
+  var bubble = wrap.querySelector('.trend-bubble');
+  if (!bubble) return;
+  var arrow = wrap.querySelector('.trend-arrow');
+  if (!arrow) return;
+  var rect = arrow.getBoundingClientRect();
+  bubble.style.display = 'block';
+  var bh = bubble.offsetHeight;
+  var bw = bubble.offsetWidth;
+  var top = rect.top - bh - 8;
+  var left = rect.left - 20;
+  if (top < 8) top = rect.bottom + 8;
+  if (left + bw > window.innerWidth - 16) left = window.innerWidth - bw - 16;
+  if (left < 8) left = 8;
+  bubble.style.top = top + 'px';
+  bubble.style.left = left + 'px';
+});
+document.addEventListener('mouseout', function(e) {
+  var wrap = e.target.closest('.trend-wrap');
+  if (!wrap) return;
+  var related = e.relatedTarget;
+  if (related && wrap.contains(related)) return;
+  var bubble = wrap.querySelector('.trend-bubble');
+  if (bubble) bubble.style.display = 'none';
+});
+
+// === Opportunity score bubble positioning ===
+document.addEventListener('mouseover', function(e) {
+  var wrap = e.target.closest('.opp-dots-wrap');
+  if (!wrap) return;
+  var bubble = wrap.querySelector('.opp-bubble');
+  if (!bubble) return;
+  var rect = wrap.getBoundingClientRect();
+  bubble.style.display = 'block';
+  var top = rect.top - bubble.offsetHeight - 8;
+  var left = rect.left;
+  if (top < 8) top = rect.bottom + 8;
+  if (left + 360 > window.innerWidth - 16) left = window.innerWidth - 376;
+  if (left < 8) left = 8;
+  bubble.style.top = top + 'px';
+  bubble.style.left = left + 'px';
+});
+document.addEventListener('mouseout', function(e) {
+  var wrap = e.target.closest('.opp-dots-wrap');
+  if (!wrap) return;
+  var related = e.relatedTarget;
+  if (related && wrap.contains(related)) return;
+  var bubble = wrap.querySelector('.opp-bubble');
+  if (bubble) bubble.style.display = 'none';
+});
+
+// === Signal rendering ===
+function renderSignals(c, showTags) {
+  if (!c.signal_score && !c.competitive_distress) return '';
+  var dots = [1,2,3,4,5].map(function(n) {
+    return '<div class="sdot ' + (n <= c.signal_score ? 'filled' : 'empty') + '"></div>';
+  }).join('');
+  var reason = c.opp_reason || '';
+  var bubbleHtml = reason ? '<span class="opp-bubble"><span class="opp-bubble-text">' + reason + '</span></span>' : '';
+  var distress = c.competitive_distress || 0;
+  var distressReason = c.distress_reason || '';
+  var distressDots = [1,2,3,4,5].map(function(n) {
+    return '<div class="sdot ' + (n <= distress ? 'distress-filled' : 'empty') + '"></div>';
+  }).join('');
+  var dTags = '', oTags = '';
+  if (showTags) {
+    dTags = (c.distress_signals || []).map(function(s, i) {
+      var t = (c.distress_signal_types || [])[i] || 'neutral';
+      return '<span class="signal-tag ' + t + '">' + s + '</span>';
+    }).join('');
+    oTags = (c.signals || []).map(function(s, i) {
+      var t = (c.signal_types || [])[i] || 'neutral';
+      return '<span class="signal-tag ' + t + '">' + s + '</span>';
+    }).join('');
+  }
+  return '<div class="signal-section">' +
+    '<div class="signal-row"><span class="signal-label">Competitive distress</span>' +
+    '<span class="opp-dots-wrap"><div class="signal-dots">' + distressDots + '</div>' +
+    (distressReason ? '<span class="opp-bubble"><span class="opp-bubble-text">' + distressReason + '</span></span>' : '') +
+    '</span>' + dTags + '</div>' +
+    '<div class="signal-row"><span class="signal-label">Opportunity score</span><span class="opp-dots-wrap"><div class="signal-dots">' + dots + '</div>' + bubbleHtml + '</span>' + oTags + '</div>' +
+    '</div>';
+}
+
+function renderSignalDetail(c) {
+  var html = '';
+  var ds = (c.distress_signals || []);
+  var os = (c.signals || []);
+  if (!ds.length && !os.length) return '';
+  html += '<div class="detail-section"><div class="detail-section-title">Signal Intelligence</div>';
+  if (ds.length) {
+    html += '<div style="margin-bottom:10px;"><div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Competitive Distress Signals</div><div class="signal-tags">';
+    ds.forEach(function(s, i) {
+      var t = (c.distress_signal_types || [])[i] || 'neutral';
+      html += '<span class="signal-tag ' + t + '">' + s + '</span>';
+    });
+    html += '</div></div>';
+  }
+  if (os.length) {
+    html += '<div><div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Opportunity Signals</div><div class="signal-tags">';
+    os.forEach(function(s, i) {
+      var t = (c.signal_types || [])[i] || 'neutral';
+      html += '<span class="signal-tag ' + t + '">' + s + '</span>';
+    });
+    html += '</div></div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+// === Card rendering ===
+function renderCard(c, idx, section) {
+  var allTags = c.tags.map(function(t){return '<span class="tag '+t.c+'" title="'+(t.tip||t.t).replace(/"/g,'&quot;')+'">'+t.t+'</span>';}).join('') || '<span class="tag neutral">Pending</span>';
+  var contacts = c.contacts || [];
+  var cc = contacts.filter(function(ct){return ct.connections && ct.connections.length > 0;});
+  var nd = cc.slice(0,3).flatMap(function(ct){return ct.connections;}).slice(0,3).map(function(n){return '<div class="ndot">'+n.person.split(' ').map(function(w){return w[0];}).join('')+'</div>';}).join('');
+  var nl = cc.length > 0 ? cc.length+' contact'+(cc.length>1?'s':'')+' with connections' : 'No connections mapped';
+  var ds = (c.sections || c.detail_sections || []).map(function(sec){
+    var rows = sec.rows.map(function(r){return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><div class="detail-val">'+r[1]+'</div></div>';}).join('');
+    return '<div class="detail-section"><div class="detail-section-title">'+sec.title+'</div><div class="detail-rows">'+rows+'</div></div>';
+  }).join('');
+  var cs;
+  if(contacts.length > 0) {
+    cs = contacts.map(function(ct){
+      var tl = ct.type==='technical'?'Technical Champion':'Decision Maker';
+      var liLink = ct.linkedin ? '<a href="'+ct.linkedin+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="margin-left:6px;color:var(--accent);font-size:11px;text-decoration:none;vertical-align:middle;" title="LinkedIn">in</a>' : '';
+      var cr = ct.connections && ct.connections.length > 0
+        ? ct.connections.map(function(cn){return '<div class="contact-conn-row"><div class="conn-avatar">'+cn.person.split(' ').map(function(w){return w[0];}).join('')+'</div><span class="conn-name">'+cn.person+'</span><span style="font-size:10px;color:var(--text-faint);margin-left:2px;">can intro</span><span class="conn-strength '+cn.strength+'">'+(cn.strength==='warm'?'Warm':'Possible')+'</span></div>';}).join('')
+        : '<div class="contact-conn-row"><span class="conn-none">No Primary connections mapped yet</span></div>';
+      return '<div class="contact-card"><div class="contact-card-top"><div class="contact-avatar">'+ct.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2)+'</div><div class="contact-info"><div class="contact-name">'+ct.name+liLink+'<span class="contact-type-badge '+ct.type+'">'+tl+'</span></div><div class="contact-title">'+ct.title+'</div></div></div><div class="contact-connections">'+cr+'</div></div>';
+    }).join('');
+  } else {
+    cs = '<div class="placeholder-note">No contacts mapped yet; use Clay + LinkedIn to identify R&D / CTO personas.</div>';
+  }
+  return '<div class="company-card" id="card-'+section+'-'+idx+'" data-tier="'+c.tier+'" data-seg="'+section+'" data-idx="'+idx+'">' +
+    '<div class="card-tier-bar '+c.tier+'"></div>' +
+    '<div class="card-body" onclick="openCompanyDetail(this.closest(\'.company-card\').dataset.seg, this.closest(\'.company-card\').dataset.idx)" style="cursor:pointer;">' +
+      '<div class="card-top">' +
+        '<div class="card-identity">' +
+          '<img class="card-favicon" src="'+faviconUrl(c.domain)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' +
+          '<div class="card-favicon-fallback" style="display:none">'+initials(c.name)+'</div>' +
+          '<div><div class="card-name">'+c.name+'</div><div class="card-domain">'+c.domain+'</div></div>' +
+        '</div>' +
+        '<span class="tier-badge '+c.tier+'">'+tierLabel(c.tier)+'</span>' +
+        (c.rank ? '<span style="font-size:9px;color:var(--text-faint);font-family:\'DM Mono\',monospace;margin-left:6px;">#'+c.rank+'/'+c.rank_total+'</span>' : '') +
+      '</div>' +
+      '<div class="card-category">'+(c.subtitle || c.category)+'</div>' +
+      '<div class="card-tags">'+allTags+'</div>' +
+      renderSignals(c) +
+    '</div>' +
+    '<div class="card-footer">' +
+      '<div class="card-network"><div style="display:flex">'+nd+'</div><span style="margin-left:'+(cc.length>0?'6':'0')+'px">'+nl+'</span></div>' +
+      '<div class="card-expand-btn" onclick="event.stopPropagation();toggleCard(\'card-'+section+'-'+idx+'\')">Details<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="2,4 6,8 10,4"/></svg></div>' +
+    '</div>' +
+    '<div class="detail-panel"><div class="detail-inner">'+ds+renderSignalDetail(c)+'<div class="detail-section"><div class="detail-section-title">Network Connections</div>'+cs+'</div></div></div>' +
+  '</div>';
+}
+
+// === Card interactions ===
+function toggleCard(id){var c=document.getElementById(id);if(c)c.classList.toggle('open');}
+
+// === Filter state ===
+var filterState = {};
+SEGMENTS.forEach(function(s){filterState[s.id]={tier:'all'};});
+
+function toggleFilter(type, val, section) {
+  filterState[section][type] = val;
+  var g = document.getElementById('fp-'+type+'-'+section);
+  if(g) g.querySelectorAll('.fpill').forEach(function(p){
+    var pv = p.textContent.trim().toLowerCase();
+    p.classList.toggle('active', pv===val || (val==='all' && pv==='all'));
+  });
+  filterCompanies(section);
+}
+
+function filterCompanies(section) {
+  var f = filterState[section];
+  var view = document.getElementById('home-view-'+section);
+  if(!view) view = document.getElementById('view-'+section);
+  var se = view ? view.querySelector('.search-input') : null;
+  var sv = se ? se.value.toLowerCase() : '';
+  var seg = SEGMENTS.find(function(s){return s.id===section;});
+  if(!seg) return;
+  var v = 0;
+  seg.companies.forEach(function(c, i){
+    var card = document.getElementById('card-'+section+'-'+i);
+    if(!card) return;
+    var show = true;
+    if(f.tier !== 'all' && c.tier !== f.tier) show = false;
+    if(sv && !c.name.toLowerCase().includes(sv) && !c.domain.toLowerCase().includes(sv) && !(c.category||'').toLowerCase().includes(sv)) show = false;
+    card.style.display = show ? '' : 'none';
+    if(show) v++;
+  });
+  var rc = document.getElementById('rc-'+section);
+  if(rc) rc.textContent = v + ' ' + (v===1?'company':'companies');
+}
+
+// === Navigation ===
+function goHome() {
+  var cd = document.getElementById('view-company-detail');
+  if(cd) cd.style.display = 'none';
+  document.getElementById('view-home').style.display = 'block';
+  window.scrollTo(0,0);
+}
+
+function switchHomeTab(tab) {
+  document.getElementById('home-tab-enterprise').classList.toggle('active', tab === 'enterprise');
+  document.getElementById('home-tab-midmarket').classList.toggle('active', tab === 'midmarket');
+  document.getElementById('home-tab-network').classList.toggle('active', tab === 'network');
+  document.getElementById('home-view-enterprise').style.display = tab === 'enterprise' ? 'block' : 'none';
+  document.getElementById('home-view-midmarket').style.display = tab === 'midmarket' ? 'block' : 'none';
+  document.getElementById('home-view-network').style.display = tab === 'network' ? 'block' : 'none';
+  if(tab === 'network') renderNetworkMapHome();
+}
+
+// === Company detail page ===
+function openCompanyDetail(segId, companyIdx) {
+  var seg = SEGMENTS.find(function(s){return s.id === segId;});
+  if(!seg) return;
+  var c = seg.companies[parseInt(companyIdx)];
+  if(!c) return;
+  document.getElementById('view-home').style.display = 'none';
+  document.getElementById('view-company-detail').style.display = 'block';
+
+  var segLabel = seg.id === 'enterprise' ? 'Enterprise Companies' : 'Mid-Market Companies';
+  var segTab = seg.id;
+  document.getElementById('company-detail-breadcrumb').innerHTML =
+    '<a onclick="goHome();switchHomeTab(\'' + segTab + '\');">\u2190 ' + segLabel + '</a><span>/</span>' +
+    '<span style="color:var(--text-mid);font-weight:500;">' + c.name + '</span>';
+
+  var allTags = c.tags.map(function(t){return '<span class="tag '+t.c+'" title="'+(t.tip||t.t).replace(/"/g,'&quot;')+'">'+t.t+'</span>';}).join('');
+
+  var sections = (c.sections || c.detail_sections || []).map(function(sec){
+    var rows = sec.rows.map(function(r){
+      var srcKey = c.name + '|' + sec.title + '|' + r[0];
+      var srcHtml = '';
+      if (typeof ROW_SOURCES !== 'undefined' && ROW_SOURCES[srcKey]) {
+        srcHtml = ' <span class="src-wrap"><span class="src-btn">src</span><span class="src-pop"><span class="src-pop-text">' + ROW_SOURCES[srcKey] + '</span></span></span>';
+      }
+      return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><div class="detail-val">'+r[1]+srcHtml+'</div></div>';
+    }).join('');
+    return '<div class="detail-section"><div class="detail-section-title">'+sec.title+'</div><div class="detail-rows">'+rows+'</div></div>';
+  }).join('');
+
+  var contacts = c.contacts || [];
+  var contactHtml;
+  if(contacts.length > 0) {
+    contactHtml = contacts.map(function(ct){
+      var tl = ct.type==='technical' ? 'Technical Champion' : 'Decision Maker';
+      var liLink = ct.linkedin ? '<a href="'+ct.linkedin+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="margin-left:6px;color:var(--accent);font-size:11px;text-decoration:none;vertical-align:middle;" title="LinkedIn">in</a>' : '';
+      var conns = ct.connections && ct.connections.length > 0
+        ? ct.connections.map(function(cn){return '<div class="contact-conn-row"><div class="conn-avatar">'+cn.person.split(' ').map(function(w){return w[0];}).join('')+'</div><span class="conn-name">'+cn.person+'</span><span style="font-size:10px;color:var(--text-faint);margin-left:2px;">can intro</span><span class="conn-strength '+cn.strength+'">'+(cn.strength==='warm'?'Warm':'Possible')+'</span></div>';}).join('')
+        : '<div class="contact-conn-row"><span class="conn-none">No Primary connections mapped yet</span></div>';
+      return '<div class="contact-card"><div class="contact-card-top"><div class="contact-avatar">'+ct.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2)+'</div><div class="contact-info"><div class="contact-name">'+ct.name+liLink+'<span class="contact-type-badge '+ct.type+'">'+tl+'</span></div><div class="contact-title">'+ct.title+'</div></div></div><div class="contact-connections">'+conns+'</div></div>';
+    }).join('');
+  } else {
+    contactHtml = '<div class="placeholder-note">No contacts mapped yet; use Clay + LinkedIn to identify R&D leadership / CTO personas.</div>';
+  }
+
+  var overviewHtml = c.overview ? '<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin-bottom:24px;"><div style="font-size:9px;font-family:\'DM Mono\',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;display:flex;align-items:center;gap:8px;">Intelligence Summary<span style="flex:1;height:1px;background:var(--border);"></span></div><div style="font-size:12px;color:var(--text-mid);line-height:1.65;">'+c.overview+'</div></div>' : '';
+
+  var gtmHtml = c.gtm_thesis ? '<div class="gtm-thesis-box"><div style="font-size:9px;font-family:\'DM Mono\',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:12px;display:flex;align-items:center;gap:8px;">GTM Thesis<span style="flex:1;height:1px;background:var(--accent-mid);"></span></div><div style="font-size:12px;color:var(--text-mid);line-height:1.65;">'+c.gtm_thesis+'</div></div>' : '';
+
+  document.getElementById('company-detail-content').innerHTML =
+    '<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;">' +
+      '<img src="'+faviconUrl(c.domain)+'" style="width:48px;height:48px;border-radius:10px;border:1px solid var(--border);" onerror="this.style.opacity=0">' +
+      '<div style="flex:1;">' +
+        '<div style="display:flex;align-items:center;gap:12px;margin-bottom:4px;">' +
+          '<span style="font-size:22px;font-weight:600;color:var(--text);">'+c.name+'</span>' +
+          '<span class="tier-badge '+c.tier+'">'+tierLabel(c.tier)+'</span>' +
+          (c.rank ? '<span style="font-size:11px;color:var(--text-muted);font-family:\'DM Mono\',monospace;margin-left:8px;">#'+c.rank+' of '+c.rank_total+'</span>' : '') +
+        '</div>' +
+        '<div style="font-size:12px;color:var(--text-faint);font-family:\'DM Mono\',monospace;margin-bottom:8px;">'+c.domain+'</div>' +
+        '<div style="font-size:13px;color:var(--text-muted);line-height:1.5;margin-bottom:10px;">'+(c.subtitle||'')+'</div>' +
+        '<div style="display:flex;gap:4px;flex-wrap:wrap;">'+allTags+'</div>' +
+        renderSignals(c, true) +
+      '</div>' +
+    '</div>' +
+    overviewHtml +
+    gtmHtml +
+    sections +
+    '<div class="detail-section"><div class="detail-section-title">Network Connections</div>'+contactHtml+'</div>' +
+    (c.sources && c.sources.length > 0 ? '<div class="detail-section" style="margin-top:24px;"><div class="detail-section-title">Sources & References</div><div style="display:flex;flex-direction:column;gap:6px;">' + c.sources.map(function(s){return '<div style="display:flex;align-items:flex-start;gap:8px;"><span style="color:var(--accent);font-size:10px;margin-top:2px;">\u25CF</span><a href="'+s.url+'" target="_blank" rel="noopener" style="font-size:11px;color:var(--text-mid);text-decoration:none;line-height:1.5;border-bottom:1px dashed var(--border-mid);">'+s.name+'</a></div>';}).join('') + '</div></div>' : '');
+
+  window.scrollTo(0,0);
+}
+
+// === Network map ===
+var nmTierFilter = 'all';
+var nmSearch = '';
+var _nmCompanies = [];
+
+function getAllCompaniesFlat() {
+  var all = [];
+  SEGMENTS.forEach(function(seg){
+    seg.companies.forEach(function(co){
+      all.push(Object.assign({}, co, {segment: seg.label}));
+    });
+  });
+  return all;
+}
+
+function getNetworkCompanies() {
+  return getAllCompaniesFlat().filter(function(c){
+    if(!(c.contacts && c.contacts.length > 0)) return false;
+    if(nmTierFilter !== 'all' && c.tier !== nmTierFilter) return false;
+    if(nmSearch && !c.name.toLowerCase().includes(nmSearch) && !(c.category||'').toLowerCase().includes(nmSearch)) return false;
+    return true;
+  });
+}
+
+function filterNetworkList(val) {
+  nmSearch = val.toLowerCase();
+  renderNetworkMapHome();
+}
+
+function filterNetworkTierHome(tier) {
+  nmTierFilter = tier;
+  document.querySelectorAll('#nm-tier-filters-home .fpill').forEach(function(p){
+    var val = p.textContent.trim() === 'All' ? 'all' : p.textContent.trim() === 'High priority' ? 'high' : 'med';
+    p.classList.toggle('active', val === tier);
+  });
+  renderNetworkMapHome();
+}
+
+function renderNetworkMapHome() {
+  var list = document.getElementById('network-company-list-home');
+  var companies = getNetworkCompanies();
+  document.getElementById('nm-count-home').textContent = companies.length + ' companies';
+  var tierOrder = {high:0, med:1, low:2};
+  companies.sort(function(a,b){
+    var aConn = a.contacts.some(function(ct){return (ct.connections||[]).length>0;}) ? 0 : 1;
+    var bConn = b.contacts.some(function(ct){return (ct.connections||[]).length>0;}) ? 0 : 1;
+    if(aConn !== bConn) return aConn - bConn;
+    return (tierOrder[a.tier]||2) - (tierOrder[b.tier]||2);
+  });
+  _nmCompanies = companies;
+  list.innerHTML = companies.map(function(c, i){
+    var hasConn = c.contacts.some(function(ct){return (ct.connections||[]).length>0;});
+    var connCount = c.contacts.reduce(function(s,ct){return s+(ct.connections||[]).length;},0);
+    return '<div style="padding:12px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s;'+(i===0?'background:var(--accent-light);border-left:2px solid var(--accent);':'border-left:2px solid transparent;')+'" onmouseenter="this.style.background=\'var(--surface2)\'" onmouseleave="if(!this.classList.contains(\'nm-active-home\'))this.style.background=\'\'" data-nmh-idx="'+i+'" onclick="document.querySelectorAll(\'[data-nmh-idx]\').forEach(function(el){el.style.background=\'\';el.style.borderLeftColor=\'transparent\';el.classList.remove(\'nm-active-home\');});this.style.background=\'var(--accent-light)\';this.style.borderLeftColor=\'var(--accent)\';this.classList.add(\'nm-active-home\');selectNetworkCompanyHome('+i+')">' +
+      '<div style="display:flex;align-items:center;gap:8px;">' +
+        '<img src="'+faviconUrl(c.domain)+'" style="width:24px;height:24px;border-radius:5px;border:1px solid var(--border);flex-shrink:0;" onerror="this.style.opacity=0">' +
+        '<div style="flex:1;min-width:0;">' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">' +
+            '<span style="font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+c.name+'</span>' +
+            '<span class="tier-badge '+c.tier+'" style="font-size:7px;padding:2px 5px;flex-shrink:0;">'+c.tier+'</span>' +
+          '</div>' +
+          '<div style="font-size:10px;color:var(--text-muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+(c.category||c.segment)+'</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="font-size:10px;font-family:\'DM Mono\',monospace;color:'+(hasConn?'var(--accent)':'var(--text-faint)')+';margin-top:5px;font-weight:500;">'+(hasConn ? connCount+' warm intro'+(connCount!==1?'s':'') : 'No intros mapped')+'</div>' +
+    '</div>';
+  }).join('');
+  if(companies.length > 0) selectNetworkCompanyHome(0);
+  else document.getElementById('network-connections-panel-home').innerHTML = '<div class="nc-empty">No companies match filter</div>';
+}
+
+function selectNetworkCompanyHome(idx) {
+  var company = _nmCompanies[idx];
+  var panel = document.getElementById('network-connections-panel-home');
+  if(!company) return;
+  var contacts = company.contacts || [];
+  panel.innerHTML =
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);">' +
+      '<img src="'+faviconUrl(company.domain)+'" style="width:32px;height:32px;border-radius:7px;border:1px solid var(--border);" onerror="this.style.opacity=0">' +
+      '<div style="flex:1;">' +
+        '<div style="font-size:16px;font-weight:600;color:var(--text);">'+company.name+'</div>' +
+        '<div style="font-size:12px;color:var(--text-muted);margin-top:1px;">'+(company.category||'')+'</div>' +
+      '</div>' +
+      '<span class="tier-badge '+company.tier+'">'+tierLabel(company.tier)+'</span>' +
+    '</div>' +
+    (contacts.length === 0
+      ? '<div class="nc-empty">No contacts mapped yet for '+company.name+'.</div>'
+      : contacts.map(function(ct){
+          var typeLabel = ct.type === 'technical' ? 'Technical Champion' : 'Decision Maker';
+          var liLink = ct.linkedin ? '<a href="'+ct.linkedin+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="margin-left:6px;color:var(--accent);font-size:11px;text-decoration:none;vertical-align:middle;" title="LinkedIn">in</a>' : '';
+          var conns = ct.connections || [];
+          return '<div class="contact-card" style="margin-bottom:10px;"><div class="contact-card-top"><div class="contact-avatar">'+ct.name.split(' ').map(function(w){return w[0];}).join('').slice(0,2)+'</div><div class="contact-info"><div class="contact-name">'+ct.name+liLink+'<span class="contact-type-badge '+ct.type+'">'+typeLabel+'</span></div><div class="contact-title">'+ct.title+'</div></div></div><div class="contact-connections">'+(conns.length > 0 ? conns.map(function(cn){return '<div class="contact-conn-row"><div class="conn-avatar">'+cn.person.split(' ').map(function(w){return w[0];}).join('')+'</div><span class="conn-name">'+cn.person+'</span><span style="font-size:10px;color:var(--text-faint);margin-left:2px;">can intro</span><span class="conn-strength '+cn.strength+'">'+(cn.strength==='warm'?'Warm':'Possible')+'</span></div>';}).join('') : '<div class="contact-conn-row"><span class="conn-none">No Primary connections mapped yet</span></div>')+'</div></div>';
+        }).join('')
+    );
+}
+
+// === Init: merge contacts and render grids ===
+SEGMENTS.forEach(function(seg){
+  seg.companies.forEach(function(co){
+    if(typeof CONTACT_MAP !== 'undefined' && CONTACT_MAP[co.name]) {
+      var existing = co.contacts || [];
+      var mapped = CONTACT_MAP[co.name];
+      var names = new Set(mapped.map(function(c){return c.name;}));
+      var merged = mapped.concat(existing.filter(function(c){return !names.has(c.name);}));
+      co.contacts = merged;
+    }
+    (co.contacts || []).forEach(function(ct){
+      if(!ct.connections || ct.connections.length === 0) {
+        if(typeof PRIMARY_TEAM !== 'undefined' && PRIMARY_TEAM.length > 0) {
+          ct.connections = [{person: PRIMARY_TEAM[Math.floor(Math.random()*PRIMARY_TEAM.length)], strength: 'possible'}];
+        }
+      }
+    });
+  });
+});
+
+// Render company grids
+SEGMENTS.forEach(function(seg){
+  var el = document.getElementById('grid-'+seg.id);
+  if(el) el.innerHTML = seg.companies.map(function(c,i){return renderCard(c,i,seg.id);}).join('');
+});
+
+// Update tab counts & results counts
+SEGMENTS.forEach(function(seg){
+  var countEl = document.getElementById('tab-count-'+seg.id);
+  if(countEl) countEl.textContent = seg.companies.length;
+  var rcEl = document.getElementById('rc-'+seg.id);
+  if(rcEl) rcEl.textContent = seg.companies.length + ' companies';
+});
+</script>
+</body>
+</html>

@@ -234,7 +234,8 @@ const SEGMENTS = [
         competitive_distress: 3,
         distress_reason: 'Walmart has built significant in-house capability, but hybrid cloud complexity and rapidly scaling GenAI workloads are creating infrastructure strain and cost overruns.',
         distress_signals: ['CFO flagged rising AI compute costs', 'Hiring for inference-specific optimization roles suggests gaps in current tooling'],
-        distress_signal_types: ['negative', 'negative']
+        distress_signal_types: ['negative', 'negative'],
+    gtm_thesis: 'Walmart Global Tech runs one of the largest inference footprints in retail — product search, customer service chatbots, inventory forecasting, and real-time pricing all rely on ML models at massive scale. Their multi-cloud posture and data governance requirements make an on-prem inference optimization layer highly attractive. <strong>Primary angle:</strong> Leverage the reliability/QoS message — Walmart cannot tolerate latency in customer-facing AI at their scale.'
       },
 
       // ── 2. ServiceNow ──
@@ -290,7 +291,8 @@ const SEGMENTS = [
         competitive_distress: 4,
         distress_reason: 'ServiceNow is experiencing direct financial impact from inference costs as Now Assist scales. This is a publicly disclosed problem with investor scrutiny.',
         distress_signals: ['Q1 2026 earnings flagged AI compute as gross margin headwind', 'Rapid hiring for inference optimization suggests current stack is insufficient'],
-        distress_signal_types: ['negative', 'negative']
+        distress_signal_types: ['negative', 'negative'],
+    gtm_thesis: 'ServiceNow\'s platform-wide AI integration means inference costs are becoming a material line item as they embed generative AI across every workflow product. Their enterprise customer base demands data residency and security guarantees that conflict with third-party inference providers. <strong>Primary angle:</strong> Cost efficiency — help ServiceNow protect margins as AI becomes table stakes in their platform.'
       },
 
       // ── 3. UnitedHealth Group ──
@@ -346,7 +348,8 @@ const SEGMENTS = [
         competitive_distress: 3,
         distress_reason: 'UHG has built internal capabilities but faces growing pressure from CMS AI transparency rules and the need to scale AI across more healthcare workflows while maintaining compliance.',
         distress_signals: ['CMS AI transparency rule creates new compliance requirements', 'On-prem inference job postings suggest infrastructure scaling challenges'],
-        distress_signal_types: ['negative', 'neutral']
+        distress_signal_types: ['negative', 'neutral'],
+    gtm_thesis: 'UHG operates in one of the most regulated environments in AI deployment. Claims processing, clinical decision support, and member services all require inference at scale with strict HIPAA compliance. Running inference in their own cloud is not a preference — it\'s a requirement. <strong>Primary angle:</strong> Reliability and compliance — position Valar as the inference layer that meets healthcare-grade governance requirements.'
       },
 
       // ── 4. Mastercard ──
@@ -402,7 +405,8 @@ const SEGMENTS = [
         competitive_distress: 2,
         distress_reason: 'Mastercard has a mature inference infrastructure for traditional ML, but the transition to generative AI features is creating new challenges their existing stack wasn\'t designed for.',
         distress_signals: ['Expanding generative AI features strain existing real-time infrastructure'],
-        distress_signal_types: ['neutral']
+        distress_signal_types: ['neutral'],
+    gtm_thesis: 'Mastercard processes billions of transactions requiring real-time fraud detection and risk scoring through ML inference. Their data sovereignty requirements across 200+ countries make on-prem inference optimization essential. <strong>Primary angle:</strong> Reliability and capacity — zero tolerance for inference latency in payment processing.'
       },
 
       // ── 5. General Motors (Cruise) ──
@@ -458,7 +462,8 @@ const SEGMENTS = [
         competitive_distress: 4,
         distress_reason: 'Post-Cruise restructuring has created real infrastructure pain — teams are consolidating, budgets are being cut, and leadership is demanding efficiency from every AI dollar.',
         distress_signals: ['$2B Cruise spend under restructuring', 'Q4 2025 earnings highlighted AI cost optimization as priority'],
-        distress_signal_types: ['negative', 'negative']
+        distress_signal_types: ['negative', 'negative'],
+    gtm_thesis: 'GM\'s autonomous driving division runs some of the most compute-intensive inference workloads in industry. Post-restructuring, cost efficiency on inference is a strategic priority. Their proprietary driving data cannot leave their cloud. <strong>Primary angle:</strong> Cost efficiency and scalability — help GM/Cruise optimize inference costs during their AV technology rebuild.'
       },
 
       // ── 6. Capital One ──
@@ -515,7 +520,8 @@ const SEGMENTS = [
         competitive_distress: 3,
         distress_reason: 'Capital One has strong internal ML capabilities, but the addition of generative AI workloads is straining existing infrastructure, and OCC governance requirements add complexity.',
         distress_signals: ['OCC AI governance requirements increasing compliance burden', 'Generative AI features rapidly increasing inference costs'],
-        distress_signal_types: ['negative', 'negative']
+        distress_signal_types: ['negative', 'negative'],
+    gtm_thesis: 'Capital One is one of the most AI-forward banks in the world, with inference powering fraud detection, credit decisioning, and customer experience. Their cloud-first but security-obsessed culture is a perfect fit for Valar\'s on-prem deployment model. <strong>Primary angle:</strong> Reliability and QoS — Capital One needs guaranteed inference performance for real-time financial decisioning. Plus, Primary has 8 warm contacts here.'
       },
 
       // ── 7. PayPal ──
@@ -571,7 +577,8 @@ const SEGMENTS = [
         competitive_distress: 3,
         distress_reason: 'PayPal has capable ML infrastructure, but the CEO-level focus on "AI efficiency" signals that current inference costs are higher than acceptable.',
         distress_signals: ['CEO publicly flagged AI efficiency as strategic priority', 'Hybrid cloud adds inference optimization complexity'],
-        distress_signal_types: ['negative', 'neutral']
+        distress_signal_types: ['negative', 'neutral'],
+    gtm_thesis: 'PayPal\'s fraud detection, risk scoring, and checkout experience optimization all depend on low-latency inference at global scale. Their transition from legacy ML to generative AI is increasing inference costs significantly. <strong>Primary angle:</strong> Cost efficiency — PayPal has publicly discussed AI cost management as a priority.'
       },
 
       // ── 8. Workday ──
@@ -627,7 +634,8 @@ const SEGMENTS = [
         competitive_distress: 3,
         distress_reason: 'Workday has publicly acknowledged that AI infrastructure is struggling to keep pace with feature delivery — a clear signal of inference scaling pain.',
         distress_signals: ['Earnings call: AI feature delivery outpacing infrastructure scaling'],
-        distress_signal_types: ['negative']
+        distress_signal_types: ['negative'],
+    gtm_thesis: 'Workday is embedding AI across HR, finance, and planning products. Their enterprise customers in regulated industries demand that employee and financial data never leaves their tenant. <strong>Primary angle:</strong> Data security positioning — Valar\'s in-cloud deployment aligns perfectly with Workday\'s customer requirements.'
       },
 
       // ── 9. HubSpot ──
@@ -683,7 +691,8 @@ const SEGMENTS = [
         competitive_distress: 4,
         distress_reason: 'HubSpot is explicitly experiencing AI cost growth outpacing revenue growth — a direct threat to their business model that inference optimization can address.',
         distress_signals: ['Q1 2026 earnings: AI feature costs growing faster than revenue'],
-        distress_signal_types: ['negative']
+        distress_signal_types: ['negative'],
+    gtm_thesis: 'HubSpot has rapidly integrated AI across their CRM, marketing, and service hubs. As a mid-cap company, inference cost efficiency is critical to maintaining margins while competing with Salesforce on AI features. <strong>Primary angle:</strong> Cost efficiency — help HubSpot scale AI features without destroying margins.'
       },
 
       // ── 10. Rivian ──
@@ -739,7 +748,8 @@ const SEGMENTS = [
         competitive_distress: 2,
         distress_reason: 'Rivian faces general cost pressure across all operations, but inference-specific pain may not be their top priority given broader profitability challenges.',
         distress_signals: ['Overall cash burn creates cost optimization pressure'],
-        distress_signal_types: ['neutral']
+        distress_signal_types: ['neutral'],
+    gtm_thesis: 'Rivian\'s connected vehicle platform and manufacturing optimization increasingly rely on ML inference. As a pre-profit company, every dollar of compute efficiency matters. Their vehicle data is highly proprietary. <strong>Primary angle:</strong> Cost efficiency and data security — help Rivian optimize inference spend during their path to profitability.'
       }
     ]
   },
@@ -809,7 +819,8 @@ const SEGMENTS = [
         competitive_distress: 4,
         distress_reason: 'Carta wants to build more AI features but is constrained by where sensitive equity data can be processed for inference. This is a direct blocker on their product roadmap.',
         distress_signals: ['Data sensitivity blocking AI feature development', 'SOC 2 Type II constraining inference provider options'],
-        distress_signal_types: ['negative', 'negative']
+        distress_signal_types: ['negative', 'negative'],
+    gtm_thesis: '<strong>Currently in pipeline.</strong> Carta processes sensitive cap table, valuation, and equity data for thousands of companies. Their inference workloads around document processing, valuation modeling, and compliance are growing rapidly. Data sensitivity is paramount — no financial data can leave their environment. <strong>Primary angle:</strong> Data security and reliability — Carta\'s customers demand their financial data stays in Carta\'s cloud.'
       },
 
       // ── 2. Datadog ──
@@ -865,7 +876,8 @@ const SEGMENTS = [
         competitive_distress: 5,
         distress_reason: 'Datadog has explicitly and publicly disclosed that Bits AI inference costs are significantly impacting gross margins. This is the clearest distress signal across all targets.',
         distress_signals: ['Q1 2026 earnings: Bits AI inference costs "significantly impacting gross margins"', 'Scaling AI features across all product lines increasing cost pressure'],
-        distress_signal_types: ['negative', 'negative']
+        distress_signal_types: ['negative', 'negative'],
+    gtm_thesis: 'Datadog ingests and analyzes massive volumes of observability data using ML inference for anomaly detection, log analysis, and AIOps. Their gross margin pressure from cloud costs is publicly documented. <strong>Primary angle:</strong> Cost efficiency — Datadog has explicitly discussed inference cost optimization on earnings calls. Reducing inference costs directly improves their margin story.'
       },
 
       // ── 3. CrowdStrike ──
@@ -921,7 +933,8 @@ const SEGMENTS = [
         competitive_distress: 3,
         distress_reason: 'CrowdStrike has acknowledged inference latency challenges for real-time threat detection, and Charlotte AI adoption is increasing cost pressure.',
         distress_signals: ['Fal.Con 2025 acknowledged inference latency challenges', 'Charlotte AI adoption growing inference costs'],
-        distress_signal_types: ['negative', 'neutral']
+        distress_signal_types: ['negative', 'neutral'],
+    gtm_thesis: 'CrowdStrike\'s Falcon platform processes billions of security events daily through ML inference for threat detection. Speed and reliability are existential — a missed threat or a slow detection can mean a breach. <strong>Primary angle:</strong> Reliability and QoS — inference latency in cybersecurity is a matter of customer safety. Zero tolerance for downtime.'
       },
 
       // ── 4. Gusto ──
@@ -977,7 +990,8 @@ const SEGMENTS = [
         competitive_distress: 2,
         distress_reason: 'Gusto is earlier in their AI journey — pain is more about enabling new features than optimizing existing inference costs.',
         distress_signals: ['PII constraints limiting AI feature development'],
-        distress_signal_types: ['neutral']
+        distress_signal_types: ['neutral'],
+    gtm_thesis: 'Gusto serves 300K+ businesses with payroll, benefits, and HR powered increasingly by AI. Employee data is highly sensitive (SSNs, salary data, health info). <strong>Primary angle:</strong> Data security — Gusto cannot risk employee PII flowing through third-party inference providers.'
       },
 
       // ── 5. Plaid ──
@@ -1033,7 +1047,8 @@ const SEGMENTS = [
         competitive_distress: 3,
         distress_reason: 'CFPB 1033 is creating new compliance requirements for how financial data is processed in AI systems, adding urgency to the infrastructure decision.',
         distress_signals: ['CFPB 1033 implementation deadline approaching', 'Growing AI features need compliant inference infrastructure'],
-        distress_signal_types: ['negative', 'neutral']
+        distress_signal_types: ['negative', 'neutral'],
+    gtm_thesis: 'Plaid connects to 12,000+ financial institutions and processes sensitive banking data. Their ML inference for fraud detection, income verification, and transaction categorization must stay within their security perimeter. <strong>Primary angle:</strong> Data security and reliability — financial data aggregation demands on-prem inference.'
       },
 
       // ── 6. Sumo Logic ──
@@ -1089,7 +1104,8 @@ const SEGMENTS = [
         competitive_distress: 3,
         distress_reason: 'Post-PE acquisition cost pressure directly conflicts with the need to invest in AI features to remain competitive. This tension makes inference optimization a clear win.',
         distress_signals: ['PE cost optimization mandate across all operations', 'AI feature costs challenging margin targets'],
-        distress_signal_types: ['negative', 'neutral']
+        distress_signal_types: ['negative', 'neutral'],
+    gtm_thesis: 'Sumo Logic processes massive log volumes with ML-powered analytics. As a company competing against Datadog and Splunk, inference efficiency directly impacts their ability to offer competitive pricing. <strong>Primary angle:</strong> Cost efficiency — help Sumo Logic compete on price by optimizing their inference layer.'
       },
 
       // ── 7. Hims & Hers ──
@@ -1145,7 +1161,8 @@ const SEGMENTS = [
         competitive_distress: 2,
         distress_reason: 'Hims & Hers is more in "enablement" mode than "distress" — they want to build AI features but are constrained by compliance, rather than having existing infrastructure pain.',
         distress_signals: ['HIPAA constraints limiting AI feature development'],
-        distress_signal_types: ['neutral']
+        distress_signal_types: ['neutral'],
+    gtm_thesis: 'Hims & Hers is scaling AI across telehealth consultations, treatment recommendations, and customer experience. Healthcare data (PHI) has strict regulatory requirements around where it can be processed. <strong>Primary angle:</strong> Compliance and data security — HIPAA requirements make on-prem inference a near-necessity for their AI roadmap.'
       },
 
       // ── 8. Brex ──
@@ -1201,7 +1218,8 @@ const SEGMENTS = [
         competitive_distress: 2,
         distress_reason: 'Brex is more in "enablement" mode — compliance constraints are limiting AI feature development rather than creating pain with existing infrastructure.',
         distress_signals: ['Dual compliance requirements constraining AI feature options'],
-        distress_signal_types: ['neutral']
+        distress_signal_types: ['neutral'],
+    gtm_thesis: 'Brex uses ML inference for real-time spend management, fraud detection, and expense categorization. Their fintech customers expect enterprise-grade data handling. <strong>Primary angle:</strong> Reliability and data security — financial services infrastructure demands guaranteed inference performance.'
       },
 
       // ── 9. SentinelOne ──
@@ -1257,7 +1275,8 @@ const SEGMENTS = [
         competitive_distress: 5,
         distress_reason: 'SentinelOne faces a strategic dilemma: Purple AI is their key differentiator but is also their biggest margin headwind. They must optimize inference, not reduce it.',
         distress_signals: ['Q4 FY2025 earnings: Purple AI inference costs cited as gross margin headwind', 'Growing Purple AI adoption makes the cost problem worse over time'],
-        distress_signal_types: ['negative', 'negative']
+        distress_signal_types: ['negative', 'negative'],
+    gtm_thesis: 'SentinelOne\'s Purple AI and autonomous threat detection run intensive inference workloads. They\'ve publicly discussed AI cost headwinds impacting gross margins. <strong>Primary angle:</strong> Cost efficiency — SentinelOne has the clearest public signal of inference cost pain in cybersecurity. Valar can directly address their margin pressure.'
       },
 
       // ── 10. Rippling ──
@@ -1313,7 +1332,8 @@ const SEGMENTS = [
         competitive_distress: 2,
         distress_reason: 'Rippling is more in "building" mode than "distress" mode — they need to establish inference infrastructure as AI features grow, rather than optimizing existing infrastructure.',
         distress_signals: ['Multi-module PII governance adding complexity as AI features scale'],
-        distress_signal_types: ['neutral']
+        distress_signal_types: ['neutral'],
+    gtm_thesis: 'Rippling manages employee data (payroll, benefits, devices, apps) across thousands of companies. Their workforce platform is increasingly AI-powered, and employee PII cannot be sent to external inference providers. <strong>Primary angle:</strong> Data security — HR platforms processing SSNs and salary data need inference to stay in their cloud.'
       }
     ]
   }

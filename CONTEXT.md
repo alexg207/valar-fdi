@@ -1,15 +1,118 @@
 # Valar FDI — Full Context Dump
 
-Generated: 2026-04-28
-Sources: Slack (group DM, 1:1 DMs, #valar-fdi channel), Granola transcript, Google Sheets
+Generated: 2026-04-28 · Updated 2026-04-29 with PVP V Memo
+Sources: Slack (group DM, 1:1 DMs, #valar-fdi channel), Granola transcript, Google Sheets, **Valar PVP V Memo (Brian Schechter + Gaby Lorenzi, 4/29/2026)**
 
 ---
 
 ## What Valar Does
 
-Software layer for **inference optimization** that installs into the customer's own cloud. Unlike Nebius/Crusoe (own hardware + sell compute), Valar sells software only. Key differentiator: data stays in customer's cloud = strong for regulated/data-sensitive industries.
+**One line (from memo):** Bring-your-own-cloud (BYOC) inference optimization platform.
 
-**Stealth stage.** No public web presence, no Crunchbase, no press coverage. Everything we have is from internal Primary comms.
+Aim: **"Databricks of inference."** Installs in customer's own cloud as orchestration + optimization layer above open-source serving engines (vLLM, SGLang, TRT-LLM). Dynamically routes workloads to cheapest available compute (NVIDIA, AMD, Trainium, TPU) that meets SLO. Kernel-level optimizations per model + hardware. **Claims: 50–80% lower inference cost without data leaving customer environment.**
+
+Expansion path: cost/reliability wedge → batch/agentic workload scheduling → workflow orchestration → multi-pipeline governance → centralized cost dashboards. Goal = full enterprise AI control plane.
+
+**Stealth.** No public web presence, no Crunchbase, no press coverage.
+
+## Round + Investment
+
+- **$20M round** at **$70M post-money valuation**
+- Primary investing **$10M for 14% ownership**
+- 5 term sheets active
+- PVP point: **Brian Schechter**
+
+## Team
+
+- **Tom Amsterdam** (CEO, NYC) — Israeli PMO strategic ops → CPO/COO at Granulate (sold to Intel for $650M) → CEO of MethodIQ ($0 → $50M ARR sales-led enterprise motion)
+- **Ron Gruner** (CTO, Israel) — built Granulate runtime optimization engine from scratch as VP R&D, carried through Intel acquisition. Comes out of **Unit 8200 Aram program** (elite low-level systems R&D). Owns the differentiated tech: QoS engine, SLO-aware scheduler, workload profiler, runtime optimizer, capacity orchestrator.
+- **6 ex-Granulate engineers** committed to join post-raise
+- **Granulate playbook is the model:** runtime optimization wedge → infrastructure control plane → co-sell with cloud providers
+
+## The Valar Bet (explicit ICP qualifier)
+
+Enterprises running **>$1.5M annual inference spend** will pay **$150K–$800K+ ACV** to run inside their own cloud with lower cost, faster speed, SLO met.
+- **Mid-market land:** $150K ACV
+- **Enterprise expand:** $800K+ ACV
+- **Expansion:** per-token pricing as more workloads run through platform
+
+## Real Pipeline (per memo, NOT speculative)
+
+**Design partners (signed):**
+- BigPanda
+- Varonis
+
+**Pipeline (named in memo):**
+- ABInBev, Qualcomm, Jefferies, Mobileye, Abbott, Ford, Flatiron, American Airlines
+
+**Upcoming Primary FDI calls:** Databook, New York Times, Shutterstock
+
+**40 potential customers chatted with to date.**
+
+## Market Context (memo)
+
+- Inference market: **$100B (2026) → $255B (2030)**
+- **40% of data center workloads will be inference by 2030** (vs 20% today)
+- Three generations of inference complexity in 3 years: prompt/response → reasoning models (10–50x token consumption) → mixture-of-experts (3–5x cost variance based on infra fit)
+- Agentic workloads = orders of magnitude more compute per task
+
+## Competitive Landscape (memo)
+
+| Category | Players | Why they fail |
+|----------|---------|---------------|
+| **Hyperscalers** | AWS Bedrock, GCP Vertex, Azure AI Foundry | No SLO, opaque cost, quota limits, no cross-cloud, regional model gaps. Win regulated by default, not on merit |
+| **Inference clouds** | Fireworks ($315M ARR, $4B val), Together ($300M ARR, $3.3B val, has VPC), Baseten, Modal, Groq, Cerebras | Multi-tenant data co-mingling, can't clear regulated compliance. NVIDIA supply constraints passed through. Only Together has VPC option |
+| **GPU clouds** | Crusoe, Coreweave, Nebius | Own hardware + sell compute, different model |
+| **DIY** | vLLM/SGLang on own K8s | Needs 4–8 MLOps engineers, fragmented capacity, no SLO, every traffic spike = fire drill. **Inferact** (vLLM productized) is direct competitor — Omer says Tom's approach stronger |
+
+**Startups to monitor:** Contextual, Poetiq
+
+## Key Risks (memo)
+
+1. **Customer not ready** — inference demand hasn't exploded for them yet
+2. **Middleware risk** — sitting on hyperscalers, hyperscalers may build BYOC themselves (memo argues they won't because it cannibalizes managed compute revenue)
+3. **Inference clouds pivot to BYOC** — Together already has VPC deployment
+
+## Buyer Insights (memo appendix)
+
+### From UnitedHealth Group, Director of Architecture
+- **Currently on:** GCP Vertex AI + Azure for production. RAG-based benefits queries (Medicare, Medicaid, commercial)
+- **Tried:** Fireworks, Together, Baseten, Modal — **none reached production** due to security
+- **Hyperscaler pain:** opaque cost, model deprecations break HIPAA pipelines, cold start latency at peak, GCP vendor lock-in, multi-region compliance hell
+- **Sees BYOC + VPC peering as inevitable** — "data never leaves the firewall"
+- UHG isn't there yet but will be at next cost/scale inflection
+
+### From Andrew Wiggin (founding AE, Fireworks)
+- **AI-native customers** = fast cycles, low-quality revenue
+- **Digital natives + enterprise** = long cycles, strategic
+- ⚠️ **CRITICAL: ML engineering teams are antagonists** — they see inference vendors as threat to their role
+- **Real buyer = platform engineering OR security/compliance function**, NOT ML eng
+- GPU shortages pushing enterprises toward inference providers as GPU aggregators (hyperscalers stocked out)
+- "Performance claims aren't durable differentiation — need a problem statement where 90% of buyers immediately say yes"
+
+### From Het Trivedi (ex-FDE, Baseten — bearish)
+- **Data gravity** keeps workloads on hyperscaler
+- Real competition = AWS/GCP/Azure, not other inference startups
+- Only reason enterprises switch = **cost**
+- **Switching cost is high**
+- "Databricks for inference" positioning is overused, space is underdifferentiated
+
+### From Anupreet Walia (VP Eng, Baseten)
+- **Hard problems** in agentic infra: inference routing, data locality across calls, state management across heterogeneous hardware
+- These need forward-deployed engineering, not just a platform
+- **First 2–3 customers define PMF** — Valar's design partners (BigPanda, Varonis) are the test
+
+## Investment Thesis (memo)
+
+1. Tom + Ron's Granulate experience = right team for this product
+2. **BYOC is largely unmet** by existing players
+3. Time is now — enterprise inference scaling but staying in own cloud
+
+## Gotta Believes (memo)
+
+1. NOW is the moment enterprises need BYOC/multi-cloud inference (driven by data residency, compliance, cost predictability, agentic workloads)
+2. Hyperscalers + GPU clouds **won't** build BYOC cross-accelerator control plane (cannibalizes their compute revenue)
+3. Valar can deliver jaw-dropping CX with minimal friction to value, drives cost down, creates lock-in
 
 ## How Valar Came to Primary
 

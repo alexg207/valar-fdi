@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valar FDI · Inference Intelligence Map. Primary VC</title>
+<title>Valar · Inference Intelligence Map</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -141,7 +141,13 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .sdot{width:8px;height:8px;border-radius:50%;}
 .sdot.filled{background:var(--accent);}
 .sdot.distress-filled{background:#dc2626;}
+.sdot.residency-filled{background:#b45309;}
+.sdot.hiring-filled{background:#7e22ce;}
 .sdot.empty{background:var(--border-mid);}
+.detail-inner .detail-val ul{margin:0;padding-left:14px;list-style:none;}
+.detail-inner .detail-val ul li{font-size:11px;color:var(--text-mid);line-height:1.55;margin-bottom:5px;position:relative;padding-left:10px;}
+.detail-inner .detail-val ul li:last-child{margin-bottom:0;}
+.detail-inner .detail-val ul li::before{content:'';position:absolute;left:0;top:7px;width:4px;height:4px;border-radius:50%;background:var(--accent);}
 .signal-tags{display:flex;gap:4px;flex-wrap:wrap;}
 .signal-tag{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:500;white-space:nowrap;border:1px solid;}
 .signal-tag.positive{background:#f0fdf4;color:#166534;border-color:#bbf7d0;}
@@ -215,17 +221,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   <div class="header-left">
     <a class="logo" onclick="goHome()">
       <div class="logo-mark"><svg viewBox="0 0 12 12"><polyline points="2,9 6,3 10,9"/></svg></div>
-      Primary VC
+      Valar
     </a>
     <div class="hdiv"></div>
-    <span class="header-context">FDI · Valar Inference Intelligence Map</span>
+    <span class="header-context">Inference Intelligence Map</span>
   </div>
   <div class="header-right">
-    <div class="hstat"><div class="hstat-val">2</div><div class="hstat-lbl">Segments</div></div>
-    <div class="hstat"><div class="hstat-val">20</div><div class="hstat-lbl">Companies</div></div>
-    <div class="hstat"><div class="hstat-val" style="color:var(--high)">10</div><div class="hstat-lbl">High Priority</div></div>
+    <div class="hstat"><div class="hstat-val">10</div><div class="hstat-lbl">Active Pipeline</div></div>
+    <div class="hstat"><div class="hstat-val">20</div><div class="hstat-lbl">FDI Targets</div></div>
+    <div class="hstat"><div class="hstat-val" style="color:var(--high)">12</div><div class="hstat-lbl">High Priority</div></div>
     <div class="hdiv"></div>
-    <span class="fdi-badge">FDI Draft</span>
+    <span class="fdi-badge">Built by Primary VC</span>
   </div>
 </header>
 
@@ -233,17 +239,46 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   <!-- HOME VIEW -->
   <div id="view-home">
     <div class="tabs" style="margin-bottom:24px;">
-      <button class="tab active" id="home-tab-enterprise" onclick="switchHomeTab('enterprise')">Enterprise Companies <span class="tab-count" id="tab-count-enterprise">0</span></button>
-      <button class="tab" id="home-tab-midmarket" onclick="switchHomeTab('midmarket')">Mid-Market Companies <span class="tab-count" id="tab-count-midmarket">0</span></button>
+      <button class="tab active" id="home-tab-pipeline" onclick="switchHomeTab('pipeline')">Active Pipeline <span class="tab-count" id="tab-count-pipeline">0</span></button>
+      <button class="tab" id="home-tab-midmarket" onclick="switchHomeTab('midmarket')">Mid-Market Targets <span class="tab-count" id="tab-count-midmarket">0</span></button>
+      <button class="tab" id="home-tab-enterprise" onclick="switchHomeTab('enterprise')">Enterprise Targets <span class="tab-count" id="tab-count-enterprise">0</span></button>
       <button class="tab" id="home-tab-network" onclick="switchHomeTab('network')">Network Map</button>
     </div>
 
-    <!-- ENTERPRISE TAB -->
-    <div id="home-view-enterprise">
+    <!-- PIPELINE TAB (Active Valar pipeline) -->
+    <div id="home-view-pipeline">
       <div class="sec-head">
-        <div class="sec-eyebrow">Stage 2 — Stretch ICP</div>
-        <div class="sec-title">Enterprise Companies</div>
-        <div class="sec-desc">Large regulated enterprises with complex data infrastructure needs. These represent Valar's stretch ICP — longer sales cycles but higher ACV potential.</div>
+        <div class="sec-eyebrow">Design Partners + Named Pipeline</div>
+        <div class="sec-title">Your Active Accounts</div>
+        <div class="sec-desc">Companies already signed as design partners (BigPanda, Varonis) or named in active pipeline conversations. Use this view to track current motion, reference-account positioning, and expansion sequencing.</div>
+      </div>
+      <div class="filter-area">
+        <div class="filter-row">
+          <span class="filter-group-label">Priority</span>
+          <div class="filter-pills" id="fp-tier-pipeline">
+            <button class="fpill active" onclick="toggleFilter('tier','all','pipeline')">All</button>
+            <button class="fpill" onclick="toggleFilter('tier','high','pipeline')">Design Partners</button>
+            <button class="fpill" onclick="toggleFilter('tier','med','pipeline')">In Pipeline</button>
+          </div>
+        </div>
+        <div class="filter-divider"></div>
+        <div class="search-row">
+          <div class="search-wrap">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
+            <input class="search-input" type="text" placeholder="Search accounts..." oninput="filterCompanies('pipeline')">
+          </div>
+          <span class="results-count" id="rc-pipeline">0 accounts</span>
+        </div>
+      </div>
+      <div class="company-grid" id="grid-pipeline"></div>
+    </div>
+
+    <!-- ENTERPRISE TAB -->
+    <div id="home-view-enterprise" style="display:none;">
+      <div class="sec-head">
+        <div class="sec-eyebrow">FDI Stretch ICP — Enterprise</div>
+        <div class="sec-title">Enterprise Targets</div>
+        <div class="sec-desc">Large regulated enterprises with complex data infrastructure needs. Stretch ICP — longer sales cycles, higher ACV ($800K+).</div>
       </div>
       <div class="filter-area">
         <div class="filter-row">
@@ -270,9 +305,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <!-- MID-MARKET TAB -->
     <div id="home-view-midmarket" style="display:none;">
       <div class="sec-head">
-        <div class="sec-eyebrow">Stage 1 — Near-term ICP</div>
-        <div class="sec-title">Mid-Market Companies</div>
-        <div class="sec-desc">Data-sensitive mid-market companies with immediate need for secure inference infrastructure. These are Valar's near-term ICP with shorter sales cycles.</div>
+        <div class="sec-eyebrow">FDI Near-term ICP — Mid-Market</div>
+        <div class="sec-title">Mid-Market Targets</div>
+        <div class="sec-desc">Data-sensitive mid-market companies with immediate need for BYOC inference. Near-term ICP — shorter cycles, $150K landing ACV.</div>
       </div>
       <div class="filter-area">
         <div class="filter-row">
@@ -420,9 +455,37 @@ document.addEventListener('mouseout', function(e) {
   if (bubble) bubble.style.display = 'none';
 });
 
+// === Helpers ===
+function formatRowValue(v) {
+  if (Array.isArray(v)) {
+    return '<ul>' + v.map(function(item){ return '<li>' + item + '</li>'; }).join('') + '</ul>';
+  }
+  return v;
+}
+
+function computeJobSignal(c) {
+  if (typeof JOB_LISTINGS === 'undefined') return 1;
+  var jobs = JOB_LISTINGS[c.name] || [];
+  if (!jobs.length) return 1;
+  var specific = jobs.filter(function(j){
+    var url = (j.url||'').toLowerCase();
+    var generic = /\/careers\/?$|\/careers\.html$|\/careers-home\/?$|^https?:\/\/jobs\.[a-z]+\.com\/?$|\/careers\/jobs\/all\/?$|\/company\/careers\/?$|\/careers\/$|careers\/apply-now/.test(url);
+    return !generic;
+  });
+  var hasInferenceKw = specific.some(function(j){
+    var t = ((j.title||'') + ' ' + (j.techs||'')).toLowerCase();
+    return /inference|llm |triton|tensorrt|sglang|vllm|model serving|ml platform|gen[ ]?ai platform|kernel/.test(t);
+  });
+  if (specific.length >= 5 && hasInferenceKw) return 5;
+  if (specific.length >= 4) return 4;
+  if (specific.length >= 2) return 3;
+  if (specific.length >= 1) return 2;
+  return 1;
+}
+
 // === Signal rendering ===
 function renderSignals(c, showTags) {
-  if (!c.signal_score && !c.competitive_distress) return '';
+  if (!c.signal_score && !c.competitive_distress && !c.data_residency) return '';
   var dots = [1,2,3,4,5].map(function(n) {
     return '<div class="sdot ' + (n <= c.signal_score ? 'filled' : 'empty') + '"></div>';
   }).join('');
@@ -433,7 +496,12 @@ function renderSignals(c, showTags) {
   var distressDots = [1,2,3,4,5].map(function(n) {
     return '<div class="sdot ' + (n <= distress ? 'distress-filled' : 'empty') + '"></div>';
   }).join('');
-  var dTags = '', oTags = '';
+  var residency = c.data_residency || 0;
+  var residencyReason = c.residency_reason || '';
+  var residencyDots = [1,2,3,4,5].map(function(n) {
+    return '<div class="sdot ' + (n <= residency ? 'residency-filled' : 'empty') + '"></div>';
+  }).join('');
+  var dTags = '', oTags = '', rTags = '';
   if (showTags) {
     dTags = (c.distress_signals || []).map(function(s, i) {
       var t = (c.distress_signal_types || [])[i] || 'neutral';
@@ -443,32 +511,76 @@ function renderSignals(c, showTags) {
       var t = (c.signal_types || [])[i] || 'neutral';
       return '<span class="signal-tag ' + t + '">' + s + '</span>';
     }).join('');
+    rTags = (c.residency_signals || []).map(function(s, i) {
+      var t = (c.residency_signal_types || [])[i] || 'neutral';
+      return '<span class="signal-tag ' + t + '">' + s + '</span>';
+    }).join('');
   }
-  return '<div class="signal-section">' +
-    '<div class="signal-row"><span class="signal-label">Competitive distress</span>' +
+  var painRow = c.competitive_distress ? '<div class="signal-row"><span class="signal-label">Inference Pain</span>' +
     '<span class="opp-dots-wrap"><div class="signal-dots">' + distressDots + '</div>' +
     (distressReason ? '<span class="opp-bubble"><span class="opp-bubble-text">' + distressReason + '</span></span>' : '') +
-    '</span>' + dTags + '</div>' +
-    '<div class="signal-row"><span class="signal-label">Opportunity score</span><span class="opp-dots-wrap"><div class="signal-dots">' + dots + '</div>' + bubbleHtml + '</span>' + oTags + '</div>' +
+    '</span>' + dTags + '</div>' : '';
+  var residencyRow = c.data_residency ? '<div class="signal-row"><span class="signal-label">Data Residency</span>' +
+    '<span class="opp-dots-wrap"><div class="signal-dots">' + residencyDots + '</div>' +
+    (residencyReason ? '<span class="opp-bubble"><span class="opp-bubble-text">' + residencyReason + '</span></span>' : '') +
+    '</span>' + rTags + '</div>' : '';
+  var triggerRow = c.signal_score ? '<div class="signal-row"><span class="signal-label">Buying Trigger</span><span class="opp-dots-wrap"><div class="signal-dots">' + dots + '</div>' + bubbleHtml + '</span>' + oTags + '</div>' : '';
+  return '<div class="signal-section">' + painRow + residencyRow + triggerRow + '</div>';
+}
+
+function renderJobListings(c) {
+  var hiringScore = computeJobSignal(c);
+  var jobs = (typeof JOB_LISTINGS !== 'undefined' && JOB_LISTINGS[c.name]) || [];
+  var hiringDots = [1,2,3,4,5].map(function(n){ return '<div class="sdot ' + (n <= hiringScore ? 'hiring-filled' : 'empty') + '"></div>'; }).join('');
+  var hiringReason = '';
+  if (hiringScore === 5) hiringReason = jobs.length + ' active postings, multiple inference/LLM platform roles — strong buying signal.';
+  else if (hiringScore === 4) hiringReason = jobs.length + ' active postings — multiple specific ML platform / inference roles.';
+  else if (hiringScore === 3) hiringReason = jobs.length + ' active posting(s) — some specific ML/AI roles.';
+  else if (hiringScore === 2) hiringReason = jobs.length + ' active posting(s) — limited specificity.';
+  else hiringReason = 'No specific inference/ML hiring detected.';
+  var rows = jobs.map(function(j){
+    return '<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">' +
+      '<div style="flex:1;min-width:0;">' +
+        '<a href="' + j.url + '" target="_blank" rel="noopener" style="font-size:12px;font-weight:500;color:var(--accent);text-decoration:none;">' + j.title + ' <span style="font-size:10px;">↗</span></a>' +
+        (j.techs ? '<div style="font-size:10px;color:var(--text-muted);margin-top:3px;">' + j.techs + '</div>' : '') +
+      '</div>' +
+      (j.date ? '<span style="font-family:\'DM Mono\',monospace;font-size:9px;color:var(--text-faint);white-space:nowrap;flex-shrink:0;padding-top:2px;">' + j.date + '</span>' : '') +
     '</div>';
+  }).join('');
+  var scoreRow = '<div style="display:flex;align-items:center;gap:14px;padding:6px 0 12px;margin-bottom:8px;border-bottom:1px solid var(--border);">' +
+    '<span style="font-size:11px;color:var(--text-muted);">Hiring Activity</span>' +
+    '<span class="opp-dots-wrap"><div class="signal-dots">' + hiringDots + '</div><span class="opp-bubble"><span class="opp-bubble-text">' + hiringReason + '</span></span></span>' +
+    '<span style="font-size:10px;color:var(--text-faint);font-family:\'DM Mono\',monospace;margin-left:auto;">' + jobs.length + ' posting' + (jobs.length===1?'':'s') + '</span>' +
+  '</div>';
+  var jobsBlock = jobs.length ? '<div style="display:flex;flex-direction:column;">' + rows + '</div>' : '<div style="font-size:11px;color:var(--text-faint);font-style:italic;padding:8px 0;">No active job postings tracked.</div>';
+  return '<div class="detail-section" style="margin-top:24px;"><div class="detail-section-title">Active Jobs</div>' + scoreRow + jobsBlock + '</div>';
 }
 
 function renderSignalDetail(c) {
   var html = '';
   var ds = (c.distress_signals || []);
   var os = (c.signals || []);
-  if (!ds.length && !os.length) return '';
+  var rs = (c.residency_signals || []);
+  if (!ds.length && !os.length && !rs.length) return '';
   html += '<div class="detail-section"><div class="detail-section-title">Signal Intelligence</div>';
   if (ds.length) {
-    html += '<div style="margin-bottom:10px;"><div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Competitive Distress Signals</div><div class="signal-tags">';
+    html += '<div style="margin-bottom:10px;"><div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Inference Pain Signals</div><div class="signal-tags">';
     ds.forEach(function(s, i) {
       var t = (c.distress_signal_types || [])[i] || 'neutral';
       html += '<span class="signal-tag ' + t + '">' + s + '</span>';
     });
     html += '</div></div>';
   }
+  if (rs.length) {
+    html += '<div style="margin-bottom:10px;"><div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Data Residency Signals</div><div class="signal-tags">';
+    rs.forEach(function(s, i) {
+      var t = (c.residency_signal_types || [])[i] || 'neutral';
+      html += '<span class="signal-tag ' + t + '">' + s + '</span>';
+    });
+    html += '</div></div>';
+  }
   if (os.length) {
-    html += '<div><div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Opportunity Signals</div><div class="signal-tags">';
+    html += '<div><div style="font-size:10px;color:var(--text-muted);margin-bottom:6px;font-weight:600;">Buying Trigger Signals</div><div class="signal-tags">';
     os.forEach(function(s, i) {
       var t = (c.signal_types || [])[i] || 'neutral';
       html += '<span class="signal-tag ' + t + '">' + s + '</span>';
@@ -487,7 +599,7 @@ function renderCard(c, idx, section) {
   var nd = cc.slice(0,3).flatMap(function(ct){return ct.connections;}).slice(0,3).map(function(n){return '<div class="ndot">'+n.person.split(' ').map(function(w){return w[0];}).join('')+'</div>';}).join('');
   var nl = cc.length > 0 ? cc.length+' contact'+(cc.length>1?'s':'')+' with connections' : 'No connections mapped';
   var ds = (c.sections || c.detail_sections || []).map(function(sec){
-    var rows = sec.rows.map(function(r){return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><div class="detail-val">'+r[1]+'</div></div>';}).join('');
+    var rows = sec.rows.map(function(r){return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><div class="detail-val">'+formatRowValue(r[1])+'</div></div>';}).join('');
     return '<div class="detail-section"><div class="detail-section-title">'+sec.title+'</div><div class="detail-rows">'+rows+'</div></div>';
   }).join('');
   var cs;
@@ -523,7 +635,7 @@ function renderCard(c, idx, section) {
       '<div class="card-network"><div style="display:flex">'+nd+'</div><span style="margin-left:'+(cc.length>0?'6':'0')+'px">'+nl+'</span></div>' +
       '<div class="card-expand-btn" onclick="event.stopPropagation();toggleCard(\'card-'+section+'-'+idx+'\')">Details<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="2,4 6,8 10,4"/></svg></div>' +
     '</div>' +
-    '<div class="detail-panel"><div class="detail-inner">'+ds+renderSignalDetail(c)+'<div class="detail-section"><div class="detail-section-title">Network Connections</div>'+cs+'</div></div></div>' +
+    '<div class="detail-panel"><div class="detail-inner">'+ds+renderSignalDetail(c)+renderJobListings(c)+'<div class="detail-section"><div class="detail-section-title">Network Connections</div>'+cs+'</div></div></div>' +
   '</div>';
 }
 
@@ -575,9 +687,11 @@ function goHome() {
 }
 
 function switchHomeTab(tab) {
+  document.getElementById('home-tab-pipeline').classList.toggle('active', tab === 'pipeline');
   document.getElementById('home-tab-enterprise').classList.toggle('active', tab === 'enterprise');
   document.getElementById('home-tab-midmarket').classList.toggle('active', tab === 'midmarket');
   document.getElementById('home-tab-network').classList.toggle('active', tab === 'network');
+  document.getElementById('home-view-pipeline').style.display = tab === 'pipeline' ? 'block' : 'none';
   document.getElementById('home-view-enterprise').style.display = tab === 'enterprise' ? 'block' : 'none';
   document.getElementById('home-view-midmarket').style.display = tab === 'midmarket' ? 'block' : 'none';
   document.getElementById('home-view-network').style.display = tab === 'network' ? 'block' : 'none';
@@ -593,7 +707,7 @@ function openCompanyDetail(segId, companyIdx) {
   document.getElementById('view-home').style.display = 'none';
   document.getElementById('view-company-detail').style.display = 'block';
 
-  var segLabel = seg.id === 'enterprise' ? 'Enterprise Companies' : 'Mid-Market Companies';
+  var segLabel = seg.id === 'enterprise' ? 'Enterprise Targets' : seg.id === 'midmarket' ? 'Mid-Market Targets' : 'Active Pipeline';
   var segTab = seg.id;
   document.getElementById('company-detail-breadcrumb').innerHTML =
     '<a onclick="goHome();switchHomeTab(\'' + segTab + '\');">\u2190 ' + segLabel + '</a><span>/</span>' +
@@ -608,7 +722,7 @@ function openCompanyDetail(segId, companyIdx) {
       if (typeof ROW_SOURCES !== 'undefined' && ROW_SOURCES[srcKey]) {
         srcHtml = ' <span class="src-wrap"><span class="src-btn">src</span><span class="src-pop"><span class="src-pop-text">' + ROW_SOURCES[srcKey] + '</span></span></span>';
       }
-      return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><div class="detail-val">'+r[1]+srcHtml+'</div></div>';
+      return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><div class="detail-val">'+formatRowValue(r[1])+srcHtml+'</div></div>';
     }).join('');
     return '<div class="detail-section"><div class="detail-section-title">'+sec.title+'</div><div class="detail-rows">'+rows+'</div></div>';
   }).join('');
@@ -650,8 +764,9 @@ function openCompanyDetail(segId, companyIdx) {
     overviewHtml +
     gtmHtml +
     sections +
+    renderJobListings(c) +
     '<div class="detail-section"><div class="detail-section-title">Network Connections</div>'+contactHtml+'</div>' +
-    (c.sources && c.sources.length > 0 ? '<div class="detail-section" style="margin-top:24px;"><div class="detail-section-title">Sources & References</div><div style="display:flex;flex-direction:column;gap:6px;">' + c.sources.map(function(s){return '<div style="display:flex;align-items:flex-start;gap:8px;"><span style="color:var(--accent);font-size:10px;margin-top:2px;">\u25CF</span><a href="'+s.url+'" target="_blank" rel="noopener" style="font-size:11px;color:var(--text-mid);text-decoration:none;line-height:1.5;border-bottom:1px dashed var(--border-mid);">'+s.name+'</a></div>';}).join('') + '</div></div>' : '');
+    (c.sources && c.sources.length > 0 ? '<div class="detail-section" style="margin-top:32px;padding-top:20px;border-top:2px solid var(--border);"><div class="detail-section-title" style="margin-bottom:14px;">Sources &amp; References <span style="margin-left:8px;color:var(--text-faint);font-weight:400;">(' + c.sources.length + ')</span></div><ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">' + c.sources.map(function(s,i){var hostname='';try{hostname=(new URL(s.url)).hostname.replace(/^www\./,'');}catch(e){hostname='';}return '<li style="display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.5;"><span style="font-family:\'DM Mono\',monospace;color:var(--text-faint);font-size:10px;min-width:22px;padding-top:1px;">'+String(i+1).padStart(2,'0')+'.</span><div style="flex:1;"><a href="'+s.url+'" target="_blank" rel="noopener" style="color:var(--text);text-decoration:none;border-bottom:1px solid var(--accent);font-weight:500;display:inline-block;" onmouseover="this.style.color=\'var(--accent-dark)\'" onmouseout="this.style.color=\'var(--text)\'">'+s.name+' <span style="color:var(--accent);font-size:10px;">\u2197</span></a><div style="font-family:\'DM Mono\',monospace;font-size:10px;color:var(--text-faint);margin-top:2px;">'+hostname+'</div></div></li>';}).join('') + '</ol></div>' : '');
 
   window.scrollTo(0,0);
 }
@@ -752,9 +867,16 @@ function selectNetworkCompanyHome(idx) {
     );
 }
 
-// === Init: merge contacts and render grids ===
+// === Init: merge contacts, sources, residency, render grids ===
 SEGMENTS.forEach(function(seg){
   seg.companies.forEach(function(co){
+    if(typeof COMPANY_SOURCES !== 'undefined' && COMPANY_SOURCES[co.name]) {
+      co.sources = (co.sources || []).concat(COMPANY_SOURCES[co.name]);
+    }
+    if(typeof RESIDENCY_MAP !== 'undefined' && RESIDENCY_MAP[co.name] && co.data_residency === undefined) {
+      co.data_residency = RESIDENCY_MAP[co.name].score;
+      co.residency_reason = RESIDENCY_MAP[co.name].reason;
+    }
     if(typeof CONTACT_MAP !== 'undefined' && CONTACT_MAP[co.name]) {
       var existing = co.contacts || [];
       var mapped = CONTACT_MAP[co.name];

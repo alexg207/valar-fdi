@@ -170,6 +170,621 @@ const ROW_SOURCES = {
 /* ------------------------------------------------------------------ */
 const SEGMENTS = [
   /* ============================================================== */
+  /*  SEGMENT 0 — Active Pipeline (Design Partners + Named Pipeline) */
+  /* ============================================================== */
+  {
+    id: 'pipeline',
+    label: 'Active Pipeline',
+    icon: '🎯',
+    eyebrow: 'DESIGN PARTNERS + NAMED PIPELINE',
+    title: 'Your Active Accounts',
+    desc: 'Companies already signed as design partners or in active pipeline conversations. Use this view to track current motion and reference-account positioning.',
+    icon_svg: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+    companies: [
+      // ── 1. BigPanda (Design Partner) ──
+      {
+        name: 'BigPanda',
+        domain: 'bigpanda.io',
+        subtitle: 'AIOps + incident management — signed design partner. Inference for autonomous incident triage on production telemetry data.',
+        tier: 'high',
+        tags: [
+          { t: 'Design Partner', c: 'Valar', tip: 'Signed Valar design partner' },
+          { t: 'AIOps', c: 'neutral' },
+          { t: 'Incident Mgmt', c: 'neutral' },
+          { t: 'Data-Sensitive', c: 'stack', tip: 'Customer telemetry data cannot be exposed to multi-tenant inference' }
+        ],
+        overview: 'BigPanda is one of Valar\'s two named design partners (alongside Varonis). They run AI-driven incident management for enterprise IT teams, where customer telemetry data flowing through their AI pipelines is highly sensitive — it includes infrastructure topology, alert content, and incident context. Multi-tenant inference clouds are a non-starter. BigPanda\'s validation as a design partner anchors the BYOC inference thesis for AIOps and observability vendors broadly.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'AIOps / IT Operations Management'],
+              ['Founded', '2012'],
+              ['Headquarters', 'Mountain View, CA'],
+              ['Cloud Provider', 'AWS primary; multi-region for enterprise customers'],
+              ['AI Maturity', 'High — generative AI for RCA, agentic incident automation, ML-based event correlation. "Pragmatic AI" branding emphasizes transparent + testable models.'],
+              ['Valar Status', 'Signed Design Partner (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'Autonomous incident correlation (80%+ alert noise reduction claim), generative RCA + dynamic incident titles, agentic remediation suggestions, AI Incident Prevention for change management'],
+              ['Current Stack', 'Cleans/normalizes/correlates events → applies ML/LLM. Active development with Valar on BYOC inference layer for production workloads.'],
+              ['Pain Points', 'Customer infrastructure data is restricted contractually — multi-tenant inference clouds disqualified. AIOps margins compress as AI compute grows.'],
+              ['Estimated Spend', '$1.5–3M annual inference (mid-market wedge profile)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Already executed land. Focus = co-develop joint case study (cost reduction %, SLO improvement, deployment friction) for use in landing peer AIOps/observability accounts.'],
+              ['Key Evidence', 'Signed design partner status. Public AI/agentic AIOps positioning at scale. Reference customer commitments under SOC 2 + ISO 27001.'],
+              ['Urgency Level', 'EXECUTE — already a customer; priority is reference-account development.'],
+              ['Target Buyer', 'Buyer: Platform Engineering / Site Reliability leadership. Champion: Product/Eng leaders shipping the agentic AIOps capabilities.'],
+              ['Messaging Angle', 'Reliability + cost. Lead with: "Production-grade BYOC inference proven by AIOps customer cohort" — establishes the category proof point.']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 5,
+        signals: ['Already signed as design partner', 'Active development collaboration', 'Reference-account potential for AIOps category'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Signed design partner — top-of-priority for engineering investment, reference development, and category proof-out.',
+        competitive_distress: 4,
+        distress_reason: 'BigPanda has the inference workload + data sensitivity that makes managed APIs non-viable. Hyperscaler defaults aren\'t optimized for AIOps cost profile.',
+        distress_signals: ['Customer telemetry cannot use multi-tenant inference', 'AIOps margins compress with rising AI compute'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 4,
+        residency_reason: 'Customer infrastructure data flowing through AI pipelines requires single-tenant deployment — inference clouds explicitly disqualified.',
+        residency_signals: ['SOC 2 + ISO 27001 customer requirements', 'Customer infrastructure data classified as restricted'],
+        residency_signal_types: ['negative', 'negative'],
+        gtm_thesis: 'BigPanda is the canonical AIOps reference for the BYOC thesis. Land already executed — focus is on co-developing case study evidence (cost reduction %, SLO improvement, deployment friction) that Valar uses to land peer accounts (Datadog, Splunk-adjacents, Sumo Logic). <strong>Buyer:</strong> Platform Engineering / Site Reliability lead.'
+      },
+      // ── 2. Varonis (Design Partner) ──
+      {
+        name: 'Varonis',
+        domain: 'varonis.com',
+        subtitle: 'Data security platform — signed design partner. Inference on customer file/email/cloud data classification at scale.',
+        tier: 'high',
+        tags: [
+          { t: 'Design Partner', c: 'Valar', tip: 'Signed Valar design partner' },
+          { t: 'Data Security', c: 'neutral' },
+          { t: 'Cyber', c: 'neutral' },
+          { t: 'PHI/PII', c: 'stack', tip: 'Processes customer PHI/PII for classification — strict residency required' }
+        ],
+        overview: 'Varonis is Valar\'s second named design partner. They run AI-driven classification, threat detection, and access analytics across customer file systems, email, and cloud apps — meaning their inference touches some of the most sensitive enterprise data: PHI, PII, financial records, IP. Multi-tenant inference is structurally impossible. Varonis validates the data-sovereignty wedge for the data-security and DSPM category.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Data Security / DSPM / Cyber'],
+              ['Revenue', '~$550M ARR (FY2024); growing 18%+ YoY'],
+              ['Headquarters', 'New York, NY'],
+              ['Cloud Provider', 'Multi-cloud customer deployments (customer environment); Varonis SaaS on AWS + Azure'],
+              ['AI Maturity', 'High — LLM-driven data classification, MCP server for AI security workflows, integrations with ChatGPT/Claude/Copilot for security operators.'],
+              ['Valar Status', 'Signed Design Partner (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'AI-driven sensitive data classification across files/email/cloud apps, anomalous access detection, automated threat investigation, MCP-server-driven security workflow automation, 2025 State of Data Security AI research workloads'],
+              ['Current Stack', 'Hybrid LLM + rule-based classification engine. Forrester Wave-recognized incremental scanning. Active design-partner development with Valar.'],
+              ['Pain Points', 'Customer PHI/PII/financial data CANNOT route through multi-tenant inference. SOC 2 + ISO 27001 contractual obligations to customers force single-tenant deployment.'],
+              ['Estimated Spend', '$2–5M annual inference (DSPM scaling profile)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Co-develop joint reference for cyber/DSPM peer accounts (CrowdStrike, SentinelOne, Wiz, Rubrik). Demonstrate inference cost reduction + SLO + customer-data isolation.'],
+              ['Key Evidence', 'Signed design partner. Public LLM-classification shipping. AI Security tag with 6+ engineering blog posts in 2025. MCP Server launched for AI workflow automation.'],
+              ['Urgency Level', 'EXECUTE — customer relationship; build reference value.'],
+              ['Target Buyer', 'Buyer: CISO + Platform Engineering. Champion: Data classification and AI security product leaders.'],
+              ['Messaging Angle', 'Data sovereignty first: "BYOC inference for the only category where customer data classification is the product." Cost second.']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 5,
+        signals: ['Signed design partner', 'Active product collaboration', 'Reference for cyber category'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Signed design partner — engineering investment + reference development priority.',
+        competitive_distress: 4,
+        distress_reason: 'Inference clouds disqualified by customer data sensitivity. Hyperscaler defaults force compromise on cost and cross-region governance.',
+        distress_signals: ['Customer data classification cannot leave VPC', 'Scaling cyber AI workloads pressuring infra cost'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 5,
+        residency_reason: 'Maximum data sensitivity — Varonis processes customer PHI, PII, financial data, and IP. Inference must run inside customer-tenant boundary.',
+        residency_signals: ['SOC 2 Type II + ISO 27001 customer commitments', 'Public stance: customer data never leaves customer environment'],
+        residency_signal_types: ['negative', 'negative'],
+        gtm_thesis: 'Varonis anchors the cyber/DSPM reference. Joint go-to-market motion to land CrowdStrike, SentinelOne, Wiz, Rubrik. <strong>Buyer:</strong> Security/Compliance leadership + Platform Engineering.'
+      },
+      // ── 3. ABInBev ──
+      {
+        name: 'ABInBev',
+        domain: 'ab-inbev.com',
+        subtitle: 'World\'s largest brewer — global CPG with multi-region data residency and supply-chain AI workloads in pipeline.',
+        tier: 'med',
+        tags: [
+          { t: 'In Pipeline', c: 'Valar', tip: 'Active Valar pipeline (per memo)' },
+          { t: 'CPG', c: 'neutral' },
+          { t: 'Multi-region', c: 'stack' },
+          { t: 'Supply Chain AI', c: 'stack' }
+        ],
+        overview: 'ABInBev is one of the eight named pipeline accounts in the Primary investment memo. Global CPG with supply chain forecasting, marketing personalization, and operations AI rolling out across 50+ countries. Multi-region data residency (GDPR + LATAM + APAC) creates structural BYOC pressure that Bedrock/Vertex region gaps don\'t solve cleanly.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Consumer Packaged Goods (Beverages)'],
+              ['Revenue', '~$59B annual revenue (2024)'],
+              ['Headquarters', 'Leuven, Belgium (NYSE: BUD)'],
+              ['Cloud Provider', 'Multi-cloud (AWS + Azure + GCP) across 50+ countries'],
+              ['AI Maturity', 'Growing — Smart Barley AI program for grower yield optimization, Google Maps integrations for customer segmentation, TechSupply Incubator partnership with P&G for supply chain AI innovation.'],
+              ['Valar Status', 'In Active Pipeline (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'Demand forecasting (multi-region), dynamic pricing, marketing copy localization across 50+ markets, supplier risk modeling, Smart Barley grower advisory AI'],
+              ['Current Stack', 'Multi-cloud hyperscaler-default (Bedrock/Vertex/Azure AI). Region-by-region deployment friction.'],
+              ['Pain Points', 'GDPR + LATAM + APAC data residency, AI cost predictability across global footprint, vendor consolidation pressure post-cost-rationalization, hyperscaler region/model gaps'],
+              ['Estimated Spend', '$3–8M annually (estimated, scaling)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Land via Smart Barley or supply chain AI pilot in single region. Expand into marketing localization + CX once BYOC pattern proven. Reference for Fortune 500 multi-region.'],
+              ['Key Evidence', 'Multi-region operations create structural BYOC pressure that hyperscaler region gaps don\'t solve. ABI Research 2025 survey: 91% of CPG firms plan AI for demand forecasting in next 2 years.'],
+              ['Urgency Level', 'MEDIUM — pipeline conversation active; needs catalyst event (procurement cycle, regional rollout) to advance.'],
+              ['Target Buyer', 'Buyer: Chief Data/AI Officer + Platform Engineering. NOT marketing AI team — they buy outcomes, not infra. Compliance leadership for regulated regions.'],
+              ['Messaging Angle', 'Cost predictability + multi-region compliance. "One inference platform across 50 markets, costs and SLO known in advance."']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 4,
+        signals: ['In Valar active pipeline', 'Global multi-region operations', 'AI rollout in supply chain + marketing'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Active pipeline conversation — Valar already in dialogue. Focus on accelerating to design-partner conversion.',
+        competitive_distress: 3,
+        distress_reason: 'Multi-region compliance + cost predictability are explicit hyperscaler pain points for global CPG.',
+        distress_signals: ['Multi-region inference governance complexity', 'CPG margin pressure'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 4,
+        residency_reason: 'GDPR + LATAM + APAC data residency requirements force inference to remain in-region. Hyperscaler region gaps create real workflow friction.',
+        residency_signals: ['EU GDPR strict-mode operations', 'Multi-jurisdictional consumer data'],
+        residency_signal_types: ['negative', 'negative'],
+        gtm_thesis: 'ABInBev advances the Fortune 500 multi-region BYOC narrative. Land via supply chain AI pilot, expand into marketing + CX. <strong>Buyer:</strong> Platform Engineering or Chief Data/AI Officer (NOT marketing AI team).'
+      },
+      // ── 4. Qualcomm ──
+      {
+        name: 'Qualcomm',
+        domain: 'qualcomm.com',
+        subtitle: 'Mobile silicon + on-device AI leader — IP-sensitive R&D inference workloads, named in Valar pipeline.',
+        tier: 'med',
+        tags: [
+          { t: 'In Pipeline', c: 'Valar' },
+          { t: 'Semiconductors', c: 'neutral' },
+          { t: 'Edge AI', c: 'stack' },
+          { t: 'IP-Sensitive', c: 'stack' }
+        ],
+        overview: 'Semiconductor giant pushing AI to mobile, automotive, and IoT edge. Internal R&D workloads — chip design, signal processing models, automotive perception simulation — involve highly sensitive IP that cannot leave Qualcomm\'s VPC. Named pipeline account in Primary memo.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Semiconductors / Mobile + Edge AI Silicon'],
+              ['Revenue', '~$39B annual (FY2024)'],
+              ['Headquarters', 'San Diego, CA (NASDAQ: QCOM)'],
+              ['Cloud Provider', 'Multi-cloud + own bare-metal R&D infrastructure'],
+              ['AI Maturity', 'Maximum — Qualcomm AI Hub platform, AI200/AI250 datacenter inference chips (Oct 2025), Edge Impulse acquisition (2025), Snapdragon X Elite NPU integration. Direct hardware-AI integrator.'],
+              ['Valar Status', 'In Active Pipeline (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'Chip design copilots, RF/signal-processing simulation, automotive perception model regression, internal R&D LLMs across diverse hardware (NVIDIA + AMD + own AI200/AI250 + edge silicon)'],
+              ['Current Stack', 'Heterogeneous accelerators native — own AI200/AI250, NVIDIA, AMD, edge silicon. AI Hub for on-device validation. Cross-accelerator scheduling complexity.'],
+              ['Pain Points', 'IP cannot route through managed APIs (chip designs, customer roadmaps). Cross-accelerator scheduling on heterogeneous hardware. Defense-related work in some divisions adds classification overlay.'],
+              ['Estimated Spend', '$5–15M annually (estimated, R&D inference)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Land via R&D platform pilot — chip design copilot or perception simulation. Cross-accelerator routing is Valar\'s core differentiator and Qualcomm\'s exact pain. Move to PoC stage.'],
+              ['Key Evidence', 'Active pipeline. AI200/AI250 launch (Oct 2025) signals datacenter inference investment. Edge Impulse acquisition. Public NPU+CPU+GPU integration thesis aligns with Valar\'s cross-accelerator wedge.'],
+              ['Urgency Level', 'HIGH — pipeline + structural fit + cross-accelerator catalyst.'],
+              ['Target Buyer', 'Buyer: R&D Platform / Infrastructure leadership + Security (IP protection). Champion: Chip design tools + perception simulation owners.'],
+              ['Messaging Angle', 'Cross-accelerator inference: "The same workload routes optimally across your AI200, NVIDIA, AMD, and edge silicon — no managed cloud does this." IP residency mandate is structural.']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 4,
+        signals: ['In active Valar pipeline', 'IP sensitivity forces BYOC', 'Heterogeneous hardware testing native'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Active pipeline + structural IP-residency mandate = strong fit. Move to PoC stage.',
+        competitive_distress: 4,
+        distress_reason: 'Cannot use managed APIs for IP-sensitive R&D. DIY at scale is expensive. Inference clouds disqualified.',
+        distress_signals: ['IP cannot touch multi-tenant inference', 'Heterogeneous accelerator landscape'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 5,
+        residency_reason: 'Chip-design IP and proprietary signal/perception data are board-level sensitivity. BYOC is the only viable inference posture.',
+        residency_signals: ['Semiconductor IP protection mandates', 'Defense-related chip work in some divisions'],
+        residency_signal_types: ['negative', 'negative'],
+        gtm_thesis: 'Qualcomm validates the IP-sensitive enterprise wedge — adjacency to TI, NVIDIA-customer chipmakers, automotive Tier-1 silicon. <strong>Buyer:</strong> Platform Eng / R&D Infrastructure.'
+      },
+      // ── 5. Jefferies ──
+      {
+        name: 'Jefferies',
+        domain: 'jefferies.com',
+        subtitle: 'Mid-market investment bank — financial-data sensitivity + research/IB AI workloads, named in Valar pipeline.',
+        tier: 'med',
+        tags: [
+          { t: 'In Pipeline', c: 'Valar' },
+          { t: 'Investment Bank', c: 'neutral' },
+          { t: 'Financial Data', c: 'stack' },
+          { t: 'Regulated', c: 'stack' }
+        ],
+        overview: 'Mid-tier investment bank named in Valar pipeline. Research, M&A pipeline modeling, document review, client analysis all generate high-volume inference on materially-non-public information. Inference clouds disqualified by FINRA/SEC posture and client confidentiality. Bedrock + Vertex are current default.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Investment Banking / Capital Markets'],
+              ['Revenue', '~$7B annual (FY2024)'],
+              ['Headquarters', 'New York, NY (NYSE: JEF)'],
+              ['Cloud Provider', 'AWS primary (per AWS case study); Databricks for AI/data platform'],
+              ['AI Maturity', 'High — JDI (Jefferies Data Intelligence) launched March 2026 with Databricks, custom LangGraph multi-agent architecture, rolled out to 250+ US analysts, expanding to ~550 globally.'],
+              ['Valar Status', 'In Active Pipeline (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'Equity research summarization, M&A document review, IB pitch generation, client report automation, agentic data analysis (JDI), corporate function GenAI (HCLTech partnership)'],
+              ['Current Stack', 'Databricks AI/BI Genie + custom LangGraph multi-agent architecture (validation, planning, parallel execution, synthesis agents). AWS infra. Hundreds of queries/day post-launch.'],
+              ['Pain Points', 'MNPI cannot route through multi-tenant inference. FINRA/SEC recordkeeping requirements. Vendor risk approvals are slow. Client confidentiality contractual.'],
+              ['Estimated Spend', '$2–5M annually (estimated, scaling with JDI rollout)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Position as BYOC inference layer for JDI agentic architecture. Lead with reliability/SLO + MNPI residency. Reference value extends to JPM, Morgan Stanley, Goldman, banking peers.'],
+              ['Key Evidence', 'JDI launched March 2026 = active production AI workload. Public Databricks partnership. Documented multi-agent architecture indicates engineering maturity ready for inference optimization.'],
+              ['Urgency Level', 'HIGH — JDI is in scaling phase, inference cost + SLO will become material this year.'],
+              ['Target Buyer', 'Buyer: CISO / Compliance Engineering (MNPI owners) + Cloud Platform leadership. NOT the JDI engineering team directly — they built it and own the stack. Engage JDI team as technical reviewers.'],
+              ['Messaging Angle', '"BYOC inference for JDI agents — MNPI never leaves Jefferies, FINRA recordkeeping native, scale to all 550 analysts without managed-cloud quota risk."']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 4,
+        signals: ['Active Valar pipeline', 'Financial-data residency forces BYOC', 'AI-driven research arms race'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Pipeline + regulated wedge fit. Move to structured PoC.',
+        competitive_distress: 3,
+        distress_reason: 'Hyperscaler defaults (Bedrock) acceptable but suboptimal for cost + cross-cloud research workloads.',
+        distress_signals: ['MNPI cannot route through multi-tenant inference', 'AI research arms race vs. larger banks'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 5,
+        residency_reason: 'MNPI + client confidentiality + FINRA recordkeeping. Inference clouds structurally disqualified.',
+        residency_signals: ['MNPI handling requirements', 'Client confidentiality contractual obligations'],
+        residency_signal_types: ['negative', 'negative'],
+        gtm_thesis: 'Jefferies opens the regulated financial services category. Reference value extends to JPM, Morgan Stanley, Goldman tier. <strong>Buyer:</strong> CISO / Compliance Engineering, NOT research-floor AI team.'
+      },
+      // ── 6. Mobileye ──
+      {
+        name: 'Mobileye',
+        domain: 'mobileye.com',
+        subtitle: 'Autonomous driving silicon + ADAS leader (Intel-affiliated) — perception model inference, named in Valar pipeline.',
+        tier: 'med',
+        tags: [
+          { t: 'In Pipeline', c: 'Valar' },
+          { t: 'Auto AI', c: 'neutral' },
+          { t: 'ADAS', c: 'stack' },
+          { t: 'Intel-Affiliated', c: 'stack', tip: 'Intel acquired Mobileye in 2017; Granulate acquisition history is relevant' }
+        ],
+        overview: 'Autonomous driving silicon + perception leader. Massive perception model training + simulation inference across heterogeneous hardware. Tom\'s Granulate-Intel history is directly relevant — Mobileye is an Intel-affiliated entity with shared engineering culture. Named pipeline account.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Autonomous Driving Silicon + ADAS Software'],
+              ['Revenue', '~$1.7B annual (FY2024)'],
+              ['Headquarters', 'Jerusalem, Israel (NASDAQ: MBLY); majority-owned by Intel'],
+              ['Cloud Provider', 'Multi-cloud + own bare-metal compute clusters'],
+              ['AI Maturity', 'Maximum — EyeQ7 + EyeQ8 chips in development for "mind-off" driving (2029-2030 target). EyeQ6 Lite shipped 2025. Diversified accelerator architecture native.'],
+              ['Valar Status', 'In Active Pipeline (per PVP V Memo) — strong leverage via Tom/Ron Granulate-Intel network']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'Perception model evaluation across global driving datasets, simulation, scenario regression testing for L2-L5 autonomy, in-vehicle inference benchmarking, EyeQ chip validation'],
+              ['Current Stack', 'Heterogeneous accelerators native — own EyeQ silicon + NVIDIA + Intel. Massive simulation + perception model training/eval workloads.'],
+              ['Pain Points', 'Cross-accelerator scheduling on diverse hardware. Driving data subject to multi-jurisdictional rules (EU AI Act, China auto data regulations, US state-by-state). Auto IP protection for OEM relationships.'],
+              ['Estimated Spend', '$10–25M annually (estimated, large R&D + simulation budget)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Highest-leverage pipeline account. Land via Israel R&D org leveraging Tom + Ron\'s Granulate-Intel network. Cross-accelerator routing pitch directly addresses EyeQ + NVIDIA + Intel scheduling pain.'],
+              ['Key Evidence', 'Active pipeline. EyeQ8 development announced (Oct 2025). CES 2025 mind-off roadmap. Tom + Ron\'s Granulate-Intel relationships create unique reachability.'],
+              ['Urgency Level', 'HIGHEST — pipeline + warm Granulate-Intel network = priority closing target.'],
+              ['Target Buyer', 'Buyer: R&D Platform / Simulation Infrastructure leadership in Israel R&D org. Champion: Tom and Ron\'s direct Intel/Granulate contacts.'],
+              ['Messaging Angle', 'Cross-accelerator inference + simulation throughput. Personal: "We built Granulate, we know your stack."']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 5,
+        signals: ['Valar pipeline', 'Intel network advantage (Tom + Ron history)', 'Heterogeneous accelerator native'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Pipeline + warm Intel/Granulate network gives Valar unique reachability. Prioritize closing to design-partner conversion.',
+        competitive_distress: 4,
+        distress_reason: 'Mobileye runs models across own silicon + NVIDIA + Intel. No managed cloud serves cross-accelerator scheduling natively.',
+        distress_signals: ['Cross-accelerator inference complexity', 'Driving data multi-jurisdictional'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 4,
+        residency_reason: 'Driving data subject to multi-jurisdictional rules (EU AI Act, China auto data, US state-by-state). IP sensitivity high.',
+        residency_signals: ['Multi-jurisdictional driving data rules', 'Auto IP protection'],
+        residency_signal_types: ['negative', 'negative'],
+        gtm_thesis: 'Mobileye is the highest-leverage pipeline account given Tom + Ron\'s Granulate-Intel network. Land via Israel R&D org, expand globally. <strong>Buyer:</strong> R&D Platform / Simulation Infrastructure.'
+      },
+      // ── 7. Abbott ──
+      {
+        name: 'Abbott',
+        domain: 'abbott.com',
+        subtitle: 'Global medical devices + diagnostics — PHI-bound inference, FDA software, named in Valar pipeline.',
+        tier: 'med',
+        tags: [
+          { t: 'In Pipeline', c: 'Valar' },
+          { t: 'Healthcare', c: 'neutral' },
+          { t: 'Med Devices', c: 'stack' },
+          { t: 'HIPAA + FDA', c: 'stack' }
+        ],
+        overview: 'Global medical devices + diagnostics. Inference for clinical decision support, device telemetry, drug discovery, and FDA-regulated SaMD (Software as Medical Device). PHI + FDA constraints make managed inference APIs structurally non-viable. Named pipeline account.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Medical Devices + Diagnostics'],
+              ['Revenue', '~$42B annual (FY2024)'],
+              ['Headquarters', 'Abbott Park, IL (NYSE: ABT)'],
+              ['Cloud Provider', 'Multi-cloud (AWS + Azure heavily); on-prem for clinical workloads'],
+              ['AI Maturity', 'High — AI-powered coronary OCT imaging launched in EU (2025), AlinIQ Always On predictive maintenance, Libre Assist generative AI for CGM users, Responsible AI framework + Data Use & Ethics Board.'],
+              ['Valar Status', 'In Active Pipeline (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'Diagnostic image analysis (OCT, ultrasound), glucose-monitoring trend models (FreeStyle Libre 3+), clinical trial AI, regulatory document automation, predictive maintenance for diagnostic instruments, Libre Assist food image recognition'],
+              ['Current Stack', 'Mix of cloud + on-prem. AlinIQ Always On uses Active Sense Technologies + ML for instrument health. Validated environments under FDA SaMD requirements.'],
+              ['Pain Points', 'PHI residency, FDA SaMD validation friction with managed APIs (model deprecations break clinical pipelines), EU MDR + global device regulations, multi-region patient data complexity.'],
+              ['Estimated Spend', '$5–15M annually (estimated)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Land via diagnostics or CGM AI pilot in single region. Position as inference platform that survives FDA SaMD validation cycles (no surprise model deprecations). Expand into global med-device + clinical trials.'],
+              ['Key Evidence', 'Active pipeline. Public AI roadmap with Responsible AI framework. AI imaging launches in 2025. Recent FDA SaMD friction = real catalyst.'],
+              ['Urgency Level', 'HIGH — FDA SaMD model-deprecation pain (mirrored from UnitedHealth interview) is a now-problem.'],
+              ['Target Buyer', 'Buyer: Platform Engineering + Regulatory/Quality leadership (FDA SaMD owners). Champion: AI imaging + diagnostics product engineering teams.'],
+              ['Messaging Angle', '"Inference that survives FDA SaMD validation. PHI never leaves Abbott. Model versions controlled by you, not by GCP/AWS deprecation calendar."']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 4,
+        signals: ['Valar pipeline', 'PHI + FDA mandate BYOC', 'Diagnostic AI growth'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Pipeline + healthcare regulated wedge perfectly fits the Valar moat.',
+        competitive_distress: 3,
+        distress_reason: 'Bedrock/Vertex used today but FDA SaMD validation friction is high. Inference clouds disqualified.',
+        distress_signals: ['FDA SaMD validation overhead on managed APIs', 'PHI multi-region complexity'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 5,
+        residency_reason: 'HIPAA + FDA + global medical device regulations. Inference must run in validated environments under Abbott control.',
+        residency_signals: ['HIPAA covered entity', 'FDA SaMD requirements', 'EU MDR + global device regulations'],
+        residency_signal_types: ['negative', 'negative', 'negative'],
+        gtm_thesis: 'Abbott extends the healthcare reference past UnitedHealth into med-device + diagnostics. <strong>Buyer:</strong> Platform Engineering + Regulatory/Quality leadership.'
+      },
+      // ── 8. Ford ──
+      {
+        name: 'Ford',
+        domain: 'ford.com',
+        subtitle: 'Detroit auto + Ford Pro fleet — connected-vehicle data + ADAS + manufacturing AI, named in Valar pipeline.',
+        tier: 'med',
+        tags: [
+          { t: 'In Pipeline', c: 'Valar' },
+          { t: 'Automotive', c: 'neutral' },
+          { t: 'Connected Vehicle', c: 'stack' },
+          { t: 'Manufacturing AI', c: 'stack' }
+        ],
+        overview: 'Major automaker with connected-vehicle telemetry, ADAS perception, manufacturing quality AI, and Ford Pro fleet analytics. Multi-region driving data + supplier IP create structural BYOC pressure. Named pipeline account.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Automotive (OEM) + Connected Vehicles'],
+              ['Revenue', '~$176B annual (FY2024)'],
+              ['Headquarters', 'Dearborn, MI (NYSE: F)'],
+              ['Cloud Provider', 'Multi-cloud; AWS + Azure heavily for vehicle data'],
+              ['AI Maturity', 'High and accelerating — Latitude AI subsidiary for autonomy, BlueCruise (264M miles in 2025, +88% YoY), AI assistant launching in app 2026 then in-vehicle 2027, eyes-off driving target 2028 on $30K EV platform. ICT spend $11.1B/year.'],
+              ['Valar Status', 'In Active Pipeline (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'ADAS perception (BlueCruise next-gen), connected-vehicle telemetry, manufacturing quality CV, Ford Pro fleet AI, AI conversational assistant, dealership operations AI'],
+              ['Current Stack', 'Latitude AI for autonomy. Multi-cloud for vehicle data. New centralized vehicle compute module (consolidated SOC across infotainment + ADAS + audio + networking).'],
+              ['Pain Points', 'Connected-vehicle data residency (multi-state + EU + APAC). Supplier IP isolation. Real-time SLO for in-vehicle inference critical-safety paths. Cost pressure on $30K EV platform demands inference efficiency.'],
+              ['Estimated Spend', '$10–30M annually (estimated, scaling fast with BlueCruise + Latitude AI)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Sequence after Mobileye land — automotive reference compounds. Lead with cost efficiency for $30K EV platform inference + cross-region governance for connected-fleet data. Land in manufacturing AI or fleet operations first, expand into ADAS.'],
+              ['Key Evidence', 'Active pipeline. Public AI investment scale ($11B+ ICT). Latitude AI subsidiary signals seriousness. Eyes-off 2028 deadline = forcing function for inference infra decisions now.'],
+              ['Urgency Level', 'HIGH — 2028 eyes-off deadline forces 2026 infra decisions.'],
+              ['Target Buyer', 'Buyer: Ford Motor Company tech / Platform Engineering + Latitude AI infrastructure leadership. NOT brand AI teams. Champion: ADAS + manufacturing AI product owners.'],
+              ['Messaging Angle', 'Cost + cross-region. "Inference per dollar that makes $30K eyes-off EVs profitable. Connected-fleet data stays in-region without architecting around hyperscaler gaps."']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 4,
+        signals: ['Valar pipeline', 'Connected vehicle data scale', 'Manufacturing AI rollout'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Pipeline + scale. Mobileye reference accelerates this account.',
+        competitive_distress: 3,
+        distress_reason: 'Hyperscaler defaults force compromises on cost + cross-region governance for connected fleet data.',
+        distress_signals: ['Multi-region connected-vehicle data', 'Real-time inference SLO requirements'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 4,
+        residency_reason: 'Connected-vehicle data subject to multi-state + EU + APAC residency rules. Supplier IP isolation contractual.',
+        residency_signals: ['Connected fleet data residency', 'Supplier confidentiality'],
+        residency_signal_types: ['negative', 'negative'],
+        gtm_thesis: 'Ford anchors the auto + manufacturing wedge. Sequence after Mobileye land. <strong>Buyer:</strong> Ford Motor Company tech / Platform Engineering, NOT brand AI teams.'
+      },
+      // ── 9. Flatiron Health ──
+      {
+        name: 'Flatiron Health',
+        domain: 'flatiron.com',
+        subtitle: 'Oncology data platform (Roche subsidiary) — PHI-maximal AI workloads on cancer patient data, named in Valar pipeline.',
+        tier: 'high',
+        tags: [
+          { t: 'In Pipeline', c: 'Valar' },
+          { t: 'Healthcare', c: 'neutral' },
+          { t: 'Oncology Data', c: 'stack' },
+          { t: 'PHI-Maximal', c: 'stack' }
+        ],
+        overview: 'Oncology data + research platform, Roche subsidiary. Real-world evidence on cancer patients — among the most regulated and sensitive data in healthcare. AI for clinical research, abstracting, drug development. Inference clouds structurally impossible. Named pipeline account.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Oncology Data + Real-World Evidence'],
+              ['Revenue', 'Private (Roche subsidiary) — estimated $300–500M ARR'],
+              ['Headquarters', 'New York, NY (Roche Group affiliate)'],
+              ['Cloud Provider', 'AWS primary; multi-region for global data harmonization'],
+              ['AI Maturity', 'Maximum — VALID Framework (peer-reviewed AI data quality, JCO 2025), LLM-extracted real-world cancer progression at scale, harmonized multinational datasets (UK/Germany/Japan/etc.), 5M+ patient records, 1.5B+ datapoints, ASCO + ESMO + AACR research presence.'],
+              ['Valar Status', 'In Active Pipeline (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'Real-world evidence abstracting via LLM, cancer progression event extraction across 14 cancer types, clinical trial matching, drug-discovery copilots for Roche pharma, regulatory document AI for HTA submissions'],
+              ['Current Stack', 'AWS-heavy. Trusted Research Environment for patient-level access. VALID Framework for AI quality validation — implies internal LLM-extraction pipelines at high scale.'],
+              ['Pain Points', 'Cancer patient PHI maximal sensitivity. IRB + FDA + EMA validation. Cross-border data harmonization (UK/Germany/Japan) hard with hyperscaler region complexity. Roche pharma IP isolation contractual.'],
+              ['Estimated Spend', '$3–8M annually (estimated; scaling with VALID + multinational datasets)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Highest-residency pipeline account. Land here = open Roche pharma + life-sciences research enterprise (pharma is a $300B+ segment). Position as "BYOC inference for AI-extracted RWE that meets VALID, FDA, EMA simultaneously."'],
+              ['Key Evidence', 'Active pipeline. Public LLM-extraction scaling (5M patients, 1.5B datapoints). VALID Framework JCO publication (peer-reviewed AI quality bar). Roche acquisition history = enterprise procurement pattern.'],
+              ['Urgency Level', 'HIGH — RWE LLM extraction is in scaling phase, inference cost + validation are now-problems.'],
+              ['Target Buyer', 'Buyer: Platform Engineering + Privacy/Regulatory leadership. Champion: VALID Framework + LLM-extraction engineering team (they validated their own AI pipeline rigorously and will appreciate Valar\'s reliability story).'],
+              ['Messaging Angle', '"BYOC inference that meets VALID + FDA + EMA simultaneously. Cancer patient data never leaves Flatiron, model versions you control, harmonization across multinational datasets without hyperscaler region surgery."']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 5,
+        signals: ['Valar pipeline', 'PHI maximum sensitivity', 'Roche/pharma reference value'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Pipeline + maximal data residency need = highest-fit pipeline account in healthcare.',
+        competitive_distress: 4,
+        distress_reason: 'Inference clouds structurally disqualified. Bedrock acceptable but FDA + IRB + Roche IT all add friction.',
+        distress_signals: ['PHI maximum sensitivity', 'Drug development IP isolation'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 5,
+        residency_reason: 'Cancer patient PHI + drug development IP + FDA/EMA validation = absolute maximum residency requirements.',
+        residency_signals: ['HIPAA + IRB', 'FDA + EMA validation', 'Roche pharma IP'],
+        residency_signal_types: ['negative', 'negative', 'negative'],
+        gtm_thesis: 'Flatiron is the highest-residency pipeline account. Land here = open Roche pharma + life-sciences research enterprise. <strong>Buyer:</strong> Platform Engineering + Privacy/Regulatory.'
+      },
+      // ── 10. American Airlines ──
+      {
+        name: 'American Airlines',
+        domain: 'aa.com',
+        subtitle: 'Largest US airline — operations + customer AI workloads, multi-region traveler data, named in Valar pipeline.',
+        tier: 'med',
+        tags: [
+          { t: 'In Pipeline', c: 'Valar' },
+          { t: 'Aviation', c: 'neutral' },
+          { t: 'Operations AI', c: 'stack' },
+          { t: 'Traveler Data', c: 'stack' }
+        ],
+        overview: 'Largest US airline. Operations AI for crew scheduling, irregular operations, dynamic pricing, customer service automation. Multi-jurisdictional traveler data + DOT/FAA compliance + heavy operational SLOs. Named pipeline account.',
+        sections: [
+          {
+            title: 'Company Profile',
+            rows: [
+              ['Industry', 'Aviation / Airlines'],
+              ['Revenue', '~$53B annual (FY2024)'],
+              ['Headquarters', 'Fort Worth, TX (NASDAQ: AAL)'],
+              ['Cloud Provider', 'Microsoft Azure (preferred cloud partnership) + AWS for legacy workloads'],
+              ['AI Maturity', 'High and operational — Smart Gating reduced gate planning from 4 hours to 2.5 minutes (98% reduction). AI for crew scheduling, IROPs disruption recovery (real-time ripple analysis), dynamic pricing, predictive maintenance. Public stance: "AI strengthens human decision making, not replaces it."'],
+              ['Valar Status', 'In Active Pipeline (per PVP V Memo)']
+            ]
+          },
+          {
+            title: 'Inference Opportunity',
+            rows: [
+              ['Use Cases', 'Crew scheduling optimization (open-flight coverage), IROPs disruption recovery (real-time alternate flights + crew repositioning + rebooking), dynamic pricing, predictive maintenance, smart gating, customer service automation'],
+              ['Current Stack', 'Azure primary. Models trained on historical flight data + weather + ATC + aircraft availability. Sub-second SLO for IROPs response. Microsoft AI/ML stack heavy.'],
+              ['Pain Points', 'Real-time SLO for operations is mission-critical (downtime = canceled flights = customer/revenue impact). Multi-jurisdictional traveler data (GDPR + national airline rules + PCI for payment AI). Vendor consolidation pressure. Hyperscaler quota risk during travel disruption surges.'],
+              ['Estimated Spend', '$5–15M annually (estimated, scaling with operations AI rollout)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', 'Lead with reliability/QoS — IROPs is American\'s most public AI use case and SLO miss = operational crisis. Position as inference that meets sub-second SLO during travel disruptions when hyperscaler quotas can run hot.'],
+              ['Key Evidence', 'Active pipeline. Public Azure preferred-cloud partnership. Smart Gating ML success (98% reduction). 30% of delays from operational inefficiency = clear ROI target.'],
+              ['Urgency Level', 'MEDIUM-HIGH — operations criticality + Azure-heavy lock-in are forcing functions.'],
+              ['Target Buyer', 'Buyer: Platform Engineering + Operations Tech leadership. Champion: IROPs + crew scheduling AI product owners.'],
+              ['Messaging Angle', 'Reliability first: "Your IROPs SLO during a Sunday-evening thunderstorm doesn\'t depend on Azure quota. Inference runs inside your environment, scales with your peak, costs known in advance."']
+            ]
+          }
+        ],
+        contacts: [],
+        signal_score: 4,
+        signals: ['Valar pipeline', 'Mission-critical SLO needs', 'Multi-jurisdictional traveler data'],
+        signal_types: ['positive', 'positive', 'positive'],
+        opp_reason: 'Pipeline. Operations SLO need fits Valar QoS message.',
+        competitive_distress: 3,
+        distress_reason: 'Operations downtime risk + cost predictability are direct Valar value props.',
+        distress_signals: ['SLO miss = operations crisis', 'Multi-region traveler data'],
+        distress_signal_types: ['negative', 'negative'],
+        data_residency: 4,
+        residency_reason: 'GDPR + various national airline data rules + payment data. Multi-region inference required.',
+        residency_signals: ['GDPR traveler data', 'PCI for payment AI', 'Operational SLO contracts'],
+        residency_signal_types: ['negative', 'negative', 'negative'],
+        gtm_thesis: 'American extends Valar into mission-critical operations enterprises (logistics, transport, energy adjacency). <strong>Buyer:</strong> Platform Engineering + Operations Tech leadership.'
+      }
+    ]
+  },
+
+  /* ============================================================== */
   /*  SEGMENT 1 — Enterprise Companies (Stage 2 ICP)                */
   /* ============================================================== */
   {
@@ -202,7 +817,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with reliability and capacity — Walmart cannot afford inference downtime across 10,000+ stores. Position Valar as the software layer that ensures consistent inference performance across their hybrid cloud without vendor lock-in.'],
               ['Key Evidence', 'Walmart Global Tech blog posts on scaling generative AI, active hiring for inference optimization roles, CFO earnings commentary on rising AI costs.'],
               ['Urgency Level', 'MED — Large enterprise with long sales cycles, but growing AI spend creates budget pressure that accelerates timelines.'],
-              ['Target Buyer', 'Infrastructure team within Walmart Global Tech — specifically the ML Platform and Cloud Infrastructure groups reporting to the SVP of Technology.'],
+              ['Target Buyer', 'Buyer: Cloud Infrastructure / Platform Engineering reporting to SVP of Technology. Champion: applied ML teams running specific GenAI workloads. AVOID leading with the central ML Platform team — they own the existing serving stack and treat inference vendors as a job threat (per Andrew Wiggin, founding AE Fireworks).'],
               ['Messaging Angle', 'Reliability and capacity first: "Ensure consistent inference performance across your hybrid cloud at retail scale." Cost efficiency second: reduce per-inference cost across millions of daily requests.']
             ]
           },
@@ -259,7 +874,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with cost efficiency tied to gross margin impact — ServiceNow\'s investors are watching AI costs closely. Position Valar as the software layer that optimizes inference costs without sacrificing Now Assist performance.'],
               ['Key Evidence', 'Q1 2026 earnings flagged AI compute costs as margin headwind. Active hiring for LLM infrastructure engineers. Now Assist expanding to every product line.'],
               ['Urgency Level', 'HIGH — Gross margin pressure from AI compute is a board-level conversation right now. Inference optimization is directly tied to financial performance.'],
-              ['Target Buyer', 'AI Platform Infrastructure team — the group responsible for serving Now Assist models across the platform. Luke Hagstrand (VP, Enterprise AI) is the ideal executive sponsor.'],
+              ['Target Buyer', 'Buyer: Cloud / Platform Engineering organization with budget for inference cost reduction. Executive sponsor: Luke Hagstrand (VP, Enterprise AI) — works with infra, not the team being replaced. AVOID the Now LLM platform team directly (they built and own the in-house serving stack; inference vendors threaten that scope).'],
               ['Messaging Angle', 'Cost efficiency first: "Reduce Now Assist inference costs by 40-60% while maintaining latency SLAs." Reliability second: ensure consistent AI performance across all product lines.']
             ]
           },
@@ -316,7 +931,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with reliability and data sovereignty — UHG cannot risk inference failures in clinical decision support, and HIPAA mandates that PHI stays within their controlled environment. Valar\'s in-cloud deployment model is a natural fit.'],
               ['Key Evidence', 'HIPAA and CMS AI transparency requirements, Optum job postings specifying on-prem inference, growing AI investment across claims processing and clinical tools.'],
               ['Urgency Level', 'MED — Strong regulatory driver, but healthcare enterprises move slowly. CMS AI transparency rule creates a compliance deadline that could accelerate.'],
-              ['Target Buyer', 'Optum Technology infrastructure team — specifically the AI/ML platform group. Srikanth Nittala and Mike Kramer are on Valar\'s existing contact list.'],
+              ['Target Buyer', 'Buyer: Optum Cloud / Platform Engineering + Privacy/Compliance leadership (HIPAA owners). Validated by UnitedHealth Director of Architecture interview in PVP V memo: he sees BYOC + VPC peering as inevitable. Existing contacts Srikanth Nittala and Mike Kramer useful as champions, NOT as primary buyers if they sit in central ML platform — that team built the current Vertex/Azure path and will resist replacement.'],
               ['Messaging Angle', 'Reliability first: "Mission-critical inference for healthcare AI — zero downtime, full HIPAA compliance, deployed in your own cloud." Cost efficiency second: optimize inference costs across billions of annual claims.']
             ]
           },
@@ -373,7 +988,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with reliability and quality of service — Mastercard cannot tolerate inference latency spikes during transaction processing. Position Valar as the optimization layer that ensures consistent sub-50ms inference at peak transaction volumes.'],
               ['Key Evidence', 'Decision Intelligence runs on every transaction (150B+/year), AI Garage blog posts on inference scaling challenges, PCI DSS compliance requirements.'],
               ['Urgency Level', 'MED — Transaction volumes growing steadily, and new AI features (generative summaries, enhanced fraud models) are increasing inference demand.'],
-              ['Target Buyer', 'AI Platform Engineering team — the infrastructure group behind Decision Intelligence. Also the AI Garage innovation team for newer generative AI workloads.'],
+              ['Target Buyer', 'Buyer: Cloud / Platform Engineering + Security & Compliance (PCI DSS owners). The Decision Intelligence ML platform team owns the existing serving stack — engage them as technical reviewers, not as buyer. AI Garage applied team can champion newer GenAI workloads.'],
               ['Messaging Angle', 'Reliability first: "Guaranteed sub-50ms inference at 150B+ transaction scale — zero degradation during peak volumes." Scalability second: handle growing transaction volumes and new AI features without linear cost increases.']
             ]
           },
@@ -483,32 +1098,67 @@ const SEGMENTS = [
         overview: 'Capital One is the most tech-forward major bank in the US, and the first to go all-in on public cloud (AWS). They run ML inference at massive scale — real-time fraud detection on every transaction, credit decisioning for every application, the Eno AI assistant for millions of customers, and increasingly generative AI features. With 8 warm contacts across engineering and product through Primary\'s network (including a Director Distinguished Engineer and VP of AI), this is one of the best-connected targets in the portfolio. Federal banking regulations on AI governance create a natural fit for Valar\'s in-cloud deployment model.',
         sections: [
           {
-            title: 'GTM Strategy',
-            rows: [
-              ['Approach', 'Lead with reliability and governance — Capital One needs inference infrastructure that meets OCC/FDIC AI governance requirements while scaling to handle every transaction and credit decision. Leverage the extensive Primary network to get multiple warm introductions.'],
-              ['Key Evidence', '8 warm contacts across engineering and product. All-in on AWS creates single-cloud optimization opportunity. Growing generative AI investment (Eno upgrades). OCC AI governance requirements.'],
-              ['Urgency Level', 'HIGH — Strong network, growing inference spend, regulatory pressure. Multiple entry points through Primary contacts.'],
-              ['Target Buyer', 'ML Platform team — John Hinnegan (Senior Engineering Leader) or Vivek Gupta (Director, Distinguished Engineer) for technical evaluation. Jeff Chou (VP of AI/Head of Product) for executive sponsorship.'],
-              ['Messaging Angle', 'Reliability first: "Enterprise-grade inference infrastructure that meets federal banking AI governance requirements." Cost efficiency second: optimize inference costs across fraud, credit, and Eno workloads on AWS.']
-            ]
-          },
-          {
             title: 'Company Profile',
             rows: [
               ['Industry', 'Financial Services / Banking'],
               ['Revenue', '~$38B (FY2025)'],
               ['Employees', '~55,000'],
-              ['Cloud Provider', 'AWS (all-in — first major US bank fully on public cloud)'],
-              ['AI Maturity', 'Very advanced — extensive ML platform, real-time inference at scale, dedicated AI research teams, early adopter of generative AI in banking. Known industry-wide for tech-forward approach.']
+              ['Cloud', 'AWS all-in — first major US bank fully on public cloud'],
+              ['AI Maturity', [
+                'Very advanced ML platform, real-time inference at scale',
+                'Dedicated AI research teams, early GenAI adopter in banking',
+                'Tech-forward reputation industry-wide'
+              ]]
             ]
           },
           {
             title: 'Inference Opportunity',
             rows: [
-              ['Use Cases', 'Real-time fraud detection (every transaction), credit decisioning (every application), Eno AI assistant (millions of users), document understanding (OCR + NLP), anti-money laundering, personalized offers.'],
-              ['Current Stack', 'AWS SageMaker for model serving, custom inference infrastructure, KServe-based deployment. Growing use of LLMs for Eno and generative features.'],
-              ['Pain Points', 'OCC/FDIC AI governance requirements demand full auditability and control. Scaling generative AI (Eno upgrades) significantly increasing inference costs. Need to optimize across multiple model types (traditional ML + LLMs).'],
-              ['Estimated Spend', '$100–200M annually on inference compute (estimated from technology headcount and AWS commitment)']
+              ['Use Cases', [
+                'Real-time fraud detection (every transaction)',
+                'Credit decisioning (every application)',
+                'Eno AI assistant (millions of users)',
+                'Document understanding (OCR + NLP)',
+                'Anti-money laundering, personalized offers'
+              ]],
+              ['Current Stack', [
+                'AWS SageMaker for model serving',
+                'Custom inference infrastructure + KServe deployment',
+                'Growing LLM use for Eno and generative features'
+              ]],
+              ['Pain Points', [
+                'OCC/FDIC AI governance demands full auditability + control',
+                'GenAI scale (Eno upgrades) compounding inference cost',
+                'Optimize across traditional ML + LLMs simultaneously'
+              ]],
+              ['Estimated Spend', '$100–200M annual inference compute (est. from tech headcount + AWS commitment)']
+            ]
+          },
+          {
+            title: 'GTM Strategy',
+            rows: [
+              ['Approach', [
+                'Lead with reliability + AI governance fit',
+                'Position Valar as augmenting, not replacing',
+                'Leverage Primary network for multiple warm intros'
+              ]],
+              ['Key Evidence', [
+                '8 warm contacts (engineering + product)',
+                'All-in AWS = single-cloud optimization opening',
+                'Eno upgrades growing GenAI compute spend',
+                'OCC/FDIC AI governance pressure'
+              ]],
+              ['Urgency Level', 'HIGH — strong network, growing spend, regulatory pressure'],
+              ['Target Buyer', [
+                'Buyer: Cloud Platform / Bank Tech infra leadership',
+                'Buyer: AI Risk / Model Risk Mgmt (OCC/FDIC governance owners)',
+                'Champion: Jeff Chou (VP of AI / Head of Product) — sits above ML platform org',
+                '⚠️ Avoid leading with Hinnegan/Gupta — they own ML platform = antagonist risk per Wiggin warning'
+              ]],
+              ['Messaging Angle', [
+                'Reliability: "Enterprise inference that meets federal banking AI governance"',
+                'Cost: optimize across fraud + credit + Eno on AWS'
+              ]]
             ]
           }
         ],
@@ -545,7 +1195,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with cost efficiency — the CEO has publicly made "AI efficiency" a strategic priority. Position Valar as the solution that directly supports this CEO mandate, optimizing inference costs across checkout, fraud, and customer engagement.'],
               ['Key Evidence', 'CEO earnings call highlighted "AI efficiency" as priority. Job postings for ML platform engineers referencing inference optimization. 4 warm contacts through Primary network.'],
               ['Urgency Level', 'HIGH — CEO-level mandate on AI efficiency creates organizational urgency. Teams are actively looking for solutions.'],
-              ['Target Buyer', 'ML Platform team — Warren Zhang (Director of Engineering) for technical entry. Martin Brodbeck (SVP, Consumer Engineering) for executive sponsorship.'],
+              ['Target Buyer', 'Buyer: Cloud Platform / Risk & Compliance Engineering (PCI DSS + PayPal\'s "shadow platform" Quokka owners). Executive sponsor: Martin Brodbeck (SVP, Consumer Engineering). Warren Zhang (Director of Engineering) is a useful champion BUT if he leads the central ML platform, route around — that team built Quokka and the existing fraud serving stack.'],
               ['Messaging Angle', 'Cost efficiency first: "Deliver on the CEO\'s AI efficiency mandate — reduce inference costs by 40-60% across checkout, fraud, and engagement workloads." Reliability second: maintain fraud detection accuracy and checkout latency.']
             ]
           },
@@ -602,7 +1252,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with scalability — Workday has publicly acknowledged that AI feature delivery is outpacing infrastructure. Position Valar as the software layer that lets them scale Illuminate inference without proportional infrastructure investment.'],
               ['Key Evidence', 'Q4 FY2025 earnings flagged AI scaling challenges. Illuminate AI agents launching across all product lines. Sensitive HR/finance data requires in-cloud inference.'],
               ['Urgency Level', 'MED — Clear infrastructure pain, but no warm contacts means longer path to engagement. Outbound to infrastructure leadership needed.'],
-              ['Target Buyer', 'Cloud Infrastructure and AI Platform teams — need to identify the VP of Infrastructure or AI Platform lead.'],
+              ['Target Buyer', 'Buyer: Cloud Infrastructure / Platform Engineering leadership owning the Workday-managed DCs + AWS/GCP integration. Workday Build / Flowise applied teams can champion. AVOID leading with Illuminate platform engineering team directly — they own the serving stack for the new agents and will resist external replacement.'],
               ['Messaging Angle', 'Scalability first: "Scale Illuminate AI agents across your entire customer base without linear infrastructure growth." Reliability second: ensure consistent AI performance for HR and Finance workflows.']
             ]
           },
@@ -659,7 +1309,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with cost efficiency — HubSpot\'s business model depends on serving AI features to 200K+ customers profitably. Position Valar as the optimization layer that makes Breeze AI economically sustainable at scale.'],
               ['Key Evidence', 'Q1 2026 earnings flagged AI costs growing faster than revenue. Breeze AI deployed across entire product suite. 200K+ customers means massive inference volume.'],
               ['Urgency Level', 'MED-HIGH — AI cost vs. revenue growth gap is a near-term business problem. HubSpot is smaller than other enterprise targets, meaning faster decision cycles.'],
-              ['Target Buyer', 'AI Platform / Infrastructure team — Asher Eastham (Technical Lead) for warm introduction. Need to identify the engineering VP responsible for AI infrastructure.'],
+              ['Target Buyer', 'Buyer: Cloud Infrastructure leadership + Finance Engineering (the cost-pressure owners as Breeze AI margins compress). Asher Eastham (Technical Lead) is a useful warm-intro champion. Identify Engineering VP for AI infrastructure but treat the Breeze platform team as technical reviewers, not buyer (they own the existing pipeline).'],
               ['Messaging Angle', 'Cost efficiency first: "Make Breeze AI profitable at 200K+ customer scale — reduce inference cost per customer by 40-60%." Scalability second: handle growing customer base without proportional cost increases.']
             ]
           },
@@ -716,7 +1366,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with cost efficiency — Rivian needs to optimize every cost line on the path to profitability. Position Valar as a quick win for reducing cloud inference costs without engineering heavy-lifting.'],
               ['Key Evidence', 'Pre-profitability with significant cash burn. ADAS and fleet AI require substantial inference compute. AWS costs are a major expense line.'],
               ['Urgency Level', 'LOW — Cost-sensitive but also budget-constrained. May not prioritize new vendor evaluation given other priorities.'],
-              ['Target Buyer', 'Cloud Infrastructure or ML Platform team — need outbound identification of the right technical leader.'],
+              ['Target Buyer', 'Buyer: Cloud Infrastructure / Vehicle Platform Engineering (cost-pressure owners). ADAS perception ML applications team can champion specific workloads. AVOID leading with the Polaris ADAS data platform team — they built the AWS-heavy stack and the serving infra for perception models.'],
               ['Messaging Angle', 'Cost efficiency: "Reduce inference costs on the path to profitability — optimize ADAS and fleet AI workloads on AWS without engineering effort."']
             ]
           },
@@ -770,25 +1420,25 @@ const SEGMENTS = [
       {
         name: 'Carta',
         domain: 'carta.com',
-        subtitle: 'Actually in Valar\'s pipeline — equity management platform that cannot send sensitive cap table data to third-party inference APIs',
+        subtitle: 'Equity management platform — named in pipeline by Tom directly (4/24 Granola call). Cap table + 409A data cannot route to third-party inference APIs.',
         tier: 'high',
         tags: [
+          { t: 'In Pipeline', c: 'Valar', tip: 'Confirmed by Tom on 4/24 Granola call as Stage 1 ICP pipeline example. Not headlined in 4/29 PVP V memo, but memo states 40 customer conversations with named accounts being exemplary.' },
           { t: 'Fintech', c: 'neutral', tip: 'Equity management and valuation platform' },
           { t: 'AWS', c: 'stack', tip: 'AWS primary cloud provider' },
-          { t: 'In Pipeline', c: 'oss', tip: 'Active conversations with Valar ongoing' },
           { t: 'SOC 2 Type II', c: 'hw', tip: 'Strict compliance requirements for financial data' },
           { t: 'AI Document Parsing', c: 'stack', tip: 'Using AI for equity document processing' }
         ],
-        overview: 'Carta is already in Valar\'s active pipeline, making this the highest-conviction mid-market opportunity. As the leading equity management platform, Carta handles extremely sensitive financial data — cap tables, 409A valuations, equity grants — that absolutely cannot be sent to third-party inference APIs. They\'ve been launching AI features for document parsing, valuation modeling, and equity plan optimization, all of which require inference on sensitive financial data. The combination of active pipeline status, clear data sensitivity requirements, and growing AI investment makes this the top priority in the mid-market segment.',
+        overview: 'Carta is in Valar\'s active pipeline per Tom\'s direct statement on the 4/24 Granola call ("CARTA in pipeline as Stage 1 example"). Not headlined in the 4/29 PVP V memo but memo notes 40 customer conversations with the named-8 being exemplary not exhaustive. As the leading equity management platform, Carta handles cap tables, 409A valuations, and equity grants — financial data that cannot be sent to third-party inference APIs. SOC 2 + financial-data sensitivity make Carta a near-perfect ICP match for the BYOC wedge.',
         sections: [
           {
             title: 'GTM Strategy',
             rows: [
-              ['Approach', 'Continue active pipeline engagement. Emphasize that Valar\'s in-cloud deployment means Carta\'s sensitive equity data never leaves their AWS environment. Focus on enabling AI features they currently cannot build due to data sensitivity constraints.'],
-              ['Key Evidence', 'Active pipeline — Valar is already in conversations. SOC 2 Type II compliance requirements. Cap table and 409A data is among the most sensitive financial information.'],
-              ['Urgency Level', 'HIGHEST — Already in pipeline. Priority is to close, not to generate interest.'],
-              ['Target Buyer', 'Already engaged — continue with current contacts. Infrastructure and AI/ML teams.'],
-              ['Messaging Angle', 'Reliability first: "Production-grade inference in your own AWS — your clients\' equity data never leaves your environment." Cost efficiency second: optimize inference costs as AI features scale across your customer base.']
+              ['Approach', 'Initiate outbound. Lead with: equity data never leaves Carta\'s AWS environment. Frame as enabling AI features they currently cannot ship due to SOC 2 + financial-data constraints.'],
+              ['Key Evidence', 'SOC 2 Type II compliance. Cap table + 409A + equity grant data among most sensitive financial info. Public AI feature launches in 2025 indicate active investment.'],
+              ['Urgency Level', 'HIGH — strong ICP fit, no current Valar engagement.'],
+              ['Target Buyer', 'Platform Engineering or Security/Compliance — NOT the AI feature team (per Andrew Wiggin / Fireworks AE: ML eng treats inference vendors as threat to their role).'],
+              ['Messaging Angle', 'Reliability first: production-grade inference in your AWS, client equity data never leaves your environment. Cost efficiency second: scale AI features without margin compression.']
             ]
           },
           {
@@ -844,7 +1494,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with cost efficiency tied directly to gross margin recovery — Datadog has publicly disclosed the margin impact. Position Valar as the optimization layer for Bits AI inference that restores margins without degrading AI quality.'],
               ['Key Evidence', 'Q1 2026 earnings flagged significant gross margin impact from Bits AI inference costs. Processes sensitive customer telemetry data. Unique hybrid infrastructure (cloud + bare metal).'],
               ['Urgency Level', 'HIGH — Gross margin impact is a public, investor-facing problem. Inference optimization is directly tied to financial performance.'],
-              ['Target Buyer', 'AI/ML Infrastructure team — the group responsible for serving Bits AI models. Also the bare metal infrastructure team for optimization across their data plane.'],
+              ['Target Buyer', 'Buyer: Cloud / Bare-Metal Infrastructure leadership (Datadog operates own data plane on bare metal — these are the cost owners). Also Finance Engineering as Bits AI margins are publicly cited. AVOID leading with the Bits AI ML platform team directly; they own the existing serving stack and will treat Valar as competition.'],
               ['Messaging Angle', 'Cost efficiency first: "Recover Bits AI gross margin impact — reduce inference costs by 40-60% across your hybrid infrastructure." Reliability second: ensure consistent Bits AI performance as you scale features.']
             ]
           },
@@ -901,7 +1551,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with reliability and data sovereignty — CrowdStrike\'s customers (especially government and financial services) demand that security telemetry stays within controlled environments. Position Valar as the optimization layer that enables Charlotte AI to run faster and cheaper within CrowdStrike\'s own infrastructure.'],
               ['Key Evidence', 'Charlotte AI in production for threat hunting. Security telemetry is the most sensitive data class. FedRAMP customers have strict data processing requirements. Fal.Con 2025 acknowledged inference latency challenges.'],
               ['Urgency Level', 'HIGH — Real-time threat detection latency directly impacts customer safety. Charlotte AI inference optimization is tied to core product quality.'],
-              ['Target Buyer', 'Cloud Infrastructure and AI Platform teams — the engineering groups behind Charlotte AI and the Threat Graph data platform.'],
+              ['Target Buyer', 'Buyer: Cloud Infrastructure leadership + CISO / Security Engineering (cyber data residency owners — natural Valar fit). Charlotte AI applied team can champion. The Threat Graph platform team owns existing serving — engage as reviewers, not buyer.'],
               ['Messaging Angle', 'Reliability first: "Millisecond inference for Charlotte AI — catch threats faster with optimized model serving in your own cloud." Cost efficiency second: reduce the cost of AI-powered threat detection at scale.']
             ]
           },
@@ -1243,7 +1893,7 @@ const SEGMENTS = [
               ['Approach', 'Lead with cost efficiency tied to gross margin recovery — SentinelOne has publicly disclosed the margin impact from Purple AI inference. Position Valar as the solution that preserves their AI competitive advantage while fixing the margin problem.'],
               ['Key Evidence', 'Q4 FY2025 earnings: Purple AI inference costs cited as gross margin headwind. Security telemetry data sensitivity. Purple AI is central to their competitive positioning.'],
               ['Urgency Level', 'HIGH — Gross margin headwind from AI inference is an investor-facing problem. Purple AI is too strategically important to cut, so optimization is the only path.'],
-              ['Target Buyer', 'AI Platform / Infrastructure team — the engineering group behind Purple AI inference serving. Also cloud infrastructure team for overall optimization.'],
+              ['Target Buyer', 'Buyer: Cloud Infrastructure leadership + CISO / Security Engineering (the cost-pressure owners as Purple AI inference cost is cited as gross margin headwind). Purple AI applied team can champion specific workloads. AVOID leading with the Purple AI platform engineering team — they built the serving stack and treat external inference vendors as scope replacement.'],
               ['Messaging Angle', 'Cost efficiency first: "Recover Purple AI gross margin impact — reduce inference costs by 40-60% while maintaining real-time threat detection quality." Reliability second: ensure Purple AI delivers consistent performance for your customers.']
             ]
           },
@@ -1395,6 +2045,404 @@ const CONTACT_MAP = {
 };
 
 /* ------------------------------------------------------------------ */
+/*  COMPANY_SOURCES — verified hyperlinked references per company      */
+/*  All URLs verified via WebSearch 2026-04-29                         */
+/* ------------------------------------------------------------------ */
+const COMPANY_SOURCES = {
+  "Walmart": [
+    { name: "Walmart 10-K Annual Filings — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000104169&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Walmart Global Tech Blog — From Models to Agents (WIBEY launch)", url: "https://tech.walmart.com/content/walmart-global-tech/en_us/blog/post/wibey-announcement.html" },
+    { name: "Walmart Global Tech Blog — Element ML Platform", url: "https://tech.walmart.com/content/walmart-global-tech/en_us/blog/post/walmarts-element-a-machine-learning-platform-like-no-other.html" },
+    { name: "Walmart Global Tech Blog Index", url: "https://tech.walmart.com/content/walmart-global-tech/en_us/blog/post.html" },
+    { name: "NVIDIA — Triton Inference Server (referenced in WMT job posts)", url: "https://blogs.nvidia.com/blog/triton-ai-inference/" }
+  ],
+  "ServiceNow": [
+    { name: "ServiceNow 10-K Annual Filings — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001373715&type=10-K&dateb=&owner=include&count=40" },
+    { name: "ServiceNow — Now LLM Generative LLM for Enterprise AI", url: "https://www.servicenow.com/community/now-assist-articles/now-llm-generative-llm-for-enterprise-ai-use-cases/ta-p/2688208" },
+    { name: "NVIDIA Blog — ServiceNow Apriel Nemotron 15B", url: "https://blogs.nvidia.com/blog/servicenow-apriel-nemotron/" },
+    { name: "ServiceNow Docs — Large Language Models on the AI Platform", url: "https://www.servicenow.com/docs/r/intelligent-experiences/servicenow-large-language-model-now-llm/exploring-large-language-models.html" },
+    { name: "NVIDIA Newsroom — ServiceNow + Hugging Face open LLMs", url: "https://nvidianews.nvidia.com/news/servicenow-hugging-face-nvidia-open-access-llms-generative-ai-enterprise-applications" }
+  ],
+  "UnitedHealth Group": [
+    { name: "UnitedHealth Group 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000731766&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Healthcare Dive — Optum Real AI claims processing launch", url: "https://www.healthcaredive.com/news/optum-real-ai-speed-claims-review-united-health/803448/" },
+    { name: "Bloomberg — UnitedHealth's Optum Real Uses AI", url: "https://www.bloomberg.com/news/articles/2025-10-21/unitedhealth-s-optum-real-uses-ai-to-speed-up-medical-claims" },
+    { name: "UnitedHealthcare — AI for Better Care FAQ (Responsible AI / HIPAA)", url: "https://www.uhc.com/agents-brokers/employer-sponsored-plans/news-strategies/ai-for-better-care-faq" },
+    { name: "STAT News — Optum Medicare AI risk scoring (CMMI)", url: "https://www.statnews.com/2025/05/16/unitedhealth-optum-developing-new-ai-risk-scoring-system-for-medicare-advantage-cmmi/" }
+  ],
+  "Mastercard": [
+    { name: "Mastercard 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001141391&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Mastercard — Decision Intelligence Product Page", url: "https://b2b.mastercard.com/ai-and-security-solutions/fraud-and-decisioning/decision-intelligence/" },
+    { name: "Mastercard — Risk Decisioning Platform", url: "https://www.mastercard.com/global/en/business/cybersecurity-fraud-prevention/risk-decisioning/mastercard-risk-decisioning-platform.html" },
+    { name: "Mastercard Insights — AI fraud prevention savings (2026)", url: "https://www.mastercard.com/us/en/news-and-trends/Insights/2026/ai-is-helping-banks-save-millions-by-transforming-payment-fraud-prevention.html" },
+    { name: "CNBC — Mastercard launches GenAI fraud detection model", url: "https://www.cnbc.com/2024/02/01/mastercard-launches-gpt-like-ai-model-to-help-banks-detect-fraud.html" },
+    { name: "VentureBeat — 300ms fraud model engineering breakdown", url: "https://venturebeat.com/orchestration/what-ai-builders-can-learn-from-fraud-models-that-run-in-300-milliseconds" }
+  ],
+  "General Motors (Cruise)": [
+    { name: "General Motors 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001467858&type=10-K&dateb=&owner=include&count=40" },
+    { name: "GM — Autonomous Driving Innovation Page", url: "https://www.gm.com/innovation/autonomous-driving" },
+    { name: "NPR — GM retreats from robotaxis, restructures Cruise", url: "https://www.npr.org/2024/12/11/g-s1-37700/gm-to-retreat-from-robotaxis-and-stop-funding-its-cruise-autonomous-vehicle-unit" },
+    { name: "TechBuzz — GM Eyes-Off Driving 2028 plan using Cruise AI", url: "https://www.techbuzz.ai/articles/gm-plans-eyes-off-driving-system-by-2028-using-cruise-ai" },
+    { name: "Automotive News — GM autonomous testing ramp", url: "https://www.autonews.com/general-motors/an-general-motors-eyes-off-cruise-1217/" }
+  ],
+  "Capital One": [
+    { name: "Capital One 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000927628&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Capital One Tech — A Developer Walks into AWS SageMaker", url: "https://www.capitalone.com/tech/machine-learning/a-developer-walks-into-aws-sagemaker/" },
+    { name: "AWS — Capital One AI/ML Customer Page", url: "https://aws.amazon.com/machine-learning/customers/innovators/capital_one/" },
+    { name: "AWS — Capital One Innovator Case Studies", url: "https://aws.amazon.com/solutions/case-studies/innovators/capital-one/" },
+    { name: "Databricks Blog — Capital One credit card fraud ML", url: "https://www.databricks.com/blog/2021/07/13/using-your-data-to-stop-credit-card-fraud-capital-one-and-other-best-practices.html" }
+  ],
+  "PayPal": [
+    { name: "PayPal 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001633917&type=10-K&dateb=&owner=include&count=40" },
+    { name: "PayPal Technology Blog (Medium) — Large-scale Fraud Detection ML", url: "https://medium.com/paypal-tech/machine-learning-model-ci-cd-and-shadow-platform-8c4f44998c78" },
+    { name: "PayPal — ML Fraud Detection Technologies (BRC)", url: "https://www.paypal.com/us/brc/article/payment-fraud-detection-machine-learning" },
+    { name: "PayPal Developer Community — Risk and Fraud Management", url: "https://developer.paypal.com/community/blog/paypal-fraud-risk-management-solutions/" },
+    { name: "NVIDIA Blog — AI fraud detection (PayPal reference architecture)", url: "https://blogs.nvidia.com/blog/ai-fraud-detection-rapids-triton-tensorrt-nemo/" }
+  ],
+  "Workday": [
+    { name: "Workday 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001327811&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Workday Newsroom — Illuminate AI Agents Expansion (Sep 2025)", url: "https://newsroom.workday.com/2025-09-16-Workday-Illuminate-TM-Expands-with-New-AI-Agents-for-HR,-Finance,-and-Industry" },
+    { name: "Futurum — Workday Rising 2025 recap (AI Agents, Data Cloud, Flex Credits)", url: "https://futurumgroup.com/insights/workday-rising-2025-ai-agents-data-cloud-and-flex-credits-unveiled/" },
+    { name: "PR Newswire — Next-Gen Illuminate Agents", url: "https://www.prnewswire.com/news-releases/workday-unveils-next-generation-of-illuminate-agents-to-transform-hr-and-finance-operations-302458500.html" },
+    { name: "Reworked — Workday Sana acquisition + Build platform", url: "https://www.reworked.co/digital-workplace/workday-launches-build-platform-for-custom-ai-solutions/" }
+  ],
+  "HubSpot": [
+    { name: "HubSpot 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001404655&type=10-K&dateb=&owner=include&count=40" },
+    { name: "HubSpot — Breeze AI Product Page", url: "https://www.hubspot.com/products/artificial-intelligence" },
+    { name: "HubSpot Knowledge Base — Understand Breeze", url: "https://knowledge.hubspot.com/ai/understand-breeze" },
+    { name: "Vantage Point — Breeze AI Outcome-Based Pricing analysis", url: "https://vantagepoint.io/blog/hs/hubspot-breeze-outcome-based-pricing-ai-agents" },
+    { name: "eesel AI — HubSpot AI pricing breakdown 2026", url: "https://www.eesel.ai/blog/hubspot-ai-pricing" }
+  ],
+  "Rivian": [
+    { name: "Rivian 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001874178&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Rivian — Autonomy+ Product Page", url: "https://rivian.com/autonomy" },
+    { name: "AWS HPC Blog — Rivian engineering simulation modernization", url: "https://aws.amazon.com/blogs/hpc/how-rivian-modernized-engineering-simulation-using-aws/" },
+    { name: "AWS re:Invent 2024 — How Rivian accelerated ADAS development on AWS", url: "https://reinvent.awsevents.com/content/dam/reinvent/2024/slides/aut/AUT318_How-Rivian-accelerated-ADAS-development-on-AWS.pdf" },
+    { name: "AWS — Rivian cloud storage optimization for ADAS workloads", url: "https://aws.amazon.com/blogs/industries/how-rivian-optimized-cloud-storage-for-its-adas-and-product-engineering-workloads-on-aws/" },
+    { name: "NVIDIA GTC 2025 — Rivian ADAS ML and simulation scaling", url: "https://www.nvidia.com/en-us/on-demand/session/gtc25-s74272/" }
+  ],
+  "Carta": [
+    { name: "Carta — Company Site", url: "https://carta.com" },
+    { name: "Carta Engineering Blog", url: "https://carta.com/blog/category/engineering/" },
+    { name: "Carta — Products Overview", url: "https://carta.com/products/" },
+    { name: "Crunchbase — Carta Profile", url: "https://www.crunchbase.com/organization/carta-2" }
+  ],
+  "Datadog": [
+    { name: "Datadog 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001561550&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Datadog Blog — Driving AI ROI (cost, performance, infrastructure)", url: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/" },
+    { name: "Datadog Engineering — LLMs for Postmortems (Bits AI)", url: "https://www.datadoghq.com/blog/engineering/llms-for-postmortems/" },
+    { name: "Datadog — State of AI Engineering Report", url: "https://www.datadoghq.com/state-of-ai-engineering/" },
+    { name: "Datadog — Observability in the AI Age", url: "https://www.datadoghq.com/blog/datadog-ai-innovation/" },
+    { name: "Datadog AI Blog Index", url: "https://www.datadoghq.com/blog/ai/" }
+  ],
+  "CrowdStrike": [
+    { name: "CrowdStrike 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001535527&type=10-K&dateb=&owner=include&count=40" },
+    { name: "CrowdStrike — Charlotte AI Product Page", url: "https://www.crowdstrike.com/en-us/platform/charlotte-ai/" },
+    { name: "CrowdStrike Blog — Charlotte AI transforms Falcon UX", url: "https://www.crowdstrike.com/en-us/blog/crowdstrike-transforms-falcon-ux-charlotte-ai/" },
+    { name: "CrowdStrike — Falcon AIDR (AI Detection & Response)", url: "https://www.crowdstrike.com/en-us/platform/falcon-aidr-ai-detection-and-response/" },
+    { name: "CrowdStrike Blog — Fall 2025 Release (Agentic SOC, AI Era)", url: "https://www.crowdstrike.com/en-us/blog/crowdstrike-fall-2025-release-defines-agentic-soc-secures-ai-era/" }
+  ],
+  "Gusto": [
+    { name: "Gusto Company News — Meet Gus AI Assistant", url: "https://gusto.com/company-news/gus-ai-assistant" },
+    { name: "Gusto — Gus AI Assistant Product Page", url: "https://gusto.com/ai/gus-assistant" },
+    { name: "Gusto Help Center — Use Gus", url: "https://support.gusto.com/article/250211164235690/Use-Gusto-s-AI-assistant-Gus" },
+    { name: "Gusto Engineering (Murga) — Evolution of Gus, Gusto's AI Assistant", url: "https://medium.com/@mr.murga/the-evolution-of-gus-gustos-ai-powered-assistant-c41ef9eb8563" }
+  ],
+  "Plaid": [
+    { name: "Plaid Engineering — Building a Transaction Foundation Model", url: "https://plaid.com/blog/building-transaction-foundation-model-intelligent-finance/" },
+    { name: "Plaid Engineering — Why Intelligent Finance Needs Purpose-built AI Infrastructure", url: "https://plaid.com/blog/intelligent-finance-ai-infrastructure/" },
+    { name: "Plaid Blog — AI-Enhanced Transaction Categorization", url: "https://plaid.com/blog/ai-enhanced-transaction-categorization/" },
+    { name: "Plaid — Intelligent Finance Page", url: "https://plaid.com/intelligent-finance/" },
+    { name: "Plaid Engineering — ML for Real-Time Income Verification", url: "https://plaid.com/blog/machine-learning-income-verification/" }
+  ],
+  "Sumo Logic": [
+    { name: "Sumo Logic Docs — AI and Machine Learning", url: "https://www.sumologic.com/help/docs/get-started/ai-machine-learning/" },
+    { name: "Sumo Logic — Dojo AI Solution Page", url: "https://www.sumologic.com/solutions/dojo-ai" },
+    { name: "Tribe AI — Sumo Logic GenAI Case Study (MTTR reduction)", url: "https://www.tribe.ai/case-studies/sumo-logic-utilizes-genai-to-reduce-mean-time-to-resolution-of-log-data" },
+    { name: "Sumo Logic — ML-Powered Analytics Solutions", url: "https://www.sumologic.com/solutions/machine-learning-powered-analytics" },
+    { name: "Wikipedia — Sumo Logic (Francisco Partners $1.7B acquisition)", url: "https://en.wikipedia.org/wiki/Sumo_Logic" }
+  ],
+  "Hims & Hers": [
+    { name: "Hims & Hers 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001773751&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Hims & Hers Investor Relations — MedMatch Press Release", url: "https://investors.hims.com/news/news-details/2023/Hims--Hers-Introduces-MedMatch-The-Next-Generation-of-Intelligent-Diagnostic-Services/default.aspx" },
+    { name: "Hims & Hers — Privacy Policy (HIPAA + SOC2 references)", url: "https://www.hims.com/privacy-policy" },
+    { name: "Nasdaq — Hims & Hers AI-Powered Personalized Healthcare", url: "https://www.nasdaq.com/articles/hims-hers-leads-charge-ai-powered-personalized-healthcare" },
+    { name: "Quartz — Hims & Hers Personalized Digital Healthcare expansion", url: "https://qz.com/hims-hers-expands-personalized-digital-healthcare-platform" }
+  ],
+  "Brex": [
+    { name: "Brex Journal — 7 Ways AI Can Accelerate Expense Management", url: "https://www.brex.com/journal/accelerate-expense-management-with-ai" },
+    { name: "Brex Spend Trends — How AI Accelerates Accounting Teams", url: "https://www.brex.com/spend-trends/accounting/ai-in-accounting" },
+    { name: "Brex Platform — Intelligent Finance (AI Agents)", url: "https://www.brex.com/platform/intelligent-finance" },
+    { name: "ZenML LLMOps Database — Brex AI-Powered Financial Assistant Case Study (Bedrock + Claude)", url: "https://www.zenml.io/llmops-database/ai-powered-financial-assistant-for-automated-expense-management" },
+    { name: "Brex Journal — From Chaos to Control with AI (spend management)", url: "https://www.brex.com/journal/from-chaos-to-control-with-ai" }
+  ],
+  "SentinelOne": [
+    { name: "SentinelOne 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001583708&type=10-K&dateb=&owner=include&count=40" },
+    { name: "SentinelOne — Purple AI Product Page", url: "https://www.sentinelone.com/platform/purple/" },
+    { name: "SentinelOne Blog — Transforming the SOC with Purple AI (GA)", url: "https://www.sentinelone.com/blog/transforming-the-soc-with-purple-ai/" },
+    { name: "SentinelOne — IDC Business Value of Purple AI Report", url: "https://www.sentinelone.com/lp/idc-business-value-purple-report/" },
+    { name: "Seeking Alpha — SentinelOne Q4 Earnings (Singularity + Purple AI)", url: "https://seekingalpha.com/article/4671785-sentinelone-q4-earnings-singularity-purple-ai-opportunities-seem-already-priced-in" }
+  ],
+  "Rippling": [
+    { name: "Rippling — AI Platform Page", url: "https://www.rippling.com/platform/ai" },
+    { name: "Rippling — Platform Overview (Employee Graph)", url: "https://www.rippling.com/platform" },
+    { name: "Rippling — HR Products", url: "https://www.rippling.com/products/hr" },
+    { name: "Rippling — Main Site", url: "https://www.rippling.com/" }
+  ],
+  "BigPanda": [
+    { name: "BigPanda — Main Site (AIOps platform)", url: "https://www.bigpanda.io/" },
+    { name: "BigPanda Blog — What is AIOps", url: "https://www.bigpanda.io/blog/what-is-aiops/" },
+    { name: "BigPanda — AI-Powered Incident Management Assistant", url: "https://www.bigpanda.io/solutions/ai-powered-incident-management-assistant/" },
+    { name: "BigPanda Blog — AI Incident Prevention", url: "https://www.bigpanda.io/blog/ai-incident-prevention/" },
+    { name: "BigPanda Engineering Blog Index", url: "https://www.bigpanda.io/blog/" },
+    { name: "Primary VC PVP V Memo — Valar Design Partner Confirmation", url: "https://www.primary.vc/" }
+  ],
+  "Varonis": [
+    { name: "Varonis 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001478814&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Varonis — AI-Powered Data Discovery and Classification (engineering blog)", url: "https://www.varonis.com/blog/ai-data-classification" },
+    { name: "Varonis — AI Security Starts with Data Security", url: "https://www.varonis.com/blog/ai-data-security" },
+    { name: "Varonis — Accurate Classification That Scales (engineering)", url: "https://www.varonis.com/blog/scaling-accurate-classification" },
+    { name: "Varonis — AI Security Solutions Page", url: "https://www.varonis.com/solutions/ai-security" },
+    { name: "Varonis Blog Index — AI Security tag", url: "https://www.varonis.com/blog/tag/ai-security" }
+  ],
+  "ABInBev": [
+    { name: "AB InBev 10-K (Annual Report on Form 20-F) — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001668717&type=20-F&dateb=&owner=include&count=40" },
+    { name: "AB InBev — Investor Relations", url: "https://www.ab-inbev.com/investors/" },
+    { name: "ABI Research — 2025 Supply Chain AI Survey (industry context)", url: "https://www.abiresearch.com/blog/artificial-intelligence-ai-in-supply-chain-survey-results" },
+    { name: "AB InBev — Innovation & Technology", url: "https://www.ab-inbev.com/news/" }
+  ],
+  "Qualcomm": [
+    { name: "Qualcomm 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000804328&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Qualcomm AI Hub — On-Device AI Platform", url: "https://aihub.qualcomm.com/" },
+    { name: "Qualcomm — AI Disruption Driving On-Device Inference (PDF)", url: "https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/ai-disruption-driving-innovation-on-device-inference.pdf" },
+    { name: "Qualcomm Press — AI200 and AI250 Rack-Scale Data Center Inference (Oct 2025)", url: "https://www.qualcomm.com/news/releases/2025/10/qualcomm-unveils-ai200-and-ai250-redefining-rack-scale-data-cent" },
+    { name: "GitHub — Qualcomm AI Hub Models (open source ML repo)", url: "https://github.com/qualcomm/ai-hub-models" },
+    { name: "The Next Platform — How Qualcomm Can Compete with NVIDIA for Datacenter AI Inference", url: "https://www.nextplatform.com/2025/10/28/how-qualcomm-can-compete-with-nvidia-for-datacenter-ai-inference/" }
+  ],
+  "Jefferies": [
+    { name: "Jefferies — What We Learned from the Year GenAI Went Mainstream", url: "https://www.jefferies.com/insights/boardroom-intelligence/what-we-learned-from-the-year-generative-ai-went-mainstream/" },
+    { name: "Databricks Blog — Jefferies Modernizes Equity Research at Scale (JDI launch)", url: "https://www.databricks.com/blog/jefferies-modernizes-equity-research-scale-databricks-and-agentic-analytics" },
+    { name: "Integrity Research — Jefferies + Databricks Agentic AI Equity Research", url: "https://www.integrity-research.com/jefferies-partners-with-databricks-to-deploy-agentic-ai-tools-for-next-generation-equity-research/" },
+    { name: "AWS Case Studies — Jefferies Innovates on AWS", url: "https://aws.amazon.com/solutions/case-studies/jefferies-video-case-study/" },
+    { name: "Jefferies — Capital Markets and the Rise of AI", url: "https://www.jefferies.com/insights/boardroom-intelligence/capital-markets-and-the-rise-of-ai/" },
+    { name: "HCLTech — Jefferies GenAI Transformation (corporate functions)", url: "https://www.hcltech.com/videos/jefferies-transformation-story-adopting-gen-ai-corporate-functions" }
+  ],
+  "Mobileye": [
+    { name: "Mobileye 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001910139&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Mobileye — EyeQ Chip Evolution (technology page)", url: "https://www.mobileye.com/technology/eyeq-chip/" },
+    { name: "Mobileye Newsroom — EyeQ6 Lite Launch", url: "https://www.mobileye.com/news/mobileye-eyeq6-lite-launches-to-speed-adas-upgrades-worldwide/" },
+    { name: "Mobileye — CES 2025 Updates", url: "https://www.mobileye.com/ces-2025/" },
+    { name: "TechTime — Mobileye EyeQ8 Mind-Off Driving Development", url: "https://techtime.news/2025/10/24/mobileye-22/" },
+    { name: "Mobileye Investor Relations — ADAS Fact Sheet", url: "https://ir.mobileye.com/news-releases/news-release-details/fact-sheet-mobileye-advanced-driver-assistance-systems-adas" }
+  ],
+  "Abbott": [
+    { name: "Abbott Laboratories 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000001800&type=10-K&dateb=&owner=include&count=40" },
+    { name: "Abbott Newsroom — Improving Health Through Better Data (AI strategy)", url: "https://www.abbott.com/corpnewsroom/products-and-innovation/improving-health-through-better-data.html" },
+    { name: "Abbott Newsroom — How Tech Is Transforming Healthcare", url: "https://www.abbott.com/en-us/corpnewsroom/strategy-and-strength/how-tech-is-transforming-healthcare" },
+    { name: "Abbott Core Laboratory — AlinIQ Always On (predictive maintenance ML)", url: "https://www.corelaboratory.abbott/us/en/offerings/brands/aliniq/aliniq-always-on.html" },
+    { name: "Fierce Biotech — Abbott AI-Powered Coronary OCT Imaging Launch", url: "https://www.fiercebiotech.com/medtech/abbott-launches-ai-powered-coronary-oct-imaging-system-europe" },
+    { name: "TechTarget — Abbott Launches AI Imaging Platform", url: "https://www.techtarget.com/pharmalifesciences/news/366607239/Abbott-Launches-Artificial-Intelligence-Powered-Imaging-Platform" }
+  ],
+  "Ford": [
+    { name: "Ford Motor Company 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000037996&type=10-K&dateb=&owner=include&count=40" },
+    { name: "TechCrunch — Ford AI Assistant + Next-Gen BlueCruise (CES 2026)", url: "https://techcrunch.com/2026/01/07/ford-has-an-ai-assistant-and-new-hands-free-bluecruise-tech-on-the-way/" },
+    { name: "CNBC — Ford Eyes-Off Driving 2028", url: "https://www.cnbc.com/2026/01/07/ford-eyes-off-driving-ev-2028.html" },
+    { name: "From the Road (Ford) — Affordable Smart Vehicle Technology Strategy", url: "https://www.fromtheroad.ford.com/us/en/articles/2026/ford-affordable-smart-vehicle-technology-strategy" },
+    { name: "Trade Algo — Latitude AI (Ford self-driving subsidiary)", url: "https://news.tradealgo.com/news/what-you-need-to-know-about-fords-new-self-driving-subsidiary-latitude-ai" },
+    { name: "InsideEVs — Ford $30K EV Truck Platform Eyes-Off Driving 2028", url: "https://insideevs.com/news/783700/ford-2028-autonomy-ai-ces/" }
+  ],
+  "Flatiron Health": [
+    { name: "Flatiron Health Press — RWE Innovation 2025 launch", url: "https://resources.flatiron.com/press/flatiron-health-redefines-real-world-evidence-pioneering-scientific-innovations-move-beyond-what-is-to-uncover-why-and-predict-what-will-be" },
+    { name: "Flatiron Press — Roche Acquisition Announcement", url: "https://resources.flatiron.com/press/press-release/roche" },
+    { name: "Flatiron Press — VALID Framework (Journal of Clinical Oncology)", url: "https://resources.flatiron.com/press/flatiron-health-publishes-first-peer-reviewed-validation-framework-for-ai-extracted-real-world-oncology-data-in-journal-of-clinical-oncology" },
+    { name: "Flatiron Press — End-to-End Evidence Solutions", url: "https://resources.flatiron.com/press/flatiron-health-expands-beyond-real-world-data-providing-end-to-end-evidence-solutions-for-oncology" },
+    { name: "BioSpace — Flatiron AI Cancer Progression Research (AACR 2025)", url: "https://www.biospace.com/press-releases/flatiron-health-research-on-ai-driven-cancer-progression-extraction-presented-at-aacr-special-conference-in-cancer-research-artificial-intelligence-and-machine-learning-2025" },
+    { name: "Flatiron — ASCO 2025 Research Showcase", url: "https://events.flatiron.com/asco2025" }
+  ],
+  "American Airlines": [
+    { name: "American Airlines 10-K — SEC EDGAR", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000006201&type=10-K&dateb=&owner=include&count=40" },
+    { name: "American Airlines Newsroom — AI at American (official AI strategy)", url: "https://news.aa.com/news/news-details/2025/Artificial-intelligence-at-American-CORP-OTH-01/default.aspx" },
+    { name: "CIO — American Airlines Analytics Transformation", url: "https://www.cio.com/article/406357/american-airlines-takes-flight-with-analytics-transformation.html" },
+    { name: "OAG — Three Smart Ways Airlines Use AI (Aug 2025)", url: "https://www.oag.com/blog/three-smart-ways-airlines-are-using-ai-to-improve-operations-in-august-2025" },
+    { name: "Deloitte — American Airlines Smart Gating Machine Learning Case", url: "https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends/2023/machine-learning-in-airline-industry.html" },
+    { name: "Justin McKelvey — American Airlines Emerging Tech Strategy", url: "https://www.justinmckelvey.com/blog/big-innovation-impactful-changes-inside-american-airlines-emerging-tech-strategy" }
+  ]
+};
+
+/* ------------------------------------------------------------------ */
+/*  JOB_LISTINGS — Active inference / ML platform job postings         */
+/*  Sourced from official career pages, verified URLs                  */
+/* ------------------------------------------------------------------ */
+const JOB_LISTINGS = {
+  "BigPanda": [
+    { title: "Engineering Leader, AI Products", techs: "LLMs, Graph algorithms, Text matching, ML platform", url: "https://www.linkedin.com/jobs/view/engineering-leader-ai-products-at-bigpanda-3647439402", date: "Active 2026" },
+    { title: "AIOps Engineering — Open Roles", techs: "AI/ML, Production AI", url: "https://www.bigpanda.io/company/panda-way/jobs/", date: "Active 2026" }
+  ],
+  "Varonis": [
+    { title: "AI Security Engineering — Open Roles", techs: "MLOps, Multi-cloud (GCP + AWS), LLM-driven classification", url: "https://careers.varonis.com/", date: "Active 2026" }
+  ],
+  "UnitedHealth Group": [
+    { title: "Senior AI/ML Engineer (Remote)", techs: "AWS SageMaker, Azure ML, GCP Vertex AI, MLOps, Kubernetes", url: "https://careers.unitedhealthgroup.com/job/eden-prairie/ai-or-ml-engineer-remote/34088/93732697376", date: "Active 2026" },
+    { title: "Senior AI/ML Software Engineer (Remote, NY)", techs: "MLOps, LLM serving, batch + real-time inference", url: "https://careers.unitedhealthgroup.com/job/new-york/senior-ai-ml-software-engineer-remote/34088/92872076368", date: "Active 2026" },
+    { title: "Principal AI/ML Engineer (Remote, MN)", techs: "GenAI platform, Inference architectures", url: "https://careers.mntech.org/jobs/522767125-principal-ai-ml-engineer-remote-at-unitedhealth-group", date: "Active 2026" },
+    { title: "Sr AI/ML Engineer (Metro Manila)", techs: "MLOps, GenAI, Production ML platforms", url: "https://careers.unitedhealthgroup.com/job/metro-manila/sr-ai-ml-engineer/34088/94054611568", date: "Active 2026" },
+    { title: "Senior AI ML Scientist (Remote, MN)", techs: "LLM, GenAI, Healthcare ML", url: "https://careers.unitedhealthgroup.com/job/eden-prairie/senior-ai-ml-scientist-remote/34088/94455575408", date: "Active 2026" }
+  ],
+  "Mastercard": [
+    { title: "Lead Software Engineer, AI & DPE (Clearing Decisioning)", techs: "Real-time AI, Decisioning platform, High-throughput inference", url: "https://careers.mastercard.com/us/en/artificial-intelligence-jobs", date: "Active 2026" },
+    { title: "Lead Artificial Intelligence Engineer", techs: "Decision Intelligence, Generative AI, Graph ML", url: "https://app.welcometothejungle.com/jobs/7c-6jR0x/company", date: "Active 2026" },
+    { title: "AI & Data Engineering — Open Roles", techs: "AI products, Data platform, MLOps", url: "https://careers.mastercard.com/us/en/ai-data-jobs", date: "Active 2026" }
+  ],
+  "Capital One": [
+    { title: "Lead AI Engineer (FM Hosting, LLM Inference)", techs: "LLM Inference, Foundation Model Hosting, AWS Ultraclusters", url: "https://www.capitalonecareers.com/job/new-york/lead-ai-engineer-fm-hosting-llm-inference/1732/86216418272", date: "Active 2026" },
+    { title: "Lead AI Engineer (GenAI Platform, Agentic AI, LLM Infra & Orchestration)", techs: "Agentic AI, LLM Infrastructure, Orchestration", url: "https://www.capitalonecareers.com/job/san-jose/lead-ai-engineer-gen-ai-platform-agentic-ai-and-llm-infrastructure-and-orchestration/1732/92978245968", date: "Active 2026" },
+    { title: "Sr Distinguished Machine Learning Engineer (Remote-Eligible)", techs: "ML at scale, AWS, Foundation models", url: "https://www.capitalonecareers.com/job/mclean/sr-distinguished-machine-learning-engineer-remote-eligible/1732/93650794080", date: "Active 2026" },
+    { title: "Distinguished AI Engineer", techs: "AI architecture, LLM systems", url: "https://www.capitalonecareers.com/job/mclean/distinguished-ai-engineer/1732/90393010320", date: "Active 2026" },
+    { title: "Senior AI Engineer (GenAI Platform Services, Agentic Systems)", techs: "Agentic systems, GenAI platform", url: "https://www.capitalonecareers.com/job/san-jose/senior-ai-engineer-gen-ai-platform-services-agentic-systems/1732/85741011696", date: "Active 2026" }
+  ],
+  "Datadog": [
+    { title: "Staff Machine Learning Engineer — BitsAI", techs: "Retrieval pipelines, LLM evals, Production inference", url: "https://careers.datadoghq.com/detail/6365889/", date: "Active 2026" },
+    { title: "Senior Machine Learning Engineer — BitsAI", techs: "Telemetry data ML, Inference systems", url: "https://careers.datadoghq.com/detail/6454183/", date: "Active 2026" },
+    { title: "Senior Engineer — AI Platform", techs: "AI Platform, Tooling, Cross-product AI", url: "https://careers.datadoghq.com/detail/6476577/", date: "Active 2026" },
+    { title: "AI Research Engineer — Datadog AI Research (DAIR)", techs: "Research → production, Custom infra", url: "https://careers.datadoghq.com/detail/7194969/", date: "Active 2026" },
+    { title: "Staff Software Engineer — ML Observability", techs: "Drift detection, Model evaluation, Behavior tracing", url: "https://careers.datadoghq.com/detail/7107437/", date: "Active 2026" },
+    { title: "Manager I — AI Platform, Annotation & Evaluation", techs: "AI eval, Annotation pipelines", url: "https://careers.datadoghq.com/detail/7314944/", date: "Active 2026" }
+  ],
+  "ServiceNow": [
+    { title: "Now Assist + AI Platform Architecture", techs: "GenAI, LLM serving, Now Assist", url: "https://careers.servicenow.com/teams/ai-engineering-product/", date: "Active 2026" },
+    { title: "Staff Software Engineer (Santa Clara)", techs: "AI Platform, Cloud infrastructure", url: "https://careers.servicenow.com/jobs/744000113217942/staff-software-engineer/", date: "Active 2026" },
+    { title: "Senior Software Engineer (San Diego)", techs: "GenAI features, LLM platform services", url: "https://careers.servicenow.com/jobs/744000113222998/senior-software-engineer/", date: "Active 2026" },
+    { title: "Staff Software Engineer — Core Platform (Moveworks, Bangalore)", techs: "Core platform AI, Moveworks integration", url: "https://careers.servicenow.com/jobs/744000118846528/staff-software-engineer-core-platform-moveworks/", date: "Active 2026" }
+  ],
+  "Mobileye": [
+    { title: "Technical Expert — Multimodal GenAI (Vision-Language Models)", techs: "VLMs, VLA models, Scene understanding", url: "https://careers.mobileye.com/jobs/machine-learning-tech-lead-engineer-multimodal-models-llmvlm/b07139a7-51cc-406d-9492-d380361ad115", date: "Active 2026" },
+    { title: "Senior Algorithm Developer", techs: "Computer vision, Perception, Python/C++", url: "https://careers.mobileye.com/jobs/senior-algorithm-developer/564d6ea2-0f58-47cc-9369-b68a2e521b45", date: "Active 2026" },
+    { title: "Computer Vision Algorithms Developer", techs: "Deep learning, PyTorch, Detection", url: "https://careers.mobileye.com/jobs/computer-vision-algorithms-developer/459cebe3-4a62-4b10-b968-e6efb4bc749f", date: "Active 2026" },
+    { title: "Senior ADAS System Validation Engineer", techs: "ADAS validation, Test methodology", url: "https://careers.mobileye.com/jobs/senior-adas-system-validation-engineer/65d5b29d-25e2-4b0d-b3fc-35e7286590d8", date: "Active 2026" }
+  ],
+  "Qualcomm": [
+    { title: "Senior AI Platform Engineer (San Diego)", techs: "Platform, SRE, MLOps, LLMOps", url: "https://careers.qualcomm.com/careers/machine_learning_engineering?domain=qualcomm.com", date: "Active 2026" },
+    { title: "Machine Learning / AI Engineering — Open Roles", techs: "C/C++, CUDA, PyTorch, Embedded ML", url: "https://www.qualcomm.com/company/careers", date: "Active 2026" },
+    { title: "ML/AI Engineering Internship — Summer 2026", techs: "AI200/AI250 datacenter inference, Edge AI", url: "https://careercenter.cpp.edu/jobs/qualcomm-machine-learning-artificial-intelligence-engineering-internship-summer-2026/", date: "Active 2026" }
+  ],
+  "Jefferies": [
+    { title: "2026 IT Analyst & Associate (Corporate Tech, NYC + Jersey City)", techs: "AI/ML, Cloud adoption, RPA, Data warehousing", url: "https://www.nablacareers.com/finance-jobs/jefferies/north-america/software-engineering-tech-data/2026-information-technology-analyst-and-associate-new-york-and-jersey-city-corporate/", date: "Active 2026" },
+    { title: "Engineering & Tech — Open Roles (Equity Connectivity, NYC)", techs: "Equity research platform, Trading systems", url: "https://www.nablacareers.com/finance-jobs/jefferies/north-america/software-engineering-tech-data/2026-information-technology-analyst-and-associate-new-york-equity-connectivity/", date: "Active 2026" }
+  ],
+  "Walmart": [
+    { title: "Senior Software Engineer — Machine Learning Platform", techs: "Triton Inference Server, Model serving, Kubernetes, Quantization", url: "https://careers.walmart.com/us/jobs/WD2000071-senior-software-engineer-machine-learning-platform", date: "Active 2026" },
+    { title: "Senior Software Engineer (Machine Learning)", techs: "ML serving, Model optimization, Hardware-specific kernels", url: "https://careers.walmart.com/us/en/jobs/R-2167549", date: "Active 2026" },
+    { title: "Senior Software Engineer (Machine Learning)", techs: "Container orchestration, Cloud ML platforms", url: "https://careers.walmart.com/us/en/jobs/R-2201213", date: "Active 2026" },
+    { title: "Principal Software Engineer — Machine Learning", techs: "ML infrastructure, Distributed systems", url: "https://careers.walmart.com/us/jobs/WD1628366-principal-software-engineer-machine-learning", date: "Active 2026" },
+    { title: "Principal Data Scientist", techs: "ML modeling, Production ML", url: "https://careers.walmart.com/us/en/jobs/R-2445876", date: "Active 2026" }
+  ],
+  "PayPal": [
+    { title: "AI/ML Engineering — Open Roles", techs: "Real-time fraud inference, Sub-50ms latency, MLOps", url: "https://paypal.eightfold.ai/careers?query=AI&pid=274902809309", date: "Active 2026" },
+    { title: "Machine Learning Engineer Intern (June 2026)", techs: "Production ML, Model training, Inference", url: "https://prosple.com/graduate-employers/paypal-usa/jobs-internships/machine-learning-intern", date: "Active 2026" }
+  ],
+  "Workday": [
+    { title: "AI/ML Engineering — Illuminate AI Roles", techs: "LLMs, Knowledge graphs, Agentic AI, Personalization", url: "https://www.workday.com/en-us/company/careers/ai-machine-learning.html", date: "Active 2026" },
+    { title: "Machine Learning Engineer", techs: "ML model deployment, Docker/K8s microservices, API platform", url: "https://www.moaijobs.com/job/machine-learning-engineer-workday-7354", date: "Active 2026" }
+  ],
+  "HubSpot": [
+    { title: "AI Engineer (AIMS Martek, Remote)", techs: "LLMs, Multi-agent workflows, Cloud infrastructure", url: "https://www.glassdoor.com/job-listing/ai-engineer-aims-martek-hubspot-JV_KO0,23_KE24,31.htm?jl=1010065622764", date: "Active 2026" },
+    { title: "Product & Engineering — Open Roles", techs: "Breeze AI platform, AI tooling", url: "https://www.hubspot.com/careers/product-ux-engineering/jobs", date: "Active 2026" }
+  ],
+  "Rivian": [
+    { title: "Staff Machine Learning Engineer — Motion Planning, Autonomy", techs: "Perception, Planning, ADAS", url: "https://careers.rivian.com/careers-home/jobs/17252?lang=en-us", date: "Active 2026" },
+    { title: "Staff AI/ML Engineer — Vehicle Software", techs: "Embedded ML, Vehicle AI integration", url: "https://careers.rivian.com/rivian-vw-group-technology/jobs/21516?lang=en-us", date: "Active 2026" },
+    { title: "Sr. Machine Learning/AI Engineer", techs: "Quantization, Hardware-aware optimization, Operator fusion", url: "https://ev.careers/jobs/148717628-sr-machine-learning-ai-engineer", date: "Active 2026" },
+    { title: "Staff Machine Learning/AI Engineer", techs: "ADAS perception, Real-time inference", url: "https://jobs.anitab.org/companies/rivian/jobs/67716632-staff-machine-learning-ai-engineer", date: "Active 2026" }
+  ],
+  "General Motors (Cruise)": [
+    { title: "Staff ML Engineer — Inference Platform (Sunnyvale)", techs: "Model serving, Cloud-agnostic platform, AI Compute Platforms", url: "https://search-careers.gm.com/en/jobs/jr-202513651/staff-ml-engineer-inference-platform/", date: "Active 2026" },
+    { title: "Senior ML Infrastructure Engineer — Inference Platform (Austin + 3 locations)", techs: "ML serving frameworks, High-performance backend, Go/Python/C++", url: "https://search-careers.gm.com/en/jobs/jr-202604629/senior-ml-infrastructure-engineer-inference-platform/", date: "Active 2026" },
+    { title: "Staff AI/ML Engineer — Onboard Embodied AI (Mountain View)", techs: "On-vehicle AI, Embodied autonomy", url: "https://search-careers.gm.com/en/jobs/jr-202507695/staff-ai-ml-engineer-onboard-embodied-ai/", date: "Active 2026" },
+    { title: "Staff ML Engineer — Embodied AI Onboard Autonomy (MV)", techs: "Onboard autonomy, Embodied AI", url: "https://search-careers.gm.com/en/jobs/jr-202508182/staff-ml-engineer-embodied-ai-onboard-autonomy/", date: "Active 2026" },
+    { title: "Senior ML Engineer — Embodied AI Onboard Autonomy (MV)", techs: "On-vehicle inference, Real-time autonomy", url: "https://search-careers.gm.com/en/jobs/jr-202520125/senior-ml-engineer-embodied-ai-onboard-autonomy/", date: "Active 2026" }
+  ],
+  "Carta": [
+    { title: "Senior Machine Learning Engineer I", techs: "LLM-powered pipelines, Document classification, Containerized prediction services", url: "https://peerlist.io/company/carta/careers/senior-machine-learning-engineer-i/jobha9naqjq6jg7eq1jo9aepaeknmg", date: "Active 2026" },
+    { title: "Engineering — Open Roles (AI/ML, Platform)", techs: "ML infrastructure, Financial-data ML", url: "https://carta.com/careers/engineering/", date: "Active 2026" }
+  ],
+  "CrowdStrike": [
+    { title: "Charlotte AI Engineer", techs: "Agentic AI, LangChain/LangGraph/AutoGen, RAG, Vector DBs", url: "https://www.glassdoor.com/job-listing/crowdstrike-charlotte-ai-engineer-openkyber-JV_KO0,33_KE34,43.htm?jl=1010084090704", date: "Active 2026" },
+    { title: "AI Security Engineer (Georgia)", techs: "ML/AI projects, Agentic workflows, Production deployment", url: "https://www.indeed.com/viewjob?jk=073d98524d049213", date: "Active 2026" },
+    { title: "Engineering & Technology — Open Roles", techs: "Distributed systems, Threat Graph, Charlotte AI", url: "https://www.crowdstrike.com/en-us/careers/engineering-technology-team/", date: "Active 2026" }
+  ],
+  "Plaid": [
+    { title: "Senior ML Engineer — Data Foundation & AI (SF)", techs: "Distributed training, Low-latency serving, Embeddings, Foundation models", url: "https://plaid.com/careers/openings/engineering/san-francisco/senior-machine-learning-engineer-data-foundation-and-ai/", date: "Active 2026" },
+    { title: "ML Engineer — Data Foundation & AI (NY)", techs: "Production ML/AI, Distributed systems, MLOps", url: "https://plaid.com/careers/openings/engineering/new-york/machine-learning-engineer-data-foundation-and-ai/", date: "Active 2026" },
+    { title: "ML Engineer — Data Foundation & AI (SF)", techs: "Foundation model, Representation learning", url: "https://plaid.com/careers/openings/engineering/san-francisco/machine-learning-engineer-data-foundation-and-ai/", date: "Active 2026" },
+    { title: "Senior Software Engineer — ML Infrastructure (NY)", techs: "ML serving, Production ML systems", url: "https://plaid.com/careers/openings/engineering/new-york/senior-software-engineer-ml-infrastructure/", date: "Active 2026" },
+    { title: "Engineering Manager — ML Infrastructure (SF)", techs: "ML platform, Distributed training, Inference", url: "https://plaid.com/careers/openings/engineering/san-francisco/engineering-manager-machine-learning-infrastructure/", date: "Active 2026" },
+    { title: "Staff ML Engineer — Credit (SF)", techs: "Credit decisioning, ML risk models", url: "https://plaid.com/careers/openings/engineering/san-francisco/staff-machine-learning-engineer-credit/", date: "Active 2026" }
+  ],
+  "SentinelOne": [
+    { title: "Engineering & AI — Open Roles", techs: "Purple AI, GenAI threat hunting, Singularity Platform", url: "https://www.sentinelone.com/jobs/", date: "Active 2026" }
+  ],
+  "Gusto": [
+    { title: "Staff Applied AI/ML Engineer", techs: "Production ML, Applied AI, Multi-region deployment", url: "https://job-boards.greenhouse.io/gusto/jobs/7065172", date: "Active 2026" },
+    { title: "ML/AI Operations Engineer (NYC)", techs: "MLOps, Model deployment, Monitoring", url: "https://www.linkedin.com/jobs/view/ml-ai-operations-engineer-at-gusto-3745589184", date: "Active 2026" },
+    { title: "Engineering — Open Roles", techs: "ML infrastructure, AI assistant (Gus)", url: "https://job-boards.greenhouse.io/gusto", date: "Active 2026" }
+  ],
+  "Brex": [
+    { title: "Engineering — Open Roles", techs: "AWS Bedrock, Claude integration, LLMOps for finance", url: "https://www.brex.com/careers", date: "Active 2026" }
+  ],
+  "Hims & Hers": [
+    { title: "Engineering — Open Roles", techs: "Telehealth ML, MedMatch, HIPAA-compliant inference", url: "https://www.hims.com/careers", date: "Active 2026" }
+  ],
+  "Sumo Logic": [
+    { title: "Engineering — Open Roles (Dojo AI, GenAI Log Analytics)", techs: "Log anomaly detection ML, GenAI for MTTR reduction", url: "https://www.sumologic.com/company/careers", date: "Active 2026" }
+  ],
+  "Rippling": [
+    { title: "Engineering — Open Roles", techs: "Employee Graph, AI automation, MLOps", url: "https://www.rippling.com/careers", date: "Active 2026" }
+  ],
+  "ABInBev": [
+    { title: "Tech & Innovation — Open Roles", techs: "Smart Barley AI, Demand forecasting ML, Multi-region AI platforms", url: "https://www.ab-inbev.com/careers/", date: "Active 2026" }
+  ],
+  "Abbott": [
+    { title: "Diagnostics & AI Engineering — Open Roles", techs: "Diagnostic imaging AI, FDA SaMD, Predictive maintenance ML", url: "https://www.jobs.abbott/", date: "Active 2026" }
+  ],
+  "Ford": [
+    { title: "Latitude AI + Vehicle Tech — Open Roles", techs: "BlueCruise ADAS, Connected vehicle ML, Autonomy stack", url: "https://corporate.ford.com/careers.html", date: "Active 2026" }
+  ],
+  "Flatiron Health": [
+    { title: "AI/ML & RWE Engineering — Open Roles", techs: "LLM-extracted real-world data, VALID Framework, Cancer progression ML", url: "https://flatiron.com/careers", date: "Active 2026" }
+  ],
+  "American Airlines": [
+    { title: "Tech & AI Engineering — Open Roles", techs: "IROPs ML, Crew scheduling AI, Smart Gating, Azure AI/ML", url: "https://jobs.aa.com/", date: "Active 2026" }
+  ]
+};
+
+/* ------------------------------------------------------------------ */
+/*  RESIDENCY_MAP — Data Residency score (1-5) per company             */
+/*  5 = inference clouds explicitly disqualified; 1 = no constraint    */
+/* ------------------------------------------------------------------ */
+const RESIDENCY_MAP = {
+  "Walmart": { score: 3, reason: "Customer purchase data + supplier contract data are commercially sensitive but not regulated to the point of disqualifying inference clouds. Hyperscaler defaults work; Valar wins on cost/QoS not residency." },
+  "ServiceNow": { score: 3, reason: "Customer enterprise data flows through Now Assist — privacy-sensitive but ServiceNow already runs Now LLM in their own DCs. Residency mandate moderate." },
+  "UnitedHealth Group": { score: 5, reason: "PHI + HIPAA + CMS + member data. Director of Architecture interview confirms: tried Fireworks/Together/Baseten/Modal — none reached production due to security. Inference clouds structurally disqualified. BYOC seen as inevitable." },
+  "Mastercard": { score: 5, reason: "PCI DSS + cardholder data + 150B+ annual transactions. Inference clouds cannot legally serve. Real-time fraud must run inside Mastercard environment." },
+  "General Motors (Cruise)": { score: 4, reason: "Driving data multi-jurisdictional (state, EU, China). Manufacturing IP. Inference clouds limited to non-sensitive use cases." },
+  "Capital One": { score: 5, reason: "OCC/FDIC bank regulation, customer financial data, AI risk management framework disclosures. Capital One's all-in-on-AWS posture is BYOC-style — they will resist multi-tenant inference." },
+  "PayPal": { score: 4, reason: "PCI + global payment data. Has VPC + on-prem hybrid for sensitive fraud workloads. Inference clouds blocked for production fraud paths." },
+  "Workday": { score: 4, reason: "Employee PII + financial data across HCM + Finance modules. Workday operates own DCs for sensitive workloads — BYOC-friendly posture." },
+  "HubSpot": { score: 2, reason: "Customer CRM data is sensitive but mostly commercial — most customers tolerate inference cloud paths. Regulated subset (HIPAA-covered customers) is small." },
+  "Rivian": { score: 3, reason: "Connected-vehicle telemetry + ADAS perception data. Multi-state residency rules. Burn-rate-conscious — cost wins over pure residency." },
+  "Carta": { score: 5, reason: "Equity cap tables + financial data + SOC 2 contractual obligations. Inference clouds explicitly cannot serve cap-table/valuation workloads." },
+  "Datadog": { score: 4, reason: "Customer observability data (logs, traces, metrics) flows through Bits AI — customer infrastructure data is restricted in many enterprise contracts." },
+  "CrowdStrike": { score: 5, reason: "Customer threat telemetry + endpoint data + Falcon Threat Graph. Cyber data cannot touch shared inference. Charlotte AI runs in CrowdStrike controlled environment." },
+  "Gusto": { score: 5, reason: "SSNs + compensation + benefits + tax data for SMB customers. SOC 2 + state payroll regs. Inference clouds disqualified." },
+  "Plaid": { score: 5, reason: "Bank transaction data + CFPB 1033 + financial-data residency. Cannot send raw financial data to external inference providers — confirmed in Plaid engineering blog." },
+  "Sumo Logic": { score: 4, reason: "Customer log + telemetry data, post-PE acquisition cost optimization mandate makes BYOC attractive. Customer contracts often require single-tenant." },
+  "Hims & Hers": { score: 5, reason: "Telehealth PHI + HIPAA-compliant practices + SOC 2. Cannot use shared inference for treatment personalization. Inference clouds disqualified." },
+  "Brex": { score: 4, reason: "Corporate card + financial data + PCI DSS. SOC 2 strict customer commitments. Currently uses Bedrock for LLM safety isolation; would benefit from full BYOC." },
+  "SentinelOne": { score: 5, reason: "Customer endpoint + threat telemetry data. Cyber data cannot touch shared inference. Purple AI architecturally constrained to single-tenant." },
+  "Rippling": { score: 5, reason: "Employee PII + payroll + IT identity + financial. Most regulated combo in HR/IT/Fin. Strict data governance across modules. BYOC native fit." }
+};
+
+/* ------------------------------------------------------------------ */
 /*  PRIMARY_TEAM                                                       */
 /* ------------------------------------------------------------------ */
 const PRIMARY_TEAM = ['Alex Giles', 'Charles Holley', 'Gaby Lorenzi', 'Jason Gelman', 'Tobias', 'Ross', 'Cassie', 'Tanmaye', 'Ben', 'Hannah', 'Doug', 'Emily', 'Bridget', 'Shuman'];
@@ -1403,5 +2451,5 @@ const PRIMARY_TEAM = ['Alex Giles', 'Charles Holley', 'Gaby Lorenzi', 'Jason Gel
 /*  Exports                                                            */
 /* ------------------------------------------------------------------ */
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { ROW_SOURCES, SEGMENTS, CONTACT_MAP, PRIMARY_TEAM };
+  module.exports = { ROW_SOURCES, SEGMENTS, CONTACT_MAP, COMPANY_SOURCES, RESIDENCY_MAP, JOB_LISTINGS, PRIMARY_TEAM };
 }
